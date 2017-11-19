@@ -9,6 +9,7 @@ export IFS=$' \t\n'
 export PATH='/usr/local/bin:/usr/local/sbin:/usr/local/share/python:/usr/bin:/bin:/usr/sbin:/sbin'
 export PS1='\w$ '
 alias emacs="emacsclient -n"
+alias emacs-start="/usr/bin/emacs &> /dev/null &"
 export EDITOR=vi
 
 f ()
