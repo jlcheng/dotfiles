@@ -8,6 +8,6 @@ if [ -d "/Applications/Emacs.app" ]; then
   alias emacs="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -n"
 fi
 
-export JAVA_HOME=`ls -d /Library/Java/JavaVirtualMachines/* | tail -n 1`
+export JAVA_HOME=`ls -d /Library/Java/JavaVirtualMachines/*/Contents/Home | tail -n 1`
 
 echo "bashrc_jc_osx.sh"
