@@ -1,7 +1,15 @@
 # Installation ---
 #  echo ". ~/github/dotfiles/bashrc_jc_cygwin.sh" >> ~/.bashrc
 
-# placeholder
-export PATH=$PATH:/d/Go/bin
+# Go
+if [ -d /d/Go/bin ]; then
+    export PATH="$PATH:/d/Go/bin"
+elif [ -d /c/Go/bin ]; then
+    export PATH="$PATH:/c/Go/bin"
+fi
+
+if [ -d /progfiles/Git ]; then
+    export PATH="$PATH:/progfiles/Git/cmd"
+fi
 
 echo "bashrc_jc_cygwin.sh"

@@ -6,12 +6,17 @@ export HISTFILE=$HOME/.bash_history
 export HISTFILESIZE=500
 export HISTIGNORE='&:ls:[bf]g:exit'
 export IFS=$' \t\n'
-export PATH='/usr/local/bin:/usr/local/sbin:/usr/local/share/python:/usr/bin:/bin:/usr/sbin:/sbin'
 export PS1='\w$ '
 alias emacs="emacsclient -n"
 alias emacs-start="/usr/bin/emacs &> /dev/null &"
 alias ssh="ssh -q"
 export EDITOR=vi
+if [[ ":$PATH:" != *":/sbin:"* ]]; then
+    export PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin"
+fi
+if [[ ":$PATH:" != *":/usr/bin:"* ]]; then
+    export PATH="$PATH:/usr/bin"
+fi
 
 f ()
 {
@@ -51,5 +56,10 @@ if [ -z "$SSH_AUTH_SOCK" -a -x "$SSHAGENT" ]; then
     # use eval to take the output of sshagent and set SSH_AUTH_SOCK and SSH_AGENT_ID
     eval `$SSHAGENT`
 fi
+
+function onexit() {
+    $SSHAGENT -k
+}
+trap onexit EXIT
 
 echo "bashrc_jc.sh"
