@@ -20,13 +20,15 @@ fi
 
 f ()
 {
-  find . -iname "*${1}.*"
+  /usr/bin/find . -iname "*${1}.*"
 }
 
 fe ()
 {
-    find . -name "*.${1}"
+  /usr/bin/find . -name "*.${1}"
 }
+
+alias skey='ssh-add ~/.ssh/jackrabbit_rsa'
 
 # title_management
 # jc_tab_max: controls the max length of a tab title
