@@ -3,10 +3,10 @@
 
 ;;; http://orgmode.org/org.html
 (cond ((file-accessible-directory-p "/cygdrive")
-       (print "Windows OS"))
-      ((file-accessible-directory-p "/User")
-       (print "MacOS")
-       (add-to-list 'load-path "/Users/jcheng/personal/emacs/org-mode/lisp")))
+       (message "Windows OS"))
+      ((file-accessible-directory-p "/Users")
+       (message "MacOS")
+       (setq org-agenda-files (list "~/org/work.org"))))
 (org-mode)
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-cc" 'org-capture)
