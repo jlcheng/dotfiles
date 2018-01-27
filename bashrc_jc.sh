@@ -10,6 +10,7 @@ export PS1='\w$ '
 alias emacs="emacsclient -n"
 alias emacs-start="/usr/bin/emacs &> /dev/null &"
 alias ssh="ssh -q"
+alias jc-git-log='git log --left-right --boundary --pretty="format:%Cgreen%m %h %Cred%<(14)%cr%Creset %s" @{u}...HEAD'
 export EDITOR=vi
 if [[ ":$PATH:" != *":/sbin:"* ]]; then
     export PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin"
@@ -29,6 +30,16 @@ fe ()
 }
 
 alias skey='ssh-add ~/.ssh/jackrabbit_rsa'
+jc-sa()
+{
+    ssh-add -qL &> /dev/null
+    if [ "$?" == "2" ]; then
+        eval `ssh-agent`
+    fi
+    if [ -n "$1" ]; then
+        ssh-add $1
+    fi
+} 
 
 # title_management
 # jc_tab_max: controls the max length of a tab title
@@ -45,7 +56,7 @@ if [ ${#title__} -gt $jc_tab_max ]; then
 fi
 echo -n -e "\033]0;$title__\007"
 '
-jc_tab_title()
+jc-tab-title()
 {
   if [ -n "$1" ]; then
      export jc_tab_title=$1
@@ -53,15 +64,5 @@ jc_tab_title()
 }
 # /title management
 
-SSHAGENT="ssh-agent"
-if [ -z "$SSH_AUTH_SOCK" -a -x "$SSHAGENT" ]; then
-    # use eval to take the output of sshagent and set SSH_AUTH_SOCK and SSH_AGENT_ID
-    eval `$SSHAGENT`
-fi
-
-function onexit() {
-    $SSHAGENT -k
-}
-trap onexit EXIT
 
 echo "bashrc_jc.sh"
