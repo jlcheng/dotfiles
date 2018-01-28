@@ -10,7 +10,14 @@ export PS1='\w$ '
 alias emacs="emacsclient -n"
 alias emacs-start="/usr/bin/emacs &> /dev/null &"
 alias ssh="ssh -q"
-alias jc-git-log='git log --left-right --boundary --pretty="format:%Cgreen%m %h %Cred%<(14)%cr%Creset %s" @{u}...HEAD'
+jc-gdiff ()
+{
+    T='origin/master'
+    if [ -n "$1" ]; then
+        T="$1"
+    fi
+    git log --left-right --boundary --pretty="format:%Cgreen%m %h %Cred%<(14)%cr%Creset %s" ${T}...HEAD
+}
 export EDITOR=vi
 if [[ ":$PATH:" != *":/sbin:"* ]]; then
     export PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin"
