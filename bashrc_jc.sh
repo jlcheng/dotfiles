@@ -6,7 +6,7 @@ export HISTFILE=$HOME/.bash_history
 export HISTFILESIZE=500
 export HISTIGNORE='&:ls:[bf]g:exit'
 export IFS=$' \t\n'
-export PS1='\w$ '
+export PS1="\[\e[36m\]\w\\$\[\e[m\] "
 alias emacs="emacsclient -n"
 alias emacs-start="/usr/bin/emacs &> /dev/null &"
 alias ssh="ssh -q"
@@ -16,7 +16,7 @@ jc-gdiff ()
     if [ -n "$1" ]; then
         T="$1"
     fi
-    git log --left-right --boundary --pretty="format:%Cgreen%m %h %Cred%<(14)%cr%Creset %s" ${T}...HEAD
+    git log --left-right --boundary --pretty="format:%C(auto)%m %h %<(14)%cr %d %s" ${T}...HEAD
 }
 export EDITOR=vi
 if [[ ":$PATH:" != *":/sbin:"* ]]; then
