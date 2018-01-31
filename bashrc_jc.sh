@@ -6,7 +6,7 @@ export HISTFILE=$HOME/.bash_history
 export HISTFILESIZE=500
 export HISTIGNORE='&:ls:[bf]g:exit'
 export IFS=$' \t\n'
-export PS1="\[\e[36m\]\w\\$\[\e[m\] "
+export PS1="\w\\$ " # don't colorize this, it screws ctrl-r command history
 alias emacs="emacsclient -n"
 alias emacs-start="/usr/bin/emacs &> /dev/null &"
 alias ssh="ssh -q"
@@ -18,6 +18,24 @@ jc-gdiff ()
     fi
     git log --left-right --boundary --pretty="format:%C(auto)%m %h %<(14)%cr %d %s" ${T}...HEAD
 }
+jc-gopen()
+{
+    if [ -z "$1" ]; then
+        echo "usage: gopen <file>"
+    fi
+    target="$1"
+    o=`git ls-files | grep $target`
+    if [ "$?" != 0 ]; then
+        echo "$o"
+        return
+    fi
+    if [ `echo "$o" | wc -l` -eq 1 ]; then
+        emacs "$o"
+    else 
+        echo "$o"
+    fi
+}
+
 export EDITOR=vi
 if [[ ":$PATH:" != *":/sbin:"* ]]; then
     export PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin"
