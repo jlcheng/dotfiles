@@ -3,14 +3,14 @@
 
 export HISTCONTROL=ignoredups
 export HISTFILE=$HOME/.bash_history
-export HISTFILESIZE=500
 export HISTIGNORE='&:ls:[bf]g:exit'
 export IFS=$' \t\n'
-export PS1="\w\\$ " # don't colorize this, it screws ctrl-r command history
+export PS1="\w\\$ " # don't colorize this, it screws up ctrl-r command history
 alias emacs="emacsclient -n"
 alias emacs-start="/usr/bin/emacs &> /dev/null &"
-alias ssh="ssh -q"
-jc-gdiff ()
+
+# git
+jgdiff ()
 {
     T='origin/master'
     if [ -n "$1" ]; then
@@ -18,7 +18,7 @@ jc-gdiff ()
     fi
     git log --left-right --boundary --pretty="format:%C(auto)%m %h %<(14)%cr %d %s" ${T}...HEAD
 }
-jc-gopen()
+jgopen ()
 {
     if [ -z "$1" ]; then
         echo "usage: gopen <file>"
@@ -30,11 +30,15 @@ jc-gopen()
         return
     fi
     if [ `echo "$o" | wc -l` -eq 1 ]; then
-        emacs "$o"
-    else 
-        echo "$o"
+        emacsclient -n "$o"
+    elif [ -n "$2" ]; then
+        emacsclient -n `echo "$o"|sed "$2q;d"`
+    else
+        echo "multiple candidates:"
+        echo "$o" | awk '{print NR":", $0}'
     fi
 }
+# /git
 
 export EDITOR=vi
 if [[ ":$PATH:" != *":/sbin:"* ]]; then
@@ -44,18 +48,20 @@ if [[ ":$PATH:" != *":/usr/bin:"* ]]; then
     export PATH="$PATH:/usr/bin"
 fi
 
-f ()
+jf ()
 {
   /usr/bin/find . -iname "*${1}.*"
 }
 
-fe ()
+jfe ()
 {
   /usr/bin/find . -name "*.${1}"
 }
 
+# ssh
+alias ssh="ssh -q"
 alias skey='ssh-add ~/.ssh/jackrabbit_rsa'
-jc-sa()
+jsa ()
 {
     ssh-add -qL &> /dev/null
     if [ "$?" == "2" ]; then
@@ -64,7 +70,8 @@ jc-sa()
     if [ -n "$1" ]; then
         ssh-add $1
     fi
-} 
+}
+# /ssh
 
 # title_management
 # jc_tab_max: controls the max length of a tab title
@@ -81,7 +88,7 @@ if [ ${#title__} -gt $jc_tab_max ]; then
 fi
 echo -n -e "\033]0;$title__\007"
 '
-jc-tab-title()
+jtitle ()
 {
   if [ -n "$1" ]; then
      export jc_tab_title=$1
