@@ -6,7 +6,7 @@
        (message "Windows OS"))
       ((file-accessible-directory-p "/Users")
        (message "MacOS")
-       (setq org-agenda-files (list "~/org/work.org"))))
+       (setq org-agenda-files (list "~/org/work.org" "~/privprjs/grs/docs/plan.org"))))
 (org-mode)
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-cc" 'org-capture)
