@@ -5,6 +5,7 @@ export PATH='/usr/local/bin:/usr/local/sbin:/usr/local/share/python:/usr/bin:/bi
 
 # https://emacsformacosx.com/
 if [ -d "/Applications/Emacs.app" ]; then 
+  PATH=/Applications/Emacs.app/Contents/MacOS/bin:$PATH
   alias emacs="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -n"
 fi
 
