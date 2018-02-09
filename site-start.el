@@ -3,10 +3,13 @@
 
 ;;; http://orgmode.org/org.html
 (cond ((file-accessible-directory-p "/cygdrive")
-       (message "Windows OS"))
+       (message "Windows OS")
+       (setq org-agenda-files (list "~/org/home.org"
+				    "~/privprjs/grs/docs/plan.org")))
       ((file-accessible-directory-p "/Users")
        (message "MacOS")
-       (setq org-agenda-files (list "~/org/work.org" "~/privprjs/grs/docs/plan.org"))))
+       (setq org-agenda-files (list "~/org/work.org"
+				    "~/privprjs/grs/docs/plan.org"))))
 (org-mode)
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-cc" 'org-capture)
