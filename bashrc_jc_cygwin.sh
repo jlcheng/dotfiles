@@ -12,6 +12,10 @@ if [ -d /progfiles/Git ]; then
     export PATH="$PATH:/progfiles/Git/cmd"
 fi
 
+if [ -d $HOME/bin ]; then
+    export PATH="$PATH:$HOME/bin"
+fi
+
 alias find=/usr/bin/find
 
 echo "bashrc_jc_cygwin.sh"
