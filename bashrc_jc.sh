@@ -18,10 +18,11 @@ jgdiff ()
     fi
     git log --left-right --boundary --pretty="format:%C(auto)%m %h %<(14)%cr %d %s" ${T}...HEAD
 }
-jgopen ()
+jge ()
 {
     if [ -z "$1" ]; then
-        echo "usage: gopen <file>"
+        echo "usage: jge <file>"
+	return
     fi
     target="$1"
     o=`git ls-files | grep $target`
