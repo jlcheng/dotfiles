@@ -6,6 +6,9 @@
        (message "Windows OS")
        (setq org-agenda-files (list "~/org/home.org"
 				    "~/privprjs/grs/docs/plan.org")))
+      ((file-accessible-directory-p "/rubicon")
+       (message "MacOS-RP")
+       (setq org-agenda-files (list "~/org/work.org")))
       ((file-accessible-directory-p "/Users")
        (message "MacOS")
        (setq org-agenda-files (list "~/org/work.org"
@@ -34,5 +37,5 @@
   "Runs js-beautify, assumes installation path."
   (interactive "r")
   (shell-command-on-region
-   p1 p2 "/usr/local/share/python/js-beautify -i -s 2" nil t))
+   p1 p2 "/usr/local/bin/js-beautify -i -s 2" nil t))
 
