@@ -10,6 +10,7 @@ alias emacs="emacsclient -n"
 alias emacs-start="/usr/bin/emacs &> /dev/null &"
 
 # git
+export GIT_EDITOR="emacs"
 jgdiff ()
 {
     T='origin/master'
@@ -22,7 +23,7 @@ jge ()
 {
     if [ -z "$1" ]; then
         echo "usage: jge <file>"
-	return
+        return
     fi
     target="$1"
     o=`git ls-files | grep $target`
@@ -31,9 +32,9 @@ jge ()
         return
     fi
     if [ `echo "$o" | wc -l` -eq 1 ]; then
-        emacsclient -n "$o"
+        $GIT_EDITOR "$o"
     elif [ -n "$2" ]; then
-        emacsclient -n `echo "$o"|sed "$2q;d"`
+        $GIT_EDITOR `echo "$o"|sed "$2q;d"`
     else
         echo "multiple candidates:"
         echo "$o" | awk '{print NR":", $0}'
