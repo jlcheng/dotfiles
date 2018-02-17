@@ -18,6 +18,8 @@
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
+(global-set-key (kbd "M-n M-j r") 'revert-buffer)
+(global-set-key (kbd "M-n M-j b") 'jc-js-beautify)
 
 ;;; emacsclient support
 (server-start)
@@ -34,8 +36,10 @@
 
 ;;; js-beautify
 (defun jc-js-beautify (p1 p2)
-  "Runs js-beautify, assumes installation path."
+  "Runs js-beautify against the region"
   (interactive "r")
-  (shell-command-on-region
-   p1 p2 "/usr/local/bin/js-beautify -i -s 2" nil t))
+  (if (executable-find "js-beautify")
+      (shell-command-on-region
+       p1 p2 "js-beautify -i -s 2" nil t)
+    (message "js-beautify not installed")))
 
