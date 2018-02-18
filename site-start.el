@@ -21,8 +21,10 @@
 (global-set-key (kbd "M-n M-j r") 'revert-buffer)
 (global-set-key (kbd "M-n M-j b") 'jc-js-beautify)
 
-;;; emacsclient support
-(server-start)
+;;; enable emacsclient support unless we're running 'emacs-nox'
+(unless
+    (string-match-p (regexp-quote "emacs-nox") (elt command-line-args 0))
+  (server-start))
 (ido-mode)
 
 ;;; https://shreevatsa.wordpress.com/2007/01/06/using-emacsclient/
@@ -30,6 +32,9 @@
 
 ;;; http://stackoverflow.com/questions/151945/how-do-i-control-how-emacs-makes-backup-files 
 (setq make-backup-files nil)
+
+;;; https://www.emacswiki.org/emacs/BackupDirectory#toc2 - without the fancy ',temporary-file-directory' evaluation
+(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
 
 ;;; misc
 (setq column-number-mode t)
