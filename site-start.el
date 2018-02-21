@@ -22,8 +22,9 @@
 (global-set-key (kbd "M-n M-j b") 'jc-js-beautify)
 
 ;;; enable emacsclient support unless we're running 'emacs-nox'
+; note: string-match-p not avail on Emacs 22.1.1 on MacOS (latest release is 25.3 as of Sept 2017)
 (unless
-    (string-match-p (regexp-quote "emacs-nox") (elt command-line-args 0))
+    (string-match (regexp-quote "emacs-nox") (elt command-line-args 0))
   (server-start))
 (ido-mode)
 

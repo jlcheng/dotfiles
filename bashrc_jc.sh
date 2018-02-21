@@ -98,5 +98,9 @@ jtitle ()
 }
 # /title management
 
+# map gcal to cal
+if type gcal > /dev/null; then
+  alias cal='gcal .'
+fi
 
 echo "bashrc_jc.sh"
