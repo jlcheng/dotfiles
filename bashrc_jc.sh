@@ -62,15 +62,12 @@ jfe ()
 
 # ssh
 alias ssh="ssh -q"
-alias skey='ssh-add ~/.ssh/jackrabbit_rsa'
 jsa ()
 {
     ssh-add -qL &> /dev/null
     if [ "$?" == "2" ]; then
         eval `ssh-agent`
-    fi
-    if [ -n "$1" ]; then
-        ssh-add $1
+        ssh-add ~/.ssh/jackrabbit_rsa
     fi
 }
 # /ssh
@@ -99,7 +96,8 @@ jtitle ()
 # /title management
 
 # map gcal to cal
-if type gcal > /dev/null; then
+type gcal > /dev/null 2&>1
+if [ "$?" == "0" ]; then
   alias cal='gcal .'
 fi
 

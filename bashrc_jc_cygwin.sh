@@ -17,5 +17,6 @@ if [ -d $HOME/bin ]; then
 fi
 
 alias find=/usr/bin/find
+export GIT_EDITOR="emacs-nox"
 
 echo "bashrc_jc_cygwin.sh"
