@@ -2,10 +2,12 @@
 ;;;   echo '(load-file (expand-file-name "~/github/dotfiles/site-start.el"))' >> ~/.emacs
 
 ;;; http://orgmode.org/org.html
+(setq js-beautify-path "js-beautify")
 (cond ((file-accessible-directory-p "/cygdrive")
        (message "Windows OS")
        (setq org-agenda-files (list "~/org/home.org"
-				    "~/privprjs/grs/docs/plan.org")))
+				    "~/privprjs/grs/docs/plan.org"))
+       (setq js-beautify-path (expand-file-name "~/bin/jsnice")))
       ((file-accessible-directory-p "/rubicon")
        (message "MacOS-RP")
        (setq org-agenda-files (list "~/org/work.org")))
@@ -44,8 +46,8 @@
 (defun jc-js-beautify (p1 p2)
   "Runs js-beautify against the region"
   (interactive "r")
-  (if (executable-find "js-beautify")
+  (if (executable-find js-beautify-path)
       (shell-command-on-region
-       p1 p2 "js-beautify -i -s 2" nil t)
-    (message "js-beautify not installed")))
+       p1 p2 (format "%s -i -s 2" js-beautify-path) nil t)
+    (message (format "%s not installed" js-beautify-path))))
 
