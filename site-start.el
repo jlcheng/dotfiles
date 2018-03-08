@@ -2,19 +2,20 @@
 ;;;   echo '(load-file (expand-file-name "~/github/dotfiles/site-start.el"))' >> ~/.emacs
 
 ;;; http://orgmode.org/org.html
-(setq js-beautify-path "js-beautify")
 (cond ((file-accessible-directory-p "/cygdrive")
        (message "Windows OS")
        (setq org-agenda-files (list "~/org/home.org"
-				    "~/privprjs/grs/docs/plan.org"))
-       (setq js-beautify-path (expand-file-name "~/bin/jsnice")))
+                                    "~/privprjs/grs/docs/plan.org")))
       ((file-accessible-directory-p "/rubicon")
        (message "MacOS-RP")
-       (setq org-agenda-files (list "~/org/work.org")))
+       (setq org-agenda-files (list "~/org/work.org"))
+       (setq mac-command-modifier 'meta))
       ((file-accessible-directory-p "/Users")
        (message "MacOS")
        (setq org-agenda-files (list "~/org/work.org"
-				    "~/privprjs/grs/docs/plan.org"))))
+                                    "~/privprjs/grs/docs/plan.org"))
+       (setq mac-command-modifier 'meta)))
+
 (org-mode)
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-cc" 'org-capture)
@@ -42,7 +43,11 @@
 ;;; misc
 (setq column-number-mode t)
 
+
+
+
 ;;; js-beautify
+(setq js-beautify-path (expand-file-name "~/bin/jsnice"))
 (defun jc-js-beautify (p1 p2)
   "Runs js-beautify against the region"
   (interactive "r")
