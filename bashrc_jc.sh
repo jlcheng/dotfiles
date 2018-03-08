@@ -49,6 +49,9 @@ fi
 if [[ ":$PATH:" != *":/usr/bin:"* ]]; then
     export PATH="$PATH:/usr/bin"
 fi
+if [[ ":$PATH:" != *":~/bin:"* ]]; then
+    export PATH="$PATH:~/bin"
+fi
 
 jf ()
 {
