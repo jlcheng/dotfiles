@@ -43,12 +43,9 @@
 ;;; misc
 (setq column-number-mode t)
 
-
-
-
 ;;; jsnice
 (setq jsnice-path (expand-file-name "~/bin/jsnice"))
-(defun jsnice (p1 p2)
+(defun jsnice-jc (p1 p2)
   "Runs jsnice against the region"
   (interactive "r")
   (if (executable-find jsnice-path)
