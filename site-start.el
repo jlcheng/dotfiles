@@ -22,7 +22,8 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 (global-set-key (kbd "M-n M-j r") 'revert-buffer)
-(global-set-key (kbd "M-n M-j b") 'jc-js-beautify)
+(global-set-key (kbd "M-n M-j b") 'jsnice-jc)
+(global-set-key (kbd "M-n M-j s") 'whitespace-mode)
 
 ;;; enable emacsclient support unless we're running 'emacs-nox'
 ; note: string-match-p not avail on Emacs 22.1.1 on MacOS (latest release is 25.3 as of Sept 2017)
