@@ -46,13 +46,18 @@
 
 
 
-;;; js-beautify
-(setq js-beautify-path (expand-file-name "~/bin/jsnice"))
-(defun jc-js-beautify (p1 p2)
-  "Runs js-beautify against the region"
+;;; jsnice
+(setq jsnice-path (expand-file-name "~/bin/jsnice"))
+(defun jsnice (p1 p2)
+  "Runs jsnice against the region"
   (interactive "r")
-  (if (executable-find js-beautify-path)
+  (if (executable-find jsnice-path)
       (shell-command-on-region
-       p1 p2 (format "%s -i -s 2" js-beautify-path) nil t)
-    (message (format "%s not installed" js-beautify-path))))
+       p1 p2 (format "%s -i -s 2" jsnice-path) nil t)
+    (message (format "%s not installed" jsnice-path))))
+
+(defun notabs-jc ()
+  "Runs untabify against the buffer"
+  (interactive)
+  (untabify (point-min) (point-max)))
 
