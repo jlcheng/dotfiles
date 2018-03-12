@@ -11,7 +11,7 @@ alias emacs-start="/usr/bin/emacs &> /dev/null &"
 
 # git
 export GIT_EDITOR="emacs"
-jgdiff ()
+gitdiffj ()
 {
     T='origin/master'
     if [ -n "$1" ]; then
@@ -19,7 +19,7 @@ jgdiff ()
     fi
     git log --left-right --boundary --pretty="format:%C(auto)%m %h %<(14)%cr %d %s" ${T}...HEAD
 }
-jge ()
+gitopenj ()
 {
     if [ -z "$1" ]; then
         echo "usage: jge <file>"
@@ -70,7 +70,7 @@ if [ -f $SSH_TMP ]; then
     if [ "$?" == "0" ]; then
         ps -p $SSH_PID > /dev/null
         if [ "$?" == "0" ]; then
-	    . $SSH_TMP
+            . $SSH_TMP
         fi
     fi
 fi
@@ -96,7 +96,7 @@ if [ ${#title__} -gt $jc_tab_max ]; then
 fi
 echo -n -e "\033]0;$title__\007"
 '
-jtitle ()
+titlejc ()
 {
   if [ -n "$1" ]; then
      export jc_tab_title=$1
