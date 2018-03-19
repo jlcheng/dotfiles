@@ -19,4 +19,22 @@ fi
 alias find=/usr/bin/find
 export GIT_EDITOR="emacs-nox"
 
+# ssh
+SSH_TMP=~/.ssh-agent.tmp
+if [ -f $SSH_TMP ]; then
+    SSH_PID=`cat ~/.ssh-agent.tmp | sed  -rn 's/.+pid ([0-9]+);/\1/p'`
+    if [ "$?" == "0" ]; then
+        ps -p $SSH_PID > /dev/null
+        if [ "$?" == "0" ]; then
+            . $SSH_TMP
+        fi
+    fi
+fi
+if [ -z "$SSH_AGENT_PID" ]; then
+    ssh-agent > $SSH_TMP
+    . $SSH_TMP
+fi
+alias ssh="ssh -q"
+# /ssh
+
 echo "bashrc_jc_cygwin.sh"
