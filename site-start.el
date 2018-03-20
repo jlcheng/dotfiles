@@ -46,12 +46,15 @@
 
 ;;; jsnice
 (setq jsnice-path (expand-file-name "~/bin/jsnice"))
+(cond ((file-accessible-directory-p "/cygdrive")
+       (message "Windows OS")
+       (setq jsnice-path "C:\\cygwin64\\home\\johnl\\bin\\jsnice.exe")))
 (defun jsnice-jc (p1 p2)
   "Runs jsnice against the region"
   (interactive "r")
   (if (executable-find jsnice-path)
       (shell-command-on-region
-       p1 p2 (format "%s -i -s 2" jsnice-path) nil t)
+       p1 p2 jsnice-path nil t "*Minibuf-0*" t)
     (message (format "%s not installed" jsnice-path))))
 
 (defun notabs-jc ()
