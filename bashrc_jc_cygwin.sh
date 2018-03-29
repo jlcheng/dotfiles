@@ -1,20 +1,19 @@
 # Installation ---
 #  echo ". ~/github/dotfiles/bashrc_jc_cygwin.sh" >> ~/.bashrc
 
-# Go
+# Go is either installed udner /d/ or /c/
 if [ -d /d/Go/bin ]; then
     export PATH="$PATH:/d/Go/bin"
 elif [ -d /c/Go/bin ]; then
     export PATH="$PATH:/c/Go/bin"
 fi
 
-if [ -d /progfiles/Git ]; then
-    export PATH="$PATH:/progfiles/Git/cmd"
-fi
-
 if [ -d $HOME/bin ]; then
     export PATH="$PATH:$HOME/bin"
 fi
+
+# remove /x/Progrma Files/Git/Cmd from path so we use cygwin's git under cygin without affecting powershell
+PATH=`echo -n ${PATH} | awk -v RS=: -v ORS=: '/Program\ Files\/Git\/cmd/ {next} {print'}`
 
 alias find=/usr/bin/find
 export GIT_EDITOR="emacs-nox"
