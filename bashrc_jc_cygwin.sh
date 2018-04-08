@@ -15,6 +15,9 @@ fi
 # remove /x/Progrma Files/Git/Cmd from path so we use cygwin's git under cygin without affecting powershell
 PATH=`echo -n ${PATH} | awk -v RS=: -v ORS=: '/Program\ Files\/Git\/cmd/ {next} {print'}`
 
+# remove /x/Progrma Files/Git/Cmd from path so we use cygwin's git under cygin without affecting powershell
+PATH=`echo -n ${PATH} | awk -v RS=: -v ORS=: '/cygdrive\/c\/WINDOWS\/System32\/OpenSSH/ {next} {print'}`
+
 alias find=/usr/bin/find
 export GIT_EDITOR="emacs-nox"
 
