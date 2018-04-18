@@ -5,9 +5,11 @@ export HISTCONTROL=ignoredups
 export HISTFILE=$HOME/.bash_history
 export HISTIGNORE='&:ls:[bf]g:exit'
 export IFS=$' \t\n'
-export PS1="\w\\$ " # don't colorize this, it screws up ctrl-r command history
+
 alias emacs="emacsclient -n"
 alias emacs-start="/usr/bin/emacs &> /dev/null &"
+
+export PS1="\W\\$ " # default prompt
 
 # git
 export GIT_EDITOR="emacs"
@@ -70,13 +72,16 @@ export jc_tab_max=20
 PROMPT_COMMAND='
 if [ -n "$jc_tab_title" ]; then
   title__="$PWD ($jc_tab_title)"
+  pstitle__="\[$(tput setaf 6)\]$jc_tab_title\[$(tput setaf 7)\]: \W"
 else
   title__=$PWD
+  pstitle__="\W"
 fi
 if [ ${#title__} -gt $jc_tab_max ]; then
   title__="...`echo $title__ | tail -c $jc_tab_max`"
 fi
 echo -n -e "\033]0;$title__\007"
+export PS1="\[$(tput bold)\][$pstitle__]\\$ \[$(tput sgr0)\]"
 '
 titlejc ()
 {
