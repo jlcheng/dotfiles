@@ -71,14 +71,11 @@ jfe ()
 export jc_tab_max=20
 PROMPT_COMMAND='
 if [ -n "$jc_tab_title" ]; then
-  title__="$PWD ($jc_tab_title)"
-  pstitle__="\[$(tput setaf 6)\]$jc_tab_title\[$(tput setaf 7)\]: \W"
+  title__="$jc_tab_title"
+  pstitle__="\[$(tput setaf 6)\]$jc_tab_title\[$(tput setaf 7)\]: \[$(tput setaf 2)\]\W\[$(tput setaf 7)\]"
 else
-  title__=$PWD
-  pstitle__="\W"
-fi
-if [ ${#title__} -gt $jc_tab_max ]; then
-  title__="...`echo $title__ | tail -c $jc_tab_max`"
+  title__=$(dirs)
+  pstitle__="\[$(tput setaf 2)\]\W\[$(tput setaf 7)\]"
 fi
 echo -n -e "\033]0;$title__\007"
 export PS1="\[$(tput bold)\][$pstitle__]\\$ \[$(tput sgr0)\]"
