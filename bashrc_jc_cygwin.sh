@@ -19,7 +19,7 @@ PATH=`echo -n ${PATH} | awk -v RS=: -v ORS=: '/Program\ Files\/Git\/cmd/ {next} 
 PATH=`echo -n ${PATH} | awk -v RS=: -v ORS=: '/cygdrive\/c\/WINDOWS\/System32\/OpenSSH/ {next} {print'}`
 
 alias find=/usr/bin/find
-export GIT_EDITOR="emacs-nox"
+export GIT_EDITOR="emacs-nox -Q"
 
 # ssh
 SSH_TMP=~/.ssh-agent.tmp
