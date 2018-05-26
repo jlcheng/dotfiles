@@ -15,8 +15,8 @@ fi
 # remove /x/Progrma Files/Git/Cmd from path so we use cygwin's git under cygin without affecting powershell
 PATH=`echo -n ${PATH} | awk -v RS=: -v ORS=: '/Program\ Files\/Git\/cmd/ {next} {print'}`
 
-# remove /x/WINDOWS/System32/OpenSSH from path to use cygwin ssh
-PATH=`echo -n ${PATH} | awk -v RS=: -v ORS=: '/cygdrive\/c\/WINDOWS\/system32\/OpenSSH/ {next} {print'}`
+# remove /x/WINDOWS/System32/OpenSSH from path to use cygwin ssh tools
+PATH=`echo -n ${PATH} | awk -v RS=: -v ORS=: '/cygdrive\/c\/WINDOWS\/System32\/OpenSSH/ {next} {print'}`
 
 # remove /x/WINDOWS/System32 from path to use cygwin tar and find
 PATH=`echo -n ${PATH} | awk -v RS=: -v ORS=: '/cygdrive\/c\/WINDOWS\/system32/ {next} {print'}`
@@ -28,7 +28,7 @@ export GIT_EDITOR="emacs-nox -Q"
 SSH_TMP=~/.ssh-agent.tmp
 if [ -f $SSH_TMP ]; then
     SSH_PID=`cat ~/.ssh-agent.tmp | sed  -rn 's/.+pid ([0-9]+);/\1/p'`
-    if [ "$?" == "0" ]; then
+    if [ "$?" == "0" ] && [ -n "$SSH_PID" ] ; then
         ps -p $SSH_PID > /dev/null
         if [ "$?" == "0" ]; then
             . $SSH_TMP
