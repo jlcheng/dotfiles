@@ -1,5 +1,5 @@
 # Installation ---
-#  echo ". ~/github/dotfiles/bashrc_jc.sh" >> ~/.bashrc
+#  echo ". ~/privprjs/dotfiles/bashrc_jc.sh" >> ~/.bashrc
 
 export HISTCONTROL=ignoredups
 export HISTFILE=$HOME/.bash_history

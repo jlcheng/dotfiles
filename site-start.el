@@ -1,5 +1,5 @@
 ;;; Installation --- 
-;;;   echo '(load-file (expand-file-name "~/github/dotfiles/site-start.el"))' >> ~/.emacs
+;;;   echo '(load-file (expand-file-name "~/privprjs/dotfiles/site-start.el"))' >> ~/.emacs
 
 ;;; http://orgmode.org/org.html
 (cond ((file-accessible-directory-p "/cygdrive")

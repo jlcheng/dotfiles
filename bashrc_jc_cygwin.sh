@@ -1,5 +1,5 @@
 # Installation ---
-#  echo ". ~/github/dotfiles/bashrc_jc_cygwin.sh" >> ~/.bashrc
+#  echo ". ~/privprjs/dotfiles/bashrc_jc_cygwin.sh" >> ~/.bashrc
 
 # Go is either installed udner /d/ or /c/
 if [ -d /d/Go/bin ]; then

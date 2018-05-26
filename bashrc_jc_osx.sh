@@ -1,5 +1,5 @@
 # Installation ---
-#  echo ". ~/github/dotfiles/bashrc_jc_osx.sh" >> ~/.bashrc
+#  echo ". ~/privprjs/dotfiles/bashrc_jc_osx.sh" >> ~/.bashrc
 
 export PATH='/usr/local/bin:/usr/local/sbin:/usr/local/share/python:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/git/bin:/Users/jcheng/.rvm/bin:/Users/jcheng/software/play-2:/Users/jcheng/bin:/Applications/Sublime Text 2.app/Contents/SharedSupport/bin'
 
