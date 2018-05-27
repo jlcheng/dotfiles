@@ -4,7 +4,8 @@
 export HISTCONTROL=ignoredups
 export HISTFILE=$HOME/.bash_history
 export HISTIGNORE='&:ls:[bf]g:exit'
-export IFS=$' \t\n'
+export PATH="/usr/bin:$PATH"
+export PS1="\[$(tput bold)\][\W]\\$ \[$(tput sgr0)\]"
 
 alias emacs="emacsclient -n"
 alias emacs-start="/usr/bin/emacs &> /dev/null &"
