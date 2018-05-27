@@ -11,8 +11,22 @@ fi
 if [ -d $HOME/bin ]; then
     export PATH="$PATH:$HOME/bin"
 fi
+if [ -d $HOME/software/hadoop/bin ]; then
+    export PATH="$PATH:$HOME/software/hadoop/bin"
+fi
 
-# remove /x/Progrma Files/Git/Cmd from path so we use cygwin's git under cygin without affecting powershell
+if [ -d $HOME/software/spark/bin ]; then
+    export PATH="$PATH:$HOME/software/spark/bin"
+fi
+
+if [ -d $HOME/software/spark/bin ]; then
+    export PATH="$PATH:$HOME/software/sbt/bin"
+fi
+
+export JAVA_HOME=$HOME/software/jdk
+export PATH="$JAVA_HOME/bin:$PATH"
+
+# remove /x/Program Files/Git/Cmd from path so we use cygwin's git under cygin without affecting powershell
 PATH=`echo -n ${PATH} | awk -v RS=: -v ORS=: '/Program\ Files\/Git\/cmd/ {next} {print'}`
 
 # remove /x/WINDOWS/System32/OpenSSH from path to use cygwin ssh tools
@@ -28,7 +42,7 @@ export GIT_EDITOR="emacs-nox -Q"
 SSH_TMP=~/.ssh-agent.tmp
 if [ -f $SSH_TMP ]; then
     SSH_PID=`cat ~/.ssh-agent.tmp | sed  -rn 's/.+pid ([0-9]+);/\1/p'`
-    if [ "$?" == "0" ] && [ -n "$SSH_PID" ] ; then
+    if [ "$?" == "0" ] && [ -n "$SSH_PID" ]; then
         ps -p $SSH_PID > /dev/null
         if [ "$?" == "0" ]; then
             . $SSH_TMP
