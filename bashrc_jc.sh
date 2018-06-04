@@ -9,8 +9,6 @@ export IFS=$' \t\n'
 alias emacs="emacsclient -n"
 alias emacs-start="/usr/bin/emacs &> /dev/null &"
 
-export PS1="\W\\$ " # default prompt
-
 # git
 export GIT_EDITOR="emacs"
 gitdiffjc ()
@@ -54,7 +52,7 @@ fi
 if [[ ":$PATH:" != *":~/bin:"* ]]; then
     export PATH="$PATH:~/bin"
 fi
-
+export PS1="\[$(tput bold)\][\[$(tput sgr0)\]\[$(tput setaf 3)\]\h\[$(tput setaf 15)\]: \[$(tput bold)\]\[$(tput setaf 2)\]\W\[$(tput setaf 7)\]]\\$ \[$(tput sgr0)\]"
 jf ()
 {
   /usr/bin/find . -iname "*${1}.*"
@@ -64,29 +62,6 @@ jfe ()
 {
   /usr/bin/find . -name "*.${1}"
 }
-
-# title_management
-# jc_tab_max: controls the max length of a tab title
-# jc_tab_title <name>: appends a custom label to the tab
-export jc_tab_max=20
-PROMPT_COMMAND='
-if [ -n "$jc_tab_title" ]; then
-  title__="$jc_tab_title"
-  pstitle__="\[$(tput setaf 6)\]$jc_tab_title\[$(tput setaf 7)\]: \[$(tput setaf 2)\]\W\[$(tput setaf 7)\]"
-else
-  title__=$(dirs)
-  pstitle__="\[$(tput setaf 2)\]\W\[$(tput setaf 7)\]"
-fi
-echo -n -e "\033]0;$title__\007"
-export PS1="\[$(tput bold)\][$pstitle__]\\$ \[$(tput sgr0)\]"
-'
-titlejc ()
-{
-  if [ -n "$1" ]; then
-     export jc_tab_title=$1
-  fi
-}
-# /title management
 
 # map gcal to cal3
 type gcal > /dev/null 2>&1
