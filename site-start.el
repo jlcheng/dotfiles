@@ -8,7 +8,7 @@
                                     "~/privprjs/grs/docs/plan.org")))
       ((file-accessible-directory-p "/rubicon")
        (message "MacOS-RP")
-       (setq org-agenda-files (list "~/org/work.org"
+       (setq org-agenda-files (list "~/org/work.org" "~/org/1on1.org"
 				    "~/org/home.org"))
        (setq mac-command-modifier 'meta))
       ((file-accessible-directory-p "/Users")
