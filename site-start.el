@@ -30,7 +30,10 @@
 ; note: string-match-p not avail on Emacs 22.1.1 on MacOS (latest release is 25.3 as of Sept 2017)
 (unless
     (string-match (regexp-quote "emacs-nox") (elt command-line-args 0))
-  (server-start))
+  ;; runs emacs server
+  (server-start)
+  ;; Uubuntu: run a no-op command to bring the window into focus
+  (add-hook 'server-visit-hook (lambda() (message " "))))
 (ido-mode)
 
 ;;; https://shreevatsa.wordpress.com/2007/01/06/using-emacsclient/
