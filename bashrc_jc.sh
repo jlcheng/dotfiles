@@ -4,7 +4,7 @@
 export HISTCONTROL=ignoredups
 export HISTFILE=$HOME/.bash_history
 export HISTIGNORE='&:ls:[bf]g:exit'
-export PATH="/usr/bin:$PATH"
+export PATH="/usr/bin:$PATH:$HOME/go/bin"
 export PS1="\[$(tput bold)\][\W]\\$ \[$(tput sgr0)\]"
 
 alias emacs="emacsclient -n"
@@ -50,8 +50,8 @@ fi
 if [[ ":$PATH:" != *":/usr/bin:"* ]]; then
     export PATH="$PATH:/usr/bin"
 fi
-if [[ ":$PATH:" != *":~/bin:"* ]]; then
-    export PATH="$PATH:~/bin"
+if [[ ":$PATH:" != *":$HOME/bin:"* ]]; then
+    export PATH="$PATH:$HOME/bin"
 fi
 export PS1="\[$(tput bold)\][\[$(tput sgr0)\]\[$(tput setaf 3)\]\h\[$(tput setaf 15)\]: \[$(tput bold)\]\[$(tput setaf 2)\]\W\[$(tput setaf 7)\]]\\$ \[$(tput sgr0)\]"
 jf ()
@@ -70,6 +70,14 @@ if [ "$?" == "0"  ]; then
     alias cal3='gcal .'
 else
     alias cal3='cal'
+fi
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+
+if command -v pyenv 1>/dev/null 2>&1;
+then
+    eval "$(pyenv init -)"
 fi
 
 echo "bashrc_jc.sh"
