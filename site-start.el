@@ -25,6 +25,7 @@
 (global-set-key (kbd "M-n M-j r") 'revert-buffer)
 (global-set-key (kbd "M-n M-j b") 'jsnice-jc)
 (global-set-key (kbd "M-n M-j s") 'whitespace-mode)
+(global-set-key (kbd "M-n M-j o") 'org-sort-jc)
 
 ;;; enable emacsclient support unless we're running 'emacs-nox'
 ; note: string-match-p not avail on Emacs 22.1.1 on MacOS (latest release is 25.3 as of Sept 2017)
@@ -65,4 +66,17 @@
   "Runs untabify against the buffer"
   (interactive)
   (untabify (point-min) (point-max)))
+
+
+(defun org-sort-jc ()
+  "Runs org-sort agianst the buffer"
+  (interactive)
+  (save-excursion
+    ;; mark region
+    (goto-char (point-max))
+    (push-mark)
+    (goto-char 0)
+    (org-sort-entries t ?p)
+    )
+  )
 
