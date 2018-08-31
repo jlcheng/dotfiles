@@ -1,5 +1,5 @@
 ;;; Installation --- 
-;;;   echo '(load-file (expand-file-name "~/privprjs/dotfiles/site-start.el"))' >> ~/.emacs
+;;;   echo '(load-file (expand-file-name "~/privprjs/dotfiles/site-start.el"))' >> ~/.emacs.d/init.el
 
 ;;; http://orgmode.org/org.html
 (cond ((file-accessible-directory-p "/cygdrive")
@@ -16,6 +16,11 @@
        (setq org-agenda-files (list "~/org/work.org"
                                     "~/privprjs/grs/docs/plan.org"))
        (setq mac-command-modifier 'meta)))
+
+;; makes the 'alt' key 'meta' on macOS
+(when (eq system-type 'darwin)
+  (setq mac-command-modifier 'meta)
+  (setq mac-option-modifier 'super))
 
 (org-mode)
 (global-set-key "\C-cl" 'org-store-link)
