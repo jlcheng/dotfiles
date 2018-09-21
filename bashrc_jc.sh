@@ -80,4 +80,6 @@ then
     eval "$(pyenv init -)"
 fi
 
+source ~/.git-completion.bash
+
 echo "bashrc_jc.sh"
