@@ -32,27 +32,8 @@
 (global-set-key (kbd "M-n M-j b") 'jsnice-jc)
 (global-set-key (kbd "M-n M-j s") 'whitespace-mode)
 (global-set-key (kbd "M-n M-j o") 'org-sort-jc)
+(global-unset-key (kbd "s-w")) ;; macOS: frequenly leads to accidental killing frames
 (global-unset-key (kbd "s-n")) ;; macOS: frequenly leads to accidental new frames 
-
-;;; https://github.com/technomancy/find-file-in-project
-(global-set-key (kbd "M-n M-j f") 'find-file-in-project) ; experimenting with this binding
-(setq ffip-use-rust-fd t)
-(defun my-setup-develop-environment ()
-  (interactive)
-  (when (ffip-current-full-filename-match-pattern-p "zrprjs/ziprecruiter")
-    ;; exclude certain directories
-    (setq-local ffip-find-options "-E 'sqitch' -E 'app/js' -E 'app/view' -E 'app/t' -E 'app/java' -E 'db' -E 'etc' -E 'bin' -E 'selenium' -E '.git'")
-    ;; exclude `dist/' directory
-    (add-to-list 'ffip-prune-patterns "*/sqitch/*")
-    (add-to-list 'ffip-prune-patterns "*/app/view/*")
-    (add-to-list 'ffip-prune-patterns "*/app/lib/*")
-    (add-to-list 'ffip-prune-patterns "*/app/t/*")
-    (add-to-list 'ffip-prune-patterns "*/app/java/*")
-    (add-to-list 'ffip-prune-patterns "*/app/js/*"))
-  ;; insert more WHEN statements below this line for other projects
-  )
-;; most major modes inherit from prog-mode, so below line is enough
-(add-hook 'prog-mode-hook 'my-setup-develop-environment)
 
 ;;; enable emacsclient support unless we're running 'emacs-nox'
 ; note: string-match-p not avail on Emacs 22.1.1 on MacOS (latest release is 25.3 as of Sept 2017)
