@@ -72,12 +72,17 @@ else
     alias cal3='cal'
 fi
 
+# TODO: 2018-09-28 consider deprecating this
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
-
 if command -v pyenv 1>/dev/null 2>&1;
 then
     eval "$(pyenv init -)"
+fi
+
+if command -v colordiff 1>/dev/null 2>&1;
+then
+    alias diff='colordiff -wu'
 fi
 
 source ~/.git-completion.bash
