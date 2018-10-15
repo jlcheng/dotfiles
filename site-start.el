@@ -32,7 +32,7 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-switchb)
 ;; 2018-10-15 unclutter directories with org files
-(setq org-archive-location "~/org/archive.org::* From %s")
+(setq org-archive-location "~/org/archive/archive.org::* From %s")
 
 (global-set-key (kbd "M-n M-j r") 'revert-buffer)
 (global-set-key (kbd "M-n M-j b") 'jsnice-jc)
