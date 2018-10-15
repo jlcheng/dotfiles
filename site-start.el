@@ -20,14 +20,20 @@
        (setq mac-option-modifier 'meta)
        ))
 
-;; makes the 'alt' key 'meta' on macOS
+
 (when (eq system-type 'darwin)
-  (setq mac-command-modifier 'meta)
+  (setq mac-command-modifier 'meta))
+
+;; 2018-10-11 Disabled mapping the 'options' key to 'super' - whatever that means
+(when (eq system-type 'darwin)
   (setq mac-option-modifier 'super))
 
 (org-mode)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-switchb)
+;; 2018-10-15 unclutter directories with org files
+(setq org-archive-location "~/org/archive.org::* From %s")
+
 (global-set-key (kbd "M-n M-j r") 'revert-buffer)
 (global-set-key (kbd "M-n M-j b") 'jsnice-jc)
 (global-set-key (kbd "M-n M-j s") 'whitespace-mode)
