@@ -13,4 +13,8 @@ fi
 
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home"
 
+# 1) force ls to have color; 2) optimize lscolors for black background
+export CLICOLOR=1
+export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
+
 echo "bashrc_jc_osx.sh"

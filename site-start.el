@@ -22,10 +22,7 @@
 
 
 (when (eq system-type 'darwin)
-  (setq mac-command-modifier 'meta))
-
-;; 2018-10-11 Disabled mapping the 'options' key to 'super' - whatever that means
-(when (eq system-type 'darwin)
+  (setq mac-command-modifier 'meta)
   (setq mac-option-modifier 'super))
 
 (org-mode)
@@ -34,6 +31,7 @@
 ;; 2018-10-15 unclutter directories with org files
 (setq org-archive-location "~/org/archive/archive.org::* From %s")
 
+(global-set-key (kbd "M-s M-s") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
 (global-set-key (kbd "M-n M-j r") 'revert-buffer)
 (global-set-key (kbd "M-n M-j b") 'jsnice-jc)
 (global-set-key (kbd "M-n M-j s") 'whitespace-mode)
