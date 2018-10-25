@@ -95,3 +95,8 @@
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (global-company-mode)
 
+;;; --- tramp mode ---
+;; note from 2018-10-25, if editing over ssh is slow, try setting this
+;; https://www.emacswiki.org/emacs/TrampMode 
+;; (setq tramp-default-method "ssh")
+
