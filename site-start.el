@@ -95,6 +95,12 @@
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (global-company-mode)
 
+;; 2018-10-29: Sets full file path in title
+(setq frame-title-format
+      '((:eval (if (buffer-file-name)
+                   (abbreviate-file-name (buffer-file-name))
+                 "%b"))))
+
 ;;; --- tramp mode ---
 ;; note from 2018-10-25, if editing over ssh is slow, try setting this
 ;; https://www.emacswiki.org/emacs/TrampMode 

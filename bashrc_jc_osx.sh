@@ -9,6 +9,7 @@ export PATH="$PATH:/usr/local/go/bin"
 if [ -d "/Applications/Emacs.app" ]; then 
   PATH=/Applications/Emacs.app/Contents/MacOS/bin:$PATH
   alias emacs="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -n"
+  GIT_EDITOR="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -q -a vim"
 fi
 
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home"
