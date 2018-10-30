@@ -37,7 +37,9 @@
 (global-set-key (kbd "M-n M-j s") 'whitespace-mode)
 (global-set-key (kbd "M-n M-j o") 'org-sort-jc)
 (global-unset-key (kbd "s-w")) ;; macOS: frequenly leads to accidental killing frames
-(global-unset-key (kbd "s-n")) ;; macOS: frequenly leads to accidental new frames 
+(global-unset-key (kbd "s-n")) ;; macOS: frequenly leads to accidental new frames
+;; 2018-10-29 starting to use imenu in org mode, creating a kbd shortcut for it
+(global-set-key (kbd "M-n M-j i") 'imenu)
 
 ;;; enable emacsclient support unless we're running 'emacs-nox'
 ; note: string-match-p not avail on Emacs 22.1.1 on MacOS (latest release is 25.3 as of Sept 2017)
