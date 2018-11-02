@@ -5,8 +5,9 @@ export HISTCONTROL=ignoredups
 export HISTFILE=$HOME/.bash_history
 export HISTIGNORE='&:ls:[bf]g:exit'
 export PATH="/usr/bin:$PATH:$HOME/go/bin"
-export PS1="\[$(tput bold)\][\W]\\$ \[$(tput sgr0)\]"
-
+# from a combination of http://tldp.org/HOWTO/Xterm-Title-4.html 
+#                   and http://bashrcgenerator.com/ (2018-11-02)
+export PS1="\[\033]0;\w\007\]\[$(tput bold)\][\[$(tput sgr0)\]\[$(tput setaf 3)\]\h\[$(tput setaf 15)\]: \[$(tput bold)\]\[$(tput setaf 2)\]\W\[$(tput setaf 7)\]]\\$ \[$(tput sgr0)\]"
 alias emacs="emacsclient -n"
 alias emacs-start="/usr/bin/emacs &> /dev/null &"
 
@@ -53,7 +54,6 @@ fi
 if [[ ":$PATH:" != *":$HOME/bin:"* ]]; then
     export PATH="$PATH:$HOME/bin"
 fi
-export PS1="\[$(tput bold)\][\[$(tput sgr0)\]\[$(tput setaf 3)\]\h\[$(tput setaf 15)\]: \[$(tput bold)\]\[$(tput setaf 2)\]\W\[$(tput setaf 7)\]]\\$ \[$(tput sgr0)\]"
 jf ()
 {
   /usr/bin/find . -iname "*${1}.*"
