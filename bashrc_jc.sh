@@ -27,7 +27,7 @@ gitdiffjc ()
     if [ -n "$1" ]; then
         T="$1"
     fi
-    git log --left-right --boundary --pretty="format:%C(auto)%m %h %<(14)%cr %d %s" ${T}...HEAD
+    git log --left-right --boundary --pretty="format:%C(auto)%m %h %<(14)%cr %<(20,trunc)%ae %d %s" ${T}...HEAD
 }
 gitopenjc ()
 {
