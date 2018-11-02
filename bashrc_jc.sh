@@ -7,7 +7,15 @@ export HISTIGNORE='&:ls:[bf]g:exit'
 export PATH="/usr/bin:$PATH:$HOME/go/bin"
 # from a combination of http://tldp.org/HOWTO/Xterm-Title-4.html 
 #                   and http://bashrcgenerator.com/ (2018-11-02)
-export PS1="\[\033]0;\w\007\]\[$(tput bold)\][\[$(tput sgr0)\]\[$(tput setaf 3)\]\h\[$(tput setaf 15)\]: \[$(tput bold)\]\[$(tput setaf 2)\]\W\[$(tput setaf 7)\]]\\$ \[$(tput sgr0)\]"
+CLPART="\[$(tput bold)\][\[$(tput sgr0)\]\[$(tput setaf 3)\]\h\[$(tput setaf 15)\]: \[$(tput bold)\]\[$(tput setaf 2)\]\W\[$(tput setaf 7)\]]\\$ \[$(tput sgr0)\]"
+PS1=$CLPART
+title() {
+    if [ -z "$1" ]; then
+	echo "title required"
+    else
+	export PS1="\[\033]0;$1 \h\007\]${CLPART}"
+    fi
+}
 alias emacs="emacsclient -n"
 alias emacs-start="/usr/bin/emacs &> /dev/null &"
 
