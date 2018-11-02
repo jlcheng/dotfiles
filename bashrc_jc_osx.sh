@@ -14,6 +14,16 @@ fi
 
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home"
 
+gitdiffjczr ()
+{
+    T='origin/master'
+    if [ -n "$1" ]; then
+        T="$1"
+    fi
+    ZRST="--author jcheng --author christopher --author darias --author dustin --author gregm --author jzhuang --author jgoodknight --author mirani --author nishok --author rwinslow --author zach"
+    git log ${ZRST} --left-right --boundary --pretty="format:%C(auto)%m %h %<(14)%cr %<(20,trunc)%ae %d %s" ${T}...HEAD
+}
+
 # 1) force ls to have color; 2) optimize lscolors for black background
 export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
