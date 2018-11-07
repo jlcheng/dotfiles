@@ -81,7 +81,7 @@
   (interactive)
   (untabify (point-min) (point-max)))
 
-
+;; 2018-11-07: When is the last time I used this?
 (defun org-sort-jc ()
   "Runs org-sort agianst the buffer"
   (interactive)
