@@ -30,6 +30,9 @@
 (global-set-key "\C-cb" 'org-switchb)
 ;; 2018-10-15 unclutter directories with org files
 (setq org-archive-location "~/org/archive/archive.org::* From %s")
+;; 2018-11-07 experimenting with turning on auto-fill-mode for org-mode
+(add-hook 'org-mode-hook 'auto-fill-mode)
+
 
 (global-set-key (kbd "M-s M-s") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
 (global-set-key (kbd "M-n M-j r") 'revert-buffer)
