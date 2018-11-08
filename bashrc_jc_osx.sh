@@ -26,6 +26,7 @@ gitdiffjczr ()
 
 forgt ()
 {
+    POPDIR=$PWD
     T='TODO'
     if [ -n "$1" ]; then
 	T="$1"
@@ -34,6 +35,7 @@ forgt ()
     ack $1
     cd $HOME/org
     ack $1
+    cd $POPDIR
 }
 
 # 1) force ls to have color; 2) optimize lscolors for black background
