@@ -24,6 +24,16 @@ gitdiffjczr ()
     git log ${ZRST} --left-right --boundary --pretty="format:%C(auto)%m %h %<(14)%cr %<(20,trunc)%ae %d %s" ${T}...HEAD
 }
 
+forget ()
+{
+    T='TODO'
+    if [ -n "$1" ]; then
+	T="$1"
+    fi
+    cd FOO
+    ack --pager=less 
+}
+
 # 1) force ls to have color; 2) optimize lscolors for black background
 export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
