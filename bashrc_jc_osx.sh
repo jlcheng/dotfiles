@@ -2,7 +2,7 @@
 #  echo ". ~/privprjs/dotfiles/bashrc_jc_osx.sh" >> ~/.bashrc
 
 export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/share/python:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/git/bin:/Users/jcheng/.rvm/bin:/Users/jcheng/software/play-2:/Users/jcheng/bin:/Applications/Sublime Text 2.app/Contents/SharedSupport/bin"
-export PATH="$PATH:/usr/local/go/bin"
+export PATH="$PATH:/usr/local/go/bin:$HOME/go/bin"
 
 
 # https://emacsformacosx.com/
@@ -24,14 +24,16 @@ gitdiffjczr ()
     git log ${ZRST} --left-right --boundary --pretty="format:%C(auto)%m %h %<(14)%cr %<(20,trunc)%ae %d %s" ${T}...HEAD
 }
 
-forget ()
+forgt ()
 {
     T='TODO'
     if [ -n "$1" ]; then
 	T="$1"
     fi
-    cd FOO
-    ack --pager=less 
+    cd $HOME/Documents/zr
+    ack $1
+    cd $HOME/org
+    ack $1
 }
 
 # 1) force ls to have color; 2) optimize lscolors for black background
