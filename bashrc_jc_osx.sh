@@ -38,6 +38,11 @@ forgt ()
     cd $POPDIR
 }
 
+cspy()
+{
+    csearch -f py "$1"
+}
+
 # 1) force ls to have color; 2) optimize lscolors for black background
 export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
