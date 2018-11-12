@@ -32,9 +32,10 @@
 (setq org-archive-location "~/org/archive/archive.org::* From %s")
 ;; 2018-11-07 experimenting with turning on auto-fill-mode for org-mode
 (add-hook 'org-mode-hook 'auto-fill-mode)
+(add-hook 'org-mode-hook (lambda()
+			   (set-fill-column 120)))
 (setq org-startup-folded nil) ;; https://orgmode.org/manual/Initial-visibility.html#Initial-visibility
 (setq org-startup-indented t) ;; https://orgmode.org/manual/Clean-view.html
-
 
 (global-set-key (kbd "M-s M-s") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
 (global-set-key (kbd "M-n M-j r") 'revert-buffer)
