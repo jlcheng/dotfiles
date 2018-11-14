@@ -48,3 +48,4 @@ export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 
 echo "bashrc_jc_osx.sh"
+
