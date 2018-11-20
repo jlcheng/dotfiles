@@ -109,6 +109,12 @@
                    (abbreviate-file-name (buffer-file-name))
                  "%b"))))
 
+
+(defun eval-to-kill-ring-jc ()
+  (interactive)
+  (kill-new (with-output-to-string (princ (call-interactively 'eval-expression)))))
+(global-set-key (kbd "M-n M-j M-:") 'eval-to-kill-ring-jc)
+
 ;;; --- tramp mode ---
 ;; note from 2018-10-25, if editing over ssh is slow, try setting this
 ;; https://www.emacswiki.org/emacs/TrampMode 

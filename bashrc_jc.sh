@@ -5,6 +5,7 @@ export HISTCONTROL=ignoredups
 export HISTFILE=$HOME/.bash_history
 export HISTIGNORE='&:ls:[bf]g:exit'
 export PATH="/usr/bin:$PATH:$HOME/go/bin"
+export GOPATH=$HOME/go
 # from a combination of http://tldp.org/HOWTO/Xterm-Title-4.html 
 #                   and http://bashrcgenerator.com/ (2018-11-02)
 CLPART="\[$(tput bold)\][\[$(tput sgr0)\]\[$(tput setaf 3)\]\h\[$(tput setaf 15)\]: \[$(tput bold)\]\[$(tput setaf 2)\]\W\[$(tput setaf 7)\]]\\$ \[$(tput sgr0)\]"
@@ -50,6 +51,7 @@ gitopenjc ()
         echo "$o" | awk '{print NR":", $0}'
     fi
 }
+# git config --global pretty.sum "format:%C(auto)%m %h %<(14)%cr %<(20,trunc)%ae %d %s "
 # /git
 
 export EDITOR=vi

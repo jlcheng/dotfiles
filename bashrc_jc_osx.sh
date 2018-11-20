@@ -14,6 +14,8 @@ fi
 
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home"
 
+export ZRAUTH="--author jcheng --author christopher --author darias --author dustin --author gregm --author jzhuang --author jgoodknight --author mirani --author nishok --author rwinslow --author zach"
+# git config format.pretty "format:%C(auto)%m %h %<(14)%cr %<(20,trunc)%ae %d %s " # for zr only
 gitdiffjczr ()
 {
     T='origin/master'
