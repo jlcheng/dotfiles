@@ -120,3 +120,14 @@
 ;; https://www.emacswiki.org/emacs/TrampMode 
 ;; (setq tramp-default-method "ssh")
 
+;;; --- projectile ---
+;; experiment from 2018-12-05
+;; M-x project-refresh-contents
+;; M-x project-install projectile
+;; https://projectile.readthedocs.io/en/latest/usage/
+(projectile-mode +1)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+(setq projectile-indexing-method 'alien)
+(setq projectile-completion-system 'ivy)
+(setq projectile-project-search-path '("~/org/"))
