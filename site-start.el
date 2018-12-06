@@ -87,7 +87,7 @@
   (interactive)
   (untabify (point-min) (point-max)))
 
-;; 2018-11-07: When is the last time I used this?
+;; 2018-11-07: When is the last time I used this? 2018-12-06: 3..2..1 killing this if not used again
 (defun org-sort-jc ()
   "Runs org-sort agianst the buffer"
   (interactive)
@@ -109,7 +109,7 @@
                    (abbreviate-file-name (buffer-file-name))
                  "%b"))))
 
-
+;; 2018-12-06: Has not used this since it was written, though sounds useful.
 (defun eval-to-kill-ring-jc ()
   (interactive)
   (kill-new (with-output-to-string (princ (call-interactively 'eval-expression)))))
@@ -131,3 +131,5 @@
 (setq projectile-indexing-method 'alien)
 (setq projectile-completion-system 'ivy)
 (setq projectile-project-search-path '("~/org/"))
+(setq projectile-ignored-projects ["~/go/src/go.zr.org/"])
+(setq projectile-globally-ignored-file-suffixes ["org_archive"])
