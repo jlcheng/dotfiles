@@ -115,6 +115,11 @@
   (kill-new (with-output-to-string (princ (call-interactively 'eval-expression)))))
 (global-set-key (kbd "M-n M-j M-:") 'eval-to-kill-ring-jc)
 
+(defun kill-new-file-name ()
+  (interactive)
+  (kill-new (format "[[%s]]" (buffer-file-name))))
+(global-set-key (kbd "s-k") 'kill-new-file-name)
+
 ;;; --- tramp mode ---
 ;; note from 2018-10-25, if editing over ssh is slow, try setting this
 ;; https://www.emacswiki.org/emacs/TrampMode 
@@ -133,3 +138,7 @@
 (setq projectile-project-search-path '("~/org/"))
 (setq projectile-ignored-projects ["~/go/src/go.zr.org/"])
 (setq projectile-globally-ignored-file-suffixes ["org_archive"])
+
+
+;;; -- font size --
+(set-face-attribute 'default (selected-frame) :height 150)
