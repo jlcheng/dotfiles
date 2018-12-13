@@ -148,9 +148,11 @@
 ;;; -- start in Messages buffer
 (setq inhibit-startup-screen t)
 
-(with-current-buffer "*scratch*"
+(with-current-buffer (get-buffer-create "links")
   (erase-buffer)
-  (insert-buffer "*Messages*")
-  (end-of-buffer)
   (insert "[[~/privprjs/dotfiles/site-start.el]]\n")
+  (insert "[[~/org/work/work_journal.org]]\n")
+  (not-modified)
+  (special-mode)
+  (org-mode)
   )
