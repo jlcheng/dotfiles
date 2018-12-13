@@ -7,23 +7,39 @@
 ; (package-initialize)
 
 
-;;; http://orgmode.org/org.html
+(defun jc-org-cygwin ()
+  "Windows specific org-mode customizations"
+  (message (documentation 'jc-cygwin))
+  (setq org-agenda-files (list "~/org/home.org"
+                                    "~/privprjs/grs/docs/plan.org")))
+
+(defun jc-org-macos ()
+  "macOS specific org-mode customizations"
+  (message (documentation 'jc-org-macos))
+  (setq org-agenda-files (list "~/org/work.org"
+                               "~/privprjs/grs/docs/plan.org"
+			       "~/org/work/work_journal.org"))
+  )
+
+(defun jc-misc-macos()
+  "macos misc customizations"
+  (message (documentation 'jc-misc-macos))
+  (setq mac-command-modifier 'meta) ;; so the Alt key on WASD Code can be used for 'M-x'
+  (setq mac-option-modifier 'super) ;; so the key left of Alt on WAS Code can be used for 'S-p'
+  (global-unset-key (kbd "s-w")) ;; macOS: frequenly leads to accidental killing frames
+  (global-unset-key (kbd "s-n")) ;; macOS: frequenly leads to accidental new frames
+  )
+
+;;; OS and env-specific settings
 (cond ((file-accessible-directory-p "/cygdrive")
        (message "Windows OS")
-       (setq org-agenda-files (list "~/org/home.org"
-                                    "~/privprjs/grs/docs/plan.org")))
-      ((file-accessible-directory-p "/Users")
-       (message "MacOS")
-       (setq org-agenda-files (list "~/org/work.org"
-                                    "~/privprjs/grs/docs/plan.org"))
-       ;;(setq mac-command-modifier 'meta) changed this to mac-option-modifier 'meta so that Emacs on macOS is consistent with JetBrain
-       (setq mac-option-modifier 'meta)
-       ))
-
-
-(when (eq system-type 'darwin)
-  (setq mac-command-modifier 'meta)
-  (setq mac-option-modifier 'super))
+       jc-org-cywgin)
+      ((eq system-type 'darwin)
+       (message "macOS")
+       (jc-org-macos)
+       (jc-misc-macos)
+       )
+      )
 
 (org-mode)
 (global-set-key "\C-ca" 'org-agenda)
@@ -42,8 +58,6 @@
 (global-set-key (kbd "M-n M-j b") 'jsnice-jc)
 (global-set-key (kbd "M-n M-j s") 'whitespace-mode)
 (global-set-key (kbd "M-n M-j o") 'org-sort-jc)
-(global-unset-key (kbd "s-w")) ;; macOS: frequenly leads to accidental killing frames
-(global-unset-key (kbd "s-n")) ;; macOS: frequenly leads to accidental new frames
 ;; 2018-10-29 starting to use imenu in org mode, creating a kbd shortcut for it
 (global-set-key (kbd "M-n M-j i") 'imenu)
 
@@ -87,19 +101,6 @@
   (interactive)
   (untabify (point-min) (point-max)))
 
-;; 2018-11-07: When is the last time I used this? 2018-12-06: 3..2..1 killing this if not used again
-(defun org-sort-jc ()
-  "Runs org-sort agianst the buffer"
-  (interactive)
-  (save-excursion
-    ;; mark region
-    (goto-char (point-max))
-    (push-mark)
-    (goto-char 0)
-    (org-sort-entries t ?p)
-    )
-  )
-
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (global-company-mode)
 
@@ -142,3 +143,14 @@
 
 ;;; -- font size --
 (set-face-attribute 'default (selected-frame) :height 150)
+
+
+;;; -- start in Messages buffer
+(setq inhibit-startup-screen t)
+
+(with-current-buffer "*scratch*"
+  (erase-buffer)
+  (insert-buffer "*Messages*")
+  (end-of-buffer)
+  (insert "[[~/privprjs/dotfiles/site-start.el]]\n")
+  )
