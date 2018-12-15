@@ -9,7 +9,7 @@
 
 (defun jc-org-cygwin ()
   "Windows specific org-mode customizations"
-  (message (documentation 'jc-cygwin))
+  (message (documentation 'jc-org-cygwin))
   (setq org-agenda-files (list "~/org/home.org"
                                     "~/privprjs/grs/docs/plan.org")))
 
@@ -33,7 +33,8 @@
 ;;; OS and env-specific settings
 (cond ((file-accessible-directory-p "/cygdrive")
        (message "Windows OS")
-       jc-org-cywgin)
+       (jc-org-cygwin)
+       )
       ((eq system-type 'darwin)
        (message "macOS")
        (jc-org-macos)
