@@ -4,21 +4,31 @@
 export HISTCONTROL=ignoredups
 export HISTFILE=$HOME/.bash_history
 export HISTIGNORE='&:ls:[bf]g:exit'
-export PATH="/usr/bin:$PATH"
-export PS1="\[$(tput bold)\][\W]\\$ \[$(tput sgr0)\]"
-
+export PATH="/usr/bin:$PATH:$HOME/go/bin"
+export GOPATH=$HOME/go
+# from a combination of http://tldp.org/HOWTO/Xterm-Title-4.html 
+#                   and http://bashrcgenerator.com/ (2018-11-02)
+CLPART="\[$(tput bold)\][\[$(tput sgr0)\]\[$(tput setaf 3)\]\h\[$(tput setaf 15)\]: \[$(tput bold)\]\[$(tput setaf 2)\]\W\[$(tput setaf 7)\]]\\$ \[$(tput sgr0)\]"
+PS1=$CLPART
+title() {
+    if [ -z "$1" ]; then
+	echo "title required"
+    else
+	export PS1="\[\033]0;$1 \h\007\]${CLPART}"
+    fi
+}
 alias emacs="emacsclient -n"
 alias emacs-start="/usr/bin/emacs &> /dev/null &"
 
 # git
-export GIT_EDITOR="emacs"
+export GIT_EDITOR="emacs -nw -q"
 gitdiffjc ()
 {
     T='origin/master'
     if [ -n "$1" ]; then
         T="$1"
     fi
-    git log --left-right --boundary --pretty="format:%C(auto)%m %h %<(14)%cr %d %s" ${T}...HEAD
+    git log --left-right --boundary --pretty="format:%C(auto)%m %h %<(14)%cr %<(20,trunc)%ae %d %s" ${T}...HEAD
 }
 gitopenjc ()
 {
@@ -41,6 +51,7 @@ gitopenjc ()
         echo "$o" | awk '{print NR":", $0}'
     fi
 }
+# git config --global pretty.sum "format:%C(auto)%m %h %<(14)%cr %<(20,trunc)%ae %d %s "
 # /git
 
 export EDITOR=vi
@@ -50,10 +61,9 @@ fi
 if [[ ":$PATH:" != *":/usr/bin:"* ]]; then
     export PATH="$PATH:/usr/bin"
 fi
-if [[ ":$PATH:" != *":~/bin:"* ]]; then
-    export PATH="$PATH:~/bin"
+if [[ ":$PATH:" != *":$HOME/bin:"* ]]; then
+    export PATH="$PATH:$HOME/bin"
 fi
-export PS1="\[$(tput bold)\][\[$(tput sgr0)\]\[$(tput setaf 3)\]\h\[$(tput setaf 15)\]: \[$(tput bold)\]\[$(tput setaf 2)\]\W\[$(tput setaf 7)\]]\\$ \[$(tput sgr0)\]"
 jf ()
 {
   /usr/bin/find . -iname "*${1}.*"
@@ -71,5 +81,20 @@ if [ "$?" == "0"  ]; then
 else
     alias cal3='cal'
 fi
+
+# TODO: 2018-09-28 consider deprecating this
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1;
+then
+    eval "$(pyenv init -)"
+fi
+
+if command -v colordiff 1>/dev/null 2>&1;
+then
+    alias diff='colordiff -wu'
+fi
+
+source ~/.git-completion.bash
 
 echo "bashrc_jc.sh"
