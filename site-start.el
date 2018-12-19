@@ -63,3 +63,9 @@
   (interactive)
   (untabify (point-min) (point-max)))
 
+(defunc jc-test ()
+  "a test"
+  (read-multiple-choice "list of projects"
+			'((?a "/foo/bar")
+			  (?b "/bar/bar/do")
+			  (?c "/some/other"))))
