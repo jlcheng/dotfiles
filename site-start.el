@@ -70,8 +70,12 @@
   (server-start)
   ;; Uubuntu: run a no-op command to bring the window into focus
   (add-hook 'server-visit-hook (lambda() (message " "))))
-(ivy-mode) ; trying this out instead of (ido-mode)
 
+;; 2018-12-24: Experiment with helm-mode for completion
+(cond
+ ((functionp 'helm-mode) (helm-mode))
+ ((functionp 'ivy-mode) (ivy-mode)))
+  
 ;;; https://shreevatsa.wordpress.com/2007/01/06/using-emacsclient/
 (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function)
 
@@ -102,15 +106,26 @@
   (interactive)
   (untabify (point-min) (point-max)))
 
-(defunc jc-test ()
-  "a test"
-  (read-multiple-choice "list of projects"
-			'((?a "/foo/bar")
-			  (?b "/bar/bar/do")
-			  (?c "/some/other"))))
+
+;; Shortcut to frequently used files, can be used to replace projectile
+(defvar freq-files-def-jc '("~" "~/privprjs/dotfiles/site-start.el" "~/org/home.org")
+  "Frequently used files")
+(defun sc-jc ()
+  "Shortcut to frequently used files"
+  (interactive)
+  (find-file-existing
+   (let ((crf (cond ((functionp 'helm-comp-read)
+		     'helm-comp-read)
+		    ((functionp 'ivy-completing-read)
+		     'ivy-completing-read)
+		    ((functionp 'ido-completing-read)
+		     'ido-completing-read))))
+     (funcall crf "freq-files-jc: " freq-files-def-jc))
+   ))
+(global-set-key (kbd "M-n M-j p") 'sc-jc)
 
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
-(global-company-mode)
+(if (functionp 'global-company-mode) (global-company-mode))
 
 ;; 2018-10-29: Sets full file path in title
 (setq frame-title-format
@@ -139,15 +154,15 @@
 ;; M-x project-refresh-contents
 ;; M-x project-install projectile
 ;; https://projectile.readthedocs.io/en/latest/usage/
-(projectile-mode +1)
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-(setq projectile-indexing-method 'alien)
-(setq projectile-completion-system 'ivy)
-(setq projectile-project-search-path '("~/org/"))
-(setq projectile-ignored-projects ["~/go/src/go.zr.org/"])
-(setq projectile-globally-ignored-file-suffixes ["org_archive"])
-
+;(projectile-mode +1)
+;(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+;(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+;(setq projectile-indexing-method 'alien)
+;(setq projectile-completion-system 'ivy)
+;(setq projectile-project-search-path '("~/org/"))
+;(setq projectile-ignored-projects ["~/go/src/go.zr.org/"])
+;(setq projectile-globally-ignored-file-suffixes ["org_archive"])
+;; Removed on 2018-12-23, replaced with sc-jc
 
 ;;; -- font size --
 (set-face-attribute 'default (selected-frame) :height 150)
@@ -155,13 +170,4 @@
 
 ;;; -- start in Messages buffer
 (setq inhibit-startup-screen t)
-
-(with-current-buffer (get-buffer-create "links")
-  (erase-buffer)
-  (insert "[[~/privprjs/dotfiles/site-start.el]]\n")
-  (insert "[[~/org/work/work_journal.org]]\n")
-  (not-modified)
-  (special-mode)
-  (org-mode)
-  )
 
