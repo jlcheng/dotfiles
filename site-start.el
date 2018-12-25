@@ -17,7 +17,7 @@
                                "~/org/work/work_journal.org"))
   )
 
-(defun misc-macOS-jc()
+(defun misc-macOS-jc ()
   "macos misc customizations"
   (message (documentation 'misc-macOS-jc))
   (setq mac-command-modifier 'meta) ;; so the Alt key on WASD Code can be used for 'M-x'
@@ -26,11 +26,12 @@
   (global-unset-key (kbd "s-n")) ;; macOS: frequenly leads to accidental new frames
   )
 
-(setq-local
- org-linux-jc
- '(progn
-    (setq org-agenda-files (list "~/org/home.org"
-				 "~/privprjs/grs/docs/plan.org"))))
+(defun org-linux-jc ()
+  "gnu/linux specific org-mode customizations"
+  (message (documentation 'org-linux-jc))
+  (setq org-agenda-files '("~/org/home.org"
+			   "~/privprjs/grs/docs/plan.org"))
+  )
 
 ;;; OS and env-specific settings
 (cond ((eq system-type 'cygwin)
@@ -45,8 +46,8 @@
        )
       ((eq system-type 'gnu/linux)
        (message "gnu/linux")
-       (set-face-attribute 'default (selected-frame) :height 130)
-       (eval org-linux-jc))
+       (set-face-attribute 'default (selected-frame) :height 135)
+       (org-linux-jc))
       )
 
 (org-mode)
