@@ -1,29 +1,30 @@
+;;; site-start.el --- personalization -*- lexical-binding: t -*-
 ;;; Installation --- 
 ;;;   echo '(load-file (expand-file-name "~/privprjs/dotfiles/site-start.el"))' >> ~/.emacs.d/init.el
 
 ;; depends on following in ~/.emacs.d/init.el
 ; (require 'package)
-; (add-to-list 'package-archives (cons "melpa" "https://melpa.org/packages/"))
-; (package-initialize)
 
+                                        ; (add-to-list 'package-archives (cons "melpa" "https://melpa.org/packages/"))
+; (package-initialize)
 
 (defun jc-org-cygwin ()
   "Windows specific org-mode customizations"
-  (message (documentation 'jc-org-cygwin))
+  (message (documentation 'org-cygwin-jc))
   (setq org-agenda-files (list "~/org/home.org"
                                     "~/privprjs/grs/docs/plan.org")))
 
-(defun jc-org-macos ()
+(defun jc-org-macOS ()
   "macOS specific org-mode customizations"
-  (message (documentation 'jc-org-macos))
+  (message (documentation 'org-macos-jc))
   (setq org-agenda-files (list "~/org/work.org"
                                "~/privprjs/grs/docs/plan.org"
-			       "~/org/work/work_journal.org"))
+                               "~/org/work/work_journal.org"))
   )
 
 (defun jc-misc-macos()
   "macos misc customizations"
-  (message (documentation 'jc-misc-macos))
+  (message (documentation 'jc-misc-macOS))
   (setq mac-command-modifier 'meta) ;; so the Alt key on WASD Code can be used for 'M-x'
   (setq mac-option-modifier 'super) ;; so the key left of Alt on WAS Code can be used for 'S-p'
   (global-unset-key (kbd "s-w")) ;; macOS: frequenly leads to accidental killing frames
@@ -33,12 +34,12 @@
 ;;; OS and env-specific settings
 (cond ((file-accessible-directory-p "/cygdrive")
        (message "Windows OS")
-       (jc-org-cygwin)
+       (org-cygwin-jc)
        )
       ((eq system-type 'darwin)
        (message "macOS")
-       (jc-org-macos)
-       (jc-misc-macos)
+       (org-macos-jc)
+       (jc-misc-macOS)
        )
       )
 
@@ -50,7 +51,7 @@
 ;; 2018-11-07 experimenting with turning on auto-fill-mode for org-mode
 (add-hook 'org-mode-hook 'auto-fill-mode)
 (add-hook 'org-mode-hook (lambda()
-			   (set-fill-column 120)))
+                           (set-fill-column 120)))
 (setq org-startup-folded nil) ;; https://orgmode.org/manual/Initial-visibility.html#Initial-visibility
 (setq org-startup-indented t) ;; https://orgmode.org/manual/Clean-view.html
 
@@ -60,7 +61,9 @@
 (global-set-key (kbd "M-n M-j s") 'whitespace-mode)
 (global-set-key (kbd "M-n M-j o") 'org-sort-jc)
 ;; 2018-10-29 starting to use imenu in org mode, creating a kbd shortcut for it
-(global-set-key (kbd "M-n M-j i") 'imenu)
+;; 2018-12-25 schedule M-n M-j i from removal; not used.
+;; (global-set-key (kbd "M-n M-j i") 'imenu)
+
 
 ;;; enable emacsclient support unless we're running 'emacs-nox'
 ; note: string-match-p not avail on Emacs 22.1.1 on MacOS (latest release is 25.3 as of Sept 2017)
@@ -72,6 +75,11 @@
   (add-hook 'server-visit-hook (lambda() (message " "))))
 
 ;; 2018-12-24: Experiment with helm-mode for completion
+(unless (package-installed-p 'helm)
+  (progn
+    (add-to-list 'package-archives (cons "melpa" "https://melpa.org/packages/"))
+    (package-refresh-contents)
+    (package-install 'helm)))
 (cond
  ((functionp 'helm-mode) (helm-mode))
  ((functionp 'ivy-mode) (ivy-mode)))
@@ -103,7 +111,6 @@
 
 (defun notabs-jc ()
   "Runs untabify against the buffer"
-  (interactive)
   (untabify (point-min) (point-max)))
 
 
@@ -115,11 +122,11 @@
   (interactive)
   (find-file-existing
    (let ((crf (cond ((functionp 'helm-comp-read)
-		     'helm-comp-read)
-		    ((functionp 'ivy-completing-read)
-		     'ivy-completing-read)
-		    ((functionp 'ido-completing-read)
-		     'ido-completing-read))))
+                     'helm-comp-read)
+                    ((functionp 'ivy-completing-read)
+                     'ivy-completing-read)
+                    ((functionp 'ido-completing-read)
+                     'ido-completing-read))))
      (funcall crf "freq-files-jc: " freq-files-def-jc))
    ))
 (global-set-key (kbd "M-n M-j p") 'sc-jc)
