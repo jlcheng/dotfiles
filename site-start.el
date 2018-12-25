@@ -146,9 +146,16 @@
   (kill-new (with-output-to-string (princ (call-interactively 'eval-expression)))))
 (global-set-key (kbd "M-n M-j M-:") 'eval-to-kill-ring-jc)
 
-(defun kill-new-file-name ()
-  (interactive)
-  (kill-new (format "[[%s]]" (buffer-file-name))))
+(defun kill-new-file-name (b)
+  "Append the path of an open file into the kill ring"
+  (interactive "b")
+  (let ((bfn (buffer-file-name (get-buffer b))))
+    (if bfn
+	(progn
+	  (kill-new bfn)
+	  (message bfn)))
+    )
+  )
 (global-set-key (kbd "s-k") 'kill-new-file-name)
 
 ;;; --- tramp mode ---
