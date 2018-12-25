@@ -44,6 +44,7 @@
       ((eq system-type 'gnu/linux)
        (message "gnu/linux")
        (set-face-attribute 'default (selected-frame) :height 130)
+       (eval org-linux-jc))
       )
 
 (org-mode)
