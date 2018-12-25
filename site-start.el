@@ -2,19 +2,13 @@
 ;;; Installation --- 
 ;;;   echo '(load-file (expand-file-name "~/privprjs/dotfiles/site-start.el"))' >> ~/.emacs.d/init.el
 
-;; depends on following in ~/.emacs.d/init.el
-; (require 'package)
-
-                                        ; (add-to-list 'package-archives (cons "melpa" "https://melpa.org/packages/"))
-; (package-initialize)
-
-(defun jc-org-cygwin ()
+(defun org-cygwin-jc ()
   "Windows specific org-mode customizations"
   (message (documentation 'org-cygwin-jc))
   (setq org-agenda-files (list "~/org/home.org"
                                     "~/privprjs/grs/docs/plan.org")))
 
-(defun jc-org-macOS ()
+(defun org-macOS-jc ()
   "macOS specific org-mode customizations"
   (message (documentation 'org-macos-jc))
   (setq org-agenda-files (list "~/org/work.org"
@@ -22,9 +16,9 @@
                                "~/org/work/work_journal.org"))
   )
 
-(defun jc-misc-macos()
+(defun misc-macOS-jc()
   "macos misc customizations"
-  (message (documentation 'jc-misc-macOS))
+  (message (documentation 'misc-macOS-jc))
   (setq mac-command-modifier 'meta) ;; so the Alt key on WASD Code can be used for 'M-x'
   (setq mac-option-modifier 'super) ;; so the key left of Alt on WAS Code can be used for 'S-p'
   (global-unset-key (kbd "s-w")) ;; macOS: frequenly leads to accidental killing frames
@@ -32,9 +26,10 @@
   )
 
 ;;; OS and env-specific settings
-(cond ((file-accessible-directory-p "/cygdrive")
+(cond ((eq system-type 'cygwin)
        (message "Windows OS")
        (org-cygwin-jc)
+       (set-face-attribute 'default (selected-frame) :height 130)
        )
       ((eq system-type 'darwin)
        (message "macOS")
@@ -49,9 +44,9 @@
 ;; 2018-10-15 unclutter directories with org files
 (setq org-archive-location "~/org/archive/archive.org::* From %s")
 ;; 2018-11-07 experimenting with turning on auto-fill-mode for org-mode
-(add-hook 'org-mode-hook 'auto-fill-mode)
-(add-hook 'org-mode-hook (lambda()
-                           (set-fill-column 120)))
+(add-hook 'org-mode-hook (lambda ()
+			   (auto-fill-mode)
+			   (set-fill-column 120)))
 (setq org-startup-folded nil) ;; https://orgmode.org/manual/Initial-visibility.html#Initial-visibility
 (setq org-startup-indented t) ;; https://orgmode.org/manual/Clean-view.html
 
@@ -61,9 +56,8 @@
 (global-set-key (kbd "M-n M-j s") 'whitespace-mode)
 (global-set-key (kbd "M-n M-j o") 'org-sort-jc)
 ;; 2018-10-29 starting to use imenu in org mode, creating a kbd shortcut for it
-;; 2018-12-25 schedule M-n M-j i from removal; not used.
+;; 2018-12-25 schedule use of imenu in org mode for removal; rarely used
 ;; (global-set-key (kbd "M-n M-j i") 'imenu)
-
 
 ;;; enable emacsclient support unless we're running 'emacs-nox'
 ; note: string-match-p not avail on Emacs 22.1.1 on MacOS (latest release is 25.3 as of Sept 2017)
@@ -71,7 +65,7 @@
     (string-match (regexp-quote "emacs-nox") (elt command-line-args 0))
   ;; runs emacs server
   (server-start)
-  ;; Uubuntu: run a no-op command to bring the window into focus
+  ;; Ubuntu: run a no-op command to bring the window into focus
   (add-hook 'server-visit-hook (lambda() (message " "))))
 
 ;; 2018-12-24: Experiment with helm-mode for completion
@@ -80,9 +74,8 @@
     (add-to-list 'package-archives (cons "melpa" "https://melpa.org/packages/"))
     (package-refresh-contents)
     (package-install 'helm)))
-(cond
- ((functionp 'helm-mode) (helm-mode))
- ((functionp 'ivy-mode) (ivy-mode)))
+(let ((modes '(helm-mode ivy-mode)))
+  (funcall (cl-first (seq-filter 'functionp modes))))
   
 ;;; https://shreevatsa.wordpress.com/2007/01/06/using-emacsclient/
 (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function)
@@ -96,23 +89,20 @@
 ;;; misc
 (setq column-number-mode t)
 
-;;; jsnice
-(setq jsnice-path (expand-file-name "~/bin/jsnice"))
-(cond ((file-accessible-directory-p "/cygdrive")
-       (message "Windows OS")
-       (setq jsnice-path "C:\\cygwin64\\home\\johnl\\bin\\jsnice.exe")))
 (defun jsnice-jc (p1 p2)
   "Runs jsnice against the region"
   (interactive "r")
-  (if (executable-find jsnice-path)
-      (shell-command-on-region
-       p1 p2 jsnice-path nil t "*Minibuf-0*" t)
-    (message (format "%s not installed" jsnice-path))))
+  (let ((jsnice-path (expand-file-name "~/bin/jsnice")))
+    (cond ((eq system-type 'cygwin)
+	   (setq jsnice-path "C:\\cygwin64\\home\\johnl\\bin\\jsnice.exe")))
+    (if (executable-find jsnice-path)
+	(shell-command-on-region
+	 p1 p2 jsnice-path nil t "*Minibuf-0*" t)
+      (message (format "%s not installed" jsnice-path)))))
 
 (defun notabs-jc ()
   "Runs untabify against the buffer"
   (untabify (point-min) (point-max)))
-
 
 ;; Shortcut to frequently used files, can be used to replace projectile
 (defvar freq-files-def-jc '("~" "~/privprjs/dotfiles/site-start.el" "~/org/home.org")
@@ -121,14 +111,10 @@
   "Shortcut to frequently used files"
   (interactive)
   (find-file-existing
-   (let ((crf (cond ((functionp 'helm-comp-read)
-                     'helm-comp-read)
-                    ((functionp 'ivy-completing-read)
-                     'ivy-completing-read)
-                    ((functionp 'ido-completing-read)
-                     'ido-completing-read))))
+   (let ((crf (cl-first (seq-filter 'functionp '(helm-comp-read ivy-completing-read ido-completing-read)))))
      (funcall crf "freq-files-jc: " freq-files-def-jc))
-   ))
+   )
+  )
 (global-set-key (kbd "M-n M-j p") 'sc-jc)
 
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
@@ -178,10 +164,6 @@
 ;(setq projectile-globally-ignored-file-suffixes ["org_archive"])
 ;; Removed on 2018-12-23, replaced with sc-jc
 
-;;; -- font size --
-(set-face-attribute 'default (selected-frame) :height 150)
-
-
-;;; -- start in Messages buffer
+;;; -- start in *scratch* buffer
 (setq inhibit-startup-screen t)
 
