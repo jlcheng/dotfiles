@@ -1,3 +1,4 @@
+;;;
 ;;; site-start.el --- personalization -*- lexical-binding: t -*-
 ;;; Installation --- 
 ;;;   echo '(load-file (expand-file-name "~/privprjs/dotfiles/site-start.el"))' >> ~/.emacs.d/init.el
@@ -25,10 +26,11 @@
   (global-unset-key (kbd "s-n")) ;; macOS: frequenly leads to accidental new frames
   )
 
-(setq org-linux-jc
-      '(progn
-	 (setq org-agenda-files (list "~/org/home.org"
-				      "~/privprjs/grs/docs/plan.org"))))
+(setq-local
+ org-linux-jc
+ '(progn
+    (setq org-agenda-files (list "~/org/home.org"
+				 "~/privprjs/grs/docs/plan.org"))))
 
 ;;; OS and env-specific settings
 (cond ((eq system-type 'cygwin)
