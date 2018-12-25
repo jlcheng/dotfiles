@@ -25,6 +25,11 @@
   (global-unset-key (kbd "s-n")) ;; macOS: frequenly leads to accidental new frames
   )
 
+(setq org-linux-jc
+      '(progn
+	 (setq org-agenda-files (list "~/org/home.org"
+				      "~/privprjs/grs/docs/plan.org"))))
+
 ;;; OS and env-specific settings
 (cond ((eq system-type 'cygwin)
        (message "Windows OS")
