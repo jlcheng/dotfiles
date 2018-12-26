@@ -1,4 +1,3 @@
-;;;
 ;;; site-start.el --- personalization -*- lexical-binding: t -*-
 ;;; Installation --- 
 ;;;   echo '(load-file (expand-file-name "~/privprjs/dotfiles/site-start.el"))' >> ~/.emacs.d/init.el
@@ -43,6 +42,13 @@
        (message "macOS")
        (org-macOS-jc)
        (misc-macOS-jc)
+       (setq frame (selected-frame))
+       (let ((frame (selected-frame)))
+	 (set-frame-width frame 160)
+	 (set-frame-height frame 60)
+	 (set-frame-position frame 0 0)
+	 )
+       (set-face-attribute 'default (selected-frame) :height 130)
        )
       ((eq system-type 'gnu/linux)
        (message "gnu/linux")
