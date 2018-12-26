@@ -25,6 +25,15 @@
   (global-unset-key (kbd "s-n")) ;; macOS: frequenly leads to accidental new frames
   )
 
+(defun window-setup-hook-macOS-jc ()
+  "macOS window-setup-hook"
+  (message (documentation 'window-setup-hook-macOS-jc))
+  (set-frame-width (selected-frame) 160)
+  (set-frame-height (selected-frame) 60)
+  (set-frame-position (selected-frame) 0 0)
+  (set-face-attribute 'default (selected-frame) :height 130)
+  )
+
 (defun org-linux-jc ()
   "gnu/linux specific org-mode customizations"
   (message (documentation 'org-linux-jc))
@@ -44,11 +53,8 @@
        (misc-macOS-jc)
        (message "frame %s" (selected-frame))
        (message "frame list %s" (frames-on-display-list))
-       (add-hook 'window-setup-hook (lambda ()
-				       (set-frame-width (selected-frame) 160)
-				       (set-frame-height (selected-frame) 60)
-				       (set-frame-position (selected-frame) 0 0)
-				       (set-face-attribute 'default (selected-frame) :height 130)))
+       (add-to-list 'default-frame-alist '((width . 160) (height 60)))
+       (add-hook 'window-setup-hook 'window-setup-hook-macOS-jc)
        )
       ((eq system-type 'gnu/linux)
        (message "gnu/linux")
@@ -63,9 +69,12 @@
 ;; 2018-10-15 unclutter directories with org files
 (setq org-archive-location "~/org/archive/archive.org::* From %s")
 ;; 2018-11-07 experimenting with turning on auto-fill-mode for org-mode
-(add-hook 'org-mode-hook (lambda ()
-			   (auto-fill-mode)
-			   (set-fill-column 120)))
+(defun org-mode-hook-jc ()
+  "org-mode hooks"
+  (interactive)
+  (auto-fill-mode)
+  (set-fill-column 120))
+(add-hook 'org-mode-hook 'org-mode-hook-jc)
 (setq org-startup-folded nil ;; https://orgmode.org/manual/Initial-visibility.html#Initial-visibility
       org-startup-indented t ;; https://orgmode.org/manual/Clean-view.html
       )
