@@ -1,4 +1,4 @@
-;;; site-start.el --- personalization -*- lexical-binding: t -*-
+;; site-start.el --- personalization -*- lexical-binding: t -*-
 ;;; Installation --- 
 ;;;   echo '(load-file (expand-file-name "~/privprjs/dotfiles/site-start.el"))' >> ~/.emacs.d/init.el
 
@@ -25,15 +25,6 @@
   (global-unset-key (kbd "s-n")) ;; macOS: frequenly leads to accidental new frames
   )
 
-(defun window-setup-hook-macOS-jc ()
-  "macOS window-setup-hook"
-  (message (documentation 'window-setup-hook-macOS-jc))
-  (set-frame-width (selected-frame) 160)
-  (set-frame-height (selected-frame) 60)
-  (set-frame-position (selected-frame) 0 0)
-  (set-face-attribute 'default (selected-frame) :height 130)
-  )
-
 (defun org-linux-jc ()
   "gnu/linux specific org-mode customizations"
   (message (documentation 'org-linux-jc))
@@ -51,10 +42,8 @@
        (message "macOS")
        (org-macOS-jc)
        (misc-macOS-jc)
-       (message "frame %s" (selected-frame))
-       (message "frame list %s" (frames-on-display-list))
-       (add-to-list 'default-frame-alist '((width . 160) (height 60)))
-       (add-hook 'window-setup-hook 'window-setup-hook-macOS-jc)
+       (setq default-frame-alist '((top . 0) (left . 0) (height . 60) (width . 160)))
+       (set-face-attribute 'default (selected-frame) :height 130)
        )
       ((eq system-type 'gnu/linux)
        (message "gnu/linux")
@@ -71,7 +60,6 @@
 ;; 2018-11-07 experimenting with turning on auto-fill-mode for org-mode
 (defun org-mode-hook-jc ()
   "org-mode hooks"
-  (interactive)
   (auto-fill-mode)
   (set-fill-column 120))
 (add-hook 'org-mode-hook 'org-mode-hook-jc)
