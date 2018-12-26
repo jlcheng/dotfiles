@@ -6,19 +6,19 @@
 (defun org-cygwin-jc ()
   "Windows specific org-mode customizations"
   (message (documentation 'org-cygwin-jc))
-  (setq org-agenda-files (list "~/org/home.org"
-                                    "~/privprjs/grs/docs/plan.org")))
+  (setq org-agenda-files '("~/org/home.org"
+			   "~/privprjs/grs/docs/plan.org")))
 
 (defun org-macOS-jc ()
   "macOS specific org-mode customizations"
   (message (documentation 'org-macos-jc))
-  (setq org-agenda-files (list "~/org/work.org"
-                               "~/privprjs/grs/docs/plan.org"
-                               "~/org/work/work_journal.org"))
-  )
+  (setq org-agenda-files '("~/org/work.org"
+			   "~/privprjs/grs/docs/plan.org"
+			   "~/org/work/work_journal.org")))
+
 
 (defun misc-macOS-jc ()
-  "macos misc customizations"
+  "macOS misc customizations"
   (message (documentation 'misc-macOS-jc))
   (setq mac-command-modifier 'meta) ;; so the Alt key on WASD Code can be used for 'M-x'
   (setq mac-option-modifier 'super) ;; so the key left of Alt on WAS Code can be used for 'S-p'
@@ -59,8 +59,9 @@
 (add-hook 'org-mode-hook (lambda ()
 			   (auto-fill-mode)
 			   (set-fill-column 120)))
-(setq org-startup-folded nil) ;; https://orgmode.org/manual/Initial-visibility.html#Initial-visibility
-(setq org-startup-indented t) ;; https://orgmode.org/manual/Clean-view.html
+(setq org-startup-folded nil ;; https://orgmode.org/manual/Initial-visibility.html#Initial-visibility
+      org-startup-indented t ;; https://orgmode.org/manual/Clean-view.html
+      )
 
 (global-set-key (kbd "M-s M-s") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
 (global-set-key (kbd "M-n M-j r") 'revert-buffer)
@@ -92,11 +93,16 @@
 ;;; https://shreevatsa.wordpress.com/2007/01/06/using-emacsclient/
 (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function)
 
-;;; http://stackoverflow.com/questions/151945/how-do-i-control-how-emacs-makes-backup-files 
-(setq make-backup-files nil)
+;; https://www.emacswiki.org/emacs/BackupDirectory
+(setq
+ backup-by-copying t
+ backup-directory-alist '(("." . "/home/jcheng/.emacs.d/backups"))
+ delete-old-versions t
+ kept-new-versions 5
+ kept-old-versions 3
+ version-control t)
+(setq create-lockfiles nil) ;; do not create '.#lock' files
 
-;;; https://www.emacswiki.org/emacs/BackupDirectory#toc2 - without the fancy ',temporary-file-directory' evaluation
-(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
 
 ;;; misc
 (setq column-number-mode t)
