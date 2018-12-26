@@ -2,6 +2,19 @@
 ;;; Installation --- 
 ;;;   echo '(load-file (expand-file-name "~/privprjs/dotfiles/site-start.el"))' >> ~/.emacs.d/init.el
 
+;; Shortcut to frequently used files, can be used to replace projectile
+(defvar freq-files-def-jc '("~" "~/privprjs/dotfiles/site-start.el" "~/org/home.org")
+  "Frequently used files")
+(defun sc-jc ()
+  "Shortcut to frequently used files"
+  (interactive)
+  (find-file-existing
+   (let ((crf (cl-first (seq-filter 'functionp '(helm-comp-read ivy-completing-read ido-completing-read)))))
+     (funcall crf "freq-files-jc: " freq-files-def-jc))
+   )
+  )
+(global-set-key (kbd "M-n M-j p") 'sc-jc)
+
 (defun org-cygwin-jc ()
   "Windows specific org-mode customizations"
   (message (documentation 'org-cygwin-jc))
@@ -43,6 +56,7 @@
        (org-macOS-jc)
        (misc-macOS-jc)
        (setq default-frame-alist '((top . 0) (left . 0) (height . 60) (width . 160)))
+       (add-to-list 'freq-files-def-jc "~/org/work/work_journal.org")
        (set-face-attribute 'default (selected-frame) :height 130)
        )
       ((eq system-type 'gnu/linux)
@@ -63,9 +77,8 @@
   (auto-fill-mode)
   (set-fill-column 120))
 (add-hook 'org-mode-hook 'org-mode-hook-jc)
-(setq org-startup-folded nil ;; https://orgmode.org/manual/Initial-visibility.html#Initial-visibility
-      org-startup-indented t ;; https://orgmode.org/manual/Clean-view.html
-      )
+(setq org-startup-folded nil  ;; https://orgmode.org/manual/Initial-visibility.html#Initial-visibility
+      org-startup-indented t) ;; https://orgmode.org/manual/Clean-view.html
 
 (global-set-key (kbd "M-s M-s") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
 (global-set-key (kbd "M-n M-j r") 'revert-buffer)
@@ -125,19 +138,6 @@
 (defun notabs-jc ()
   "Runs untabify against the buffer"
   (untabify (point-min) (point-max)))
-
-;; Shortcut to frequently used files, can be used to replace projectile
-(defvar freq-files-def-jc '("~" "~/privprjs/dotfiles/site-start.el" "~/org/home.org")
-  "Frequently used files")
-(defun sc-jc ()
-  "Shortcut to frequently used files"
-  (interactive)
-  (find-file-existing
-   (let ((crf (cl-first (seq-filter 'functionp '(helm-comp-read ivy-completing-read ido-completing-read)))))
-     (funcall crf "freq-files-jc: " freq-files-def-jc))
-   )
-  )
-(global-set-key (kbd "M-n M-j p") 'sc-jc)
 
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (if (functionp 'global-company-mode) (global-company-mode))
