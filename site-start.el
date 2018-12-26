@@ -24,9 +24,7 @@
 (defun org-macOS-jc ()
   "macOS specific org-mode customizations"
   (message (documentation 'org-macOS-jc))
-  (setq org-agenda-files '("~/org/work.org"
-			   "~/privprjs/grs/docs/plan.org"
-			   "~/org/work/work_journal.org")))
+  (setq org-agenda-files '("~/org/work/work_journal.org")))
 
 
 (defun misc-macOS-jc ()
