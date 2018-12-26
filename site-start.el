@@ -11,7 +11,7 @@
 
 (defun org-macOS-jc ()
   "macOS specific org-mode customizations"
-  (message (documentation 'org-macos-jc))
+  (message (documentation 'org-macOS-jc))
   (setq org-agenda-files '("~/org/work.org"
 			   "~/privprjs/grs/docs/plan.org"
 			   "~/org/work/work_journal.org")))
@@ -41,8 +41,8 @@
        )
       ((eq system-type 'darwin)
        (message "macOS")
-       (org-macos-jc)
-       (jc-misc-macOS)
+       (org-macOS-jc)
+       (misc-macOS-jc)
        )
       ((eq system-type 'gnu/linux)
        (message "gnu/linux")
