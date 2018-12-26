@@ -137,7 +137,9 @@
   "Runs untabify against the buffer"
   (untabify (point-min) (point-max)))
 
-(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+;; 2018-12-26: Replace this with (add-to-list 'exec-path "/usr/local/bin")
+;; (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+(add-to-list 'exec-path "/usr/local/bin")
 (if (functionp 'global-company-mode) (global-company-mode))
 
 ;; 2018-10-29: Sets full file path in title
@@ -187,3 +189,7 @@
 ;;; -- start in *scratch* buffer
 (setq inhibit-startup-screen t)
 
+;;; -- spellcheck
+(cond ((executable-find "aspell")
+       (setq ispell-program-name "aspell")
+       (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))))
