@@ -11,7 +11,7 @@
 		      (insert-file-contents file)
 		      (split-string (buffer-string) "\n" t)))
 	     (flist (seq-filter 'file-exists-p flist)))
-	(setq freq-files-def-jc (append freq-files-def-jc flist)))))
+	(setq freq-files-def-jc (cl-remove-duplicates (append freq-files-def-jc flist) :test #'equal)))))
 (defun sc-jc ()
   "Shortcut to frequently used files"
   (interactive)
