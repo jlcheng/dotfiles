@@ -24,7 +24,7 @@
 (defun org-macOS-jc ()
   "macOS specific org-mode customizations"
   (message (documentation 'org-macOS-jc))
-  (setq org-agenda-files '("~/org/work/work_journal.org")))
+  (setq org-agenda-files '("~/org/home.org" "~/org/work/work_journal.org")))
 
 
 (defun misc-macOS-jc ()
@@ -54,6 +54,13 @@
        (org-macOS-jc)
        (misc-macOS-jc)
        (setq default-frame-alist '((top . 0) (left . 0) (height . 60) (width . 160)))
+       (let ((file "~/.sc-jc.txt"))
+	 (if (file-exists-p file)
+	     (let* ((flist (with-temp-buffer
+			     (insert-file-contents file)
+			     (split-string (buffer-string) "\n" t)))
+		    (flist (seq-filter 'file-exists-p flist)))
+	       (setq freq-files-def-jc (append freq-files-def-jc flist)))))
        (add-to-list 'freq-files-def-jc "~/org/work/work_journal.org")
        (set-face-attribute 'default (selected-frame) :height 130)
        )
