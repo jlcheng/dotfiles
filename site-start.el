@@ -20,7 +20,7 @@
      (funcall crf "freq-files-jc: " freq-files-def-jc))
    )
   )
-(global-set-key (kbd "M-n M-j p") 'sc-jc)
+(global-set-key (kbd "M-n M-j M-p") 'sc-jc)
 
 (defun org-cygwin-jc ()
   "Windows specific org-mode customizations"
