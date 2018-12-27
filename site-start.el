@@ -145,9 +145,8 @@
   "Runs untabify against the buffer"
   (untabify (point-min) (point-max)))
 
-;; 2018-12-26: Replace this with (add-to-list 'exec-path "/usr/local/bin")
-;; (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
-(add-to-list 'exec-path "/usr/local/bin")
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin")) ;; Needed for M-x shell-command
+(add-to-list 'exec-path "/usr/local/bin")                  ;; Needed for (executable-find ...)
 (if (functionp 'global-company-mode) (global-company-mode))
 
 ;; 2018-10-29: Sets full file path in title
