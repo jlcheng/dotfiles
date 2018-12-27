@@ -3,8 +3,15 @@
 ;;;   echo '(load-file (expand-file-name "~/privprjs/dotfiles/site-start.el"))' >> ~/.emacs.d/init.el
 
 ;; Shortcut to frequently used files, can be used to replace projectile
-(defvar freq-files-def-jc '("~" "~/privprjs/dotfiles/site-start.el" "~/org/home.org")
-  "Frequently used files")
+(defvar freq-files-def-jc '("~/privprjs/dotfiles/site-start.el" "~/org/home.org")
+  "Frequently used files. Initially populated from ~/.sc-jc.txt")
+(let ((file "~/.sc-jc.txt"))
+  (if (file-exists-p file)
+      (let* ((flist (with-temp-buffer
+		      (insert-file-contents file)
+		      (split-string (buffer-string) "\n" t)))
+	     (flist (seq-filter 'file-exists-p flist)))
+	(setq freq-files-def-jc (append freq-files-def-jc flist)))))
 (defun sc-jc ()
   "Shortcut to frequently used files"
   (interactive)
@@ -54,14 +61,7 @@
        (org-macOS-jc)
        (misc-macOS-jc)
        (setq default-frame-alist '((top . 0) (left . 0) (height . 60) (width . 160)))
-       (add-to-list 'freq-files-def-jc "~/org/work/work_journal.org")
-       (let ((file "~/.sc-jc.txt"))
-	 (if (file-exists-p file)
-	     (let* ((flist (with-temp-buffer
-			     (insert-file-contents file)
-			     (split-string (buffer-string) "\n" t)))
-		    (flist (seq-filter 'file-exists-p flist)))
-	       (setq freq-files-def-jc (append freq-files-def-jc flist)))))
+       (add-to-list 'freq-files-def-jc "~/org/work/work_journal.org")       
        (set-face-attribute 'default (selected-frame) :height 130)
        )
       ((eq system-type 'gnu/linux)
@@ -69,6 +69,8 @@
        (set-face-attribute 'default (selected-frame) :height 135)
        (org-linux-jc))
       )
+
+
 
 (org-mode)
 (global-set-key "\C-ca" 'org-agenda)
