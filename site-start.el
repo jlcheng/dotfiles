@@ -109,7 +109,9 @@
   (progn
     (add-to-list 'package-archives (cons "melpa" "https://melpa.org/packages/"))
     (package-refresh-contents)
-    (package-install 'helm)))
+    (package-install 'helm)       ;; helm is a super nice completion system
+    (package-install 'helm-rg)))  ;; install 'ripgrep' to use this
+(global-set-key (kbd "M-n M-j M-f") 'helm-rg)
 (let ((modes '(helm-mode ivy-mode)))
   (funcall (cl-first (seq-filter 'functionp modes))))
   
