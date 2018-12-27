@@ -121,7 +121,7 @@
 ;; https://www.emacswiki.org/emacs/BackupDirectory
 (setq
  backup-by-copying t
- backup-directory-alist '(("." . "/home/jcheng/.emacs.d/backups"))
+ backup-directory-alist `(("." . ,(expand-file-name "~/.emacs.d/backups")))
  delete-old-versions t
  kept-new-versions 5
  kept-old-versions 3
