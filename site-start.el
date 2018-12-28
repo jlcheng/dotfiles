@@ -8,10 +8,10 @@
 (let ((file "~/.sc-jc.txt"))
   (if (file-exists-p file)
       (let* ((flist (with-temp-buffer
-		      (insert-file-contents file)
-		      (split-string (buffer-string) "\n" t)))
-	     (flist (seq-filter 'file-exists-p flist)))
-	(setq freq-files-def-jc (cl-remove-duplicates (append freq-files-def-jc flist) :test #'equal)))))
+                      (insert-file-contents file)
+                      (split-string (buffer-string) "\n" t)))
+             (flist (seq-filter 'file-exists-p flist)))
+        (setq freq-files-def-jc (cl-remove-duplicates (append freq-files-def-jc flist) :test #'equal)))))
 (defun sc-jc ()
   "Shortcut to frequently used files"
   (interactive)
@@ -20,13 +20,13 @@
      (funcall crf "freq-files-jc: " freq-files-def-jc))
    )
   )
-(global-set-key (kbd "C-, C-p") 'sc-jc)
+(global-set-key (kbd "C-. C-p") 'sc-jc)
 
 (defun org-cygwin-jc ()
   "Windows specific org-mode customizations"
   (message (documentation 'org-cygwin-jc))
   (setq org-agenda-files '("~/org/home.org"
-			   "~/privprjs/grs/docs/plan.org")))
+                           "~/privprjs/grs/docs/plan.org")))
 
 (defun org-macOS-jc ()
   "macOS specific org-mode customizations"
@@ -47,7 +47,7 @@
   "gnu/linux specific org-mode customizations"
   (message (documentation 'org-linux-jc))
   (setq org-agenda-files '("~/org/home.org"
-			   "~/privprjs/grs/docs/plan.org"))
+                           "~/privprjs/grs/docs/plan.org"))
   )
 
 ;;; OS and env-specific settings
@@ -61,7 +61,7 @@
        (org-macOS-jc)
        (misc-macOS-jc)
        (setq default-frame-alist '((top . 0) (left . 0) (height . 60) (width . 160)))
-       (add-to-list 'freq-files-def-jc "~/org/work/work_journal.org")       
+       (add-to-list 'freq-files-def-jc "~/org/work/work_journal.org")
        (set-face-attribute 'default (selected-frame) :height 130)
        )
       ((eq system-type 'gnu/linux)
@@ -73,8 +73,8 @@
 
 
 (org-mode)
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cb" 'org-switchb)
+(global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c b") 'org-switchb)
 ;; 2018-10-15 unclutter directories with org files
 (setq org-archive-location "~/org/archive/archive.org::* From %s")
 ;; 2018-11-07 experimenting with turning on auto-fill-mode for org-mode
@@ -87,13 +87,9 @@
       org-startup-indented t) ;; https://orgmode.org/manual/Clean-view.html
 
 (global-set-key (kbd "M-s M-s") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
-(global-set-key (kbd "C-, C-r") 'revert-buffer)
-(global-set-key (kbd "C-, C-b") 'jsnice-jc)
-(global-set-key (kbd "C-, C-s") 'whitespace-mode)
-(global-set-key (kbd "C-, C-o") 'org-sort-jc)
-;; 2018-10-29 starting to use imenu in org mode, creating a kbd shortcut for it
-;; 2018-12-25 schedule use of imenu in org mode for removal; rarely used
-;; (global-set-key (kbd "C-, i") 'imenu)
+(global-set-key (kbd "C-. C-r") 'revert-buffer)
+(global-set-key (kbd "C-. C-b") 'jsnice-jc)
+(global-set-key (kbd "C-. C-s") 'whitespace-mode)
 
 ;;; enable emacsclient support unless we're running 'emacs-nox'
 ; note: string-match-p not avail on Emacs 22.1.1 on MacOS (latest release is 25.3 as of Sept 2017)
@@ -111,7 +107,7 @@
     (package-refresh-contents)
     (package-install 'helm)       ;; helm is a super nice completion system
     (package-install 'helm-rg)))  ;; install 'ripgrep' to use this
-(global-set-key (kbd "C-, C-f") 'helm-rg)
+(global-set-key (kbd "C-. C-f") 'helm-rg)
 (let ((modes '(helm-mode ivy-mode)))
   (funcall (cl-first (seq-filter 'functionp modes))))
   
@@ -137,15 +133,11 @@
   (interactive "r")
   (let ((jsnice-path (expand-file-name "~/bin/jsnice")))
     (cond ((eq system-type 'cygwin)
-	   (setq jsnice-path "C:\\cygwin64\\home\\johnl\\bin\\jsnice.exe")))
+           (setq jsnice-path "C:\\cygwin64\\home\\johnl\\bin\\jsnice.exe")))
     (if (executable-find jsnice-path)
-	(shell-command-on-region
-	 p1 p2 jsnice-path nil t "*Minibuf-0*" t)
+        (shell-command-on-region
+         p1 p2 jsnice-path nil t "*Minibuf-0*" t)
       (message (format "%s not installed" jsnice-path)))))
-
-(defun notabs-jc ()
-  "Runs untabify against the buffer"
-  (untabify (point-min) (point-max)))
 
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin")) ;; Needed for M-x shell-command
 (add-to-list 'exec-path "/usr/local/bin")                  ;; Needed for (executable-find ...)
@@ -161,16 +153,16 @@
 (defun eval-to-kill-ring-jc ()
   (interactive)
   (kill-new (with-output-to-string (princ (call-interactively 'eval-expression)))))
-(global-set-key (kbd "C-, M-:") 'eval-to-kill-ring-jc)
+(global-set-key (kbd "C-. M-:") 'eval-to-kill-ring-jc)
 
 (defun kill-new-file-name (b)
   "Append the path of an open file into the kill ring"
   (interactive "b")
   (let ((bfn (buffer-file-name (get-buffer b))))
     (if bfn
-	(progn
-	  (kill-new bfn)
-	  (message bfn)))
+        (progn
+          (kill-new bfn)
+          (message bfn)))
     )
   )
 (global-set-key (kbd "s-k") 'kill-new-file-name)
