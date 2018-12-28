@@ -2,6 +2,8 @@
 ;;; Installation --- 
 ;;;   echo '(load-file (expand-file-name "~/privprjs/dotfiles/site-start.el"))' >> ~/.emacs.d/init.el
 
+(add-to-list 'package-archives (cons "melpa" "https://melpa.org/packages/"))
+
 ;; Shortcut to frequently used files, can be used to replace projectile
 (defvar freq-files-def-jc '("~/privprjs/dotfiles/site-start.el" "~/org/home.org")
   "Frequently used files. Initially populated from ~/.sc-jc.txt")
@@ -102,8 +104,7 @@
 
 ;; 2018-12-24: Experiment with helm-mode for completion
 (unless (package-installed-p 'helm)
-  (progn
-    (add-to-list 'package-archives (cons "melpa" "https://melpa.org/packages/"))
+  (progn    
     (package-refresh-contents)
     (package-install 'helm)       ;; helm is a super nice completion system
     (package-install 'helm-rg)))  ;; install 'ripgrep' to use this
