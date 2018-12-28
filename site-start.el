@@ -22,7 +22,7 @@
      (funcall crf "freq-files-jc: " freq-files-def-jc))
    )
   )
-(global-set-key (kbd "C-. C-p") 'sc-jc)
+(global-set-key (kbd "M-n M-p") 'sc-jc)
 
 (defun org-cygwin-jc ()
   "Windows specific org-mode customizations"
@@ -89,9 +89,9 @@
       org-startup-indented t) ;; https://orgmode.org/manual/Clean-view.html
 
 (global-set-key (kbd "M-s M-s") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
-(global-set-key (kbd "C-. C-r") 'revert-buffer)
-(global-set-key (kbd "C-. C-b") 'jsnice-jc)
-(global-set-key (kbd "C-. C-s") 'whitespace-mode)
+(global-set-key (kbd "M-n M-r") 'revert-buffer)
+(global-set-key (kbd "M-n M-b") 'jsnice-jc)
+(global-set-key (kbd "M-n M-s") 'whitespace-mode)
 
 ;;; enable emacsclient support unless we're running 'emacs-nox'
 ; note: string-match-p not avail on Emacs 22.1.1 on MacOS (latest release is 25.3 as of Sept 2017)
@@ -108,7 +108,7 @@
     (package-refresh-contents)
     (package-install 'helm)       ;; helm is a super nice completion system
     (package-install 'helm-rg)))  ;; install 'ripgrep' to use this
-(global-set-key (kbd "C-. C-f") 'helm-rg)
+(global-set-key (kbd "M-n M-f") 'helm-rg)
 (let ((modes '(helm-mode ivy-mode)))
   (funcall (cl-first (seq-filter 'functionp modes))))
   
@@ -154,7 +154,7 @@
 (defun eval-to-kill-ring-jc ()
   (interactive)
   (kill-new (with-output-to-string (princ (call-interactively 'eval-expression)))))
-(global-set-key (kbd "C-. M-:") 'eval-to-kill-ring-jc)
+(global-set-key (kbd "C-' M-:") 'eval-to-kill-ring-jc)
 
 (defun kill-new-file-name (b)
   "Append the path of an open file into the kill ring"
