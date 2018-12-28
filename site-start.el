@@ -168,30 +168,12 @@
   )
 (global-set-key (kbd "s-k") 'kill-new-file-name)
 
-;;; --- tramp mode ---
-;; note from 2018-10-25, if editing over ssh is slow, try setting this
-;; https://www.emacswiki.org/emacs/TrampMode 
-;; (setq tramp-default-method "ssh")
-
-;;; --- projectile ---
-;; experiment from 2018-12-05
-;; M-x project-refresh-contents
-;; M-x project-install projectile
-;; https://projectile.readthedocs.io/en/latest/usage/
-;(projectile-mode +1)
-;(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-;(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-;(setq projectile-indexing-method 'alien)
-;(setq projectile-completion-system 'ivy)
-;(setq projectile-project-search-path '("~/org/"))
-;(setq projectile-ignored-projects ["~/go/src/go.zr.org/"])
-;(setq projectile-globally-ignored-file-suffixes ["org_archive"])
-;; Removed on 2018-12-23, replaced with sc-jc
-
 ;;; -- start in *scratch* buffer
 (setq inhibit-startup-screen t)
 
 ;;; -- spellcheck
+(require 'flyspell-correct-helm)
+(define-key flyspell-mode-map (kbd "C-;") 'flyspell-correct-wrapper)
 (cond ((executable-find "aspell")
        (setq ispell-program-name "aspell")
        (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))))
