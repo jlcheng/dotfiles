@@ -63,15 +63,14 @@
        (org-macOS-jc)
        (misc-macOS-jc)
        (setq default-frame-alist '((top . 0) (left . 0) (height . 60) (width . 160)))
-       (add-to-list 'freq-files-def-jc "~/org/work/work_journal.org")
        (set-face-attribute 'default (selected-frame) :height 130)
        )
       ((eq system-type 'gnu/linux)
        (message "gnu/linux")
+       (setq default-frame-alist '((top . 0) (left . 0) (height . 52) (width . 160)))
        (set-face-attribute 'default (selected-frame) :height 135)
        (org-linux-jc))
       )
-
 
 
 (org-mode)
@@ -106,6 +105,7 @@
 (unless (package-installed-p 'helm)
   (progn    
     (package-refresh-contents)
+    (package-install 'flyspell-correct-helm)
     (package-install 'helm)       ;; helm is a super nice completion system
     (package-install 'helm-rg)))  ;; install 'ripgrep' to use this
 (global-set-key (kbd "M-n M-f") 'helm-rg)
