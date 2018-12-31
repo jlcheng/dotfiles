@@ -67,7 +67,7 @@
        )
       ((eq system-type 'gnu/linux)
        (message "gnu/linux")
-       (setq default-frame-alist '((top . 0) (left . 0) (height . 52) (width . 160)))
+       (setq default-frame-alist '((top . 0) (left . 0) (height . 39) (width . 132)))
        (set-face-attribute 'default (selected-frame) :height 135)
        (org-linux-jc))
       )
