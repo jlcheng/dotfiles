@@ -94,8 +94,7 @@
 
 ;;; enable emacsclient support unless we're running 'emacs-nox'
 ; note: string-match-p not avail on Emacs 22.1.1 on MacOS (latest release is 25.3 as of Sept 2017)
-(unless
-    (string-match (regexp-quote "emacs-nox") (elt command-line-args 0))
+(unless (server-running-p)    
   ;; runs emacs server
   (server-start)
   ;; Ubuntu: run a no-op command to bring the window into focus
