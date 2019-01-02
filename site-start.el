@@ -92,9 +92,9 @@
 (global-set-key (kbd "M-n M-b") 'jsnice-jc)
 (global-set-key (kbd "M-n M-s") 'whitespace-mode)
 
-;;; enable emacsclient support unless we're running 'emacs-nox'
+;;; Only start a server when it is not running
 ; note: string-match-p not avail on Emacs 22.1.1 on MacOS (latest release is 25.3 as of Sept 2017)
-(unless (server-running-p)    
+(unless (server-running-p)
   ;; runs emacs server
   (server-start)
   ;; Ubuntu: run a no-op command to bring the window into focus
