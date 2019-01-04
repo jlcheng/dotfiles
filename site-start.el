@@ -76,6 +76,7 @@
 (org-mode)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c b") 'org-switchb)
+(global-set-key (kbd "M-n M-i") 'menu)
 ;; 2018-10-15 unclutter directories with org files
 (setq org-archive-location "~/org/archive/archive.org::* From %s")
 ;; 2018-11-07 experimenting with turning on auto-fill-mode for org-mode
