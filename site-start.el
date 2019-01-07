@@ -76,7 +76,7 @@
 (org-mode)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c b") 'org-switchb)
-(global-set-key (kbd "M-n M-i") 'imenu)
+(global-set-key (kbd "M-n M-i") 'helm-semantic-or-imenu)
 (global-set-key (kbd "M-n M-c M-f") '(lambda() (interactive) (org-forward-heading-same-level 1000)))
 (setq imenu-auto-rescan t)
 ;; 2018-10-15 unclutter directories with org files
