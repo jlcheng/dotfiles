@@ -49,6 +49,7 @@
   "gnu/linux specific org-mode customizations"
   (message (documentation 'org-linux-jc))
   (setq org-agenda-files '("~/org/home.org"
+			   "~/org/forget_journal.org"
                            "~/privprjs/grs/docs/plan.org"))
   )
 
