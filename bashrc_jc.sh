@@ -21,7 +21,7 @@ alias emacs="emacsclient -n"
 alias emacs-start="/usr/bin/emacs &> /dev/null &"
 
 # git
-export GIT_EDITOR="emacs -nw -q"
+export GIT_EDITOR="emacsclient"
 gitdiffjc ()
 {
     T='origin/master'
