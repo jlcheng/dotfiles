@@ -28,7 +28,29 @@ gitdiffjc ()
     if [ -n "$1" ]; then
         T="$1"
     fi
-    git log --left-right --boundary --pretty="format:%C(auto)%m %h %<(14)%cr %<(20,trunc)%ae %d %s" ${T}...HEAD
+    CMD='git log --left-right --boundary --pretty="format:%C(auto)%m %h %<(14)%cr %<(20,trunc)%ae %d %s" ${T}...HEAD'
+    echo $CMD
+    eval $CMD
+}
+gitnewjc ()
+{
+    T='origin/master'
+    if [ -n "$1" ]; then
+        T="$1"
+    fi
+    CMD='git log --right-only --boundary --pretty="format:%C(auto)%m %h %<(14)%cr %<(20,trunc)%ae %d %s" ${T}...HEAD'
+    echo $CMD
+    eval $CMD
+}
+gitstatjc ()
+{
+    T='origin/master'
+    if [ -n "$1" ]; then
+        T="$1"
+    fi
+    CMD="git diff --stat $(git merge-base $T HEAD)"
+    echo $CMD
+    $CMD
 }
 gitopenjc ()
 {

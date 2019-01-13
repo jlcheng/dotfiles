@@ -33,7 +33,8 @@
 (defun org-macOS-jc ()
   "macOS specific org-mode customizations"
   (message (documentation 'org-macOS-jc))
-  (setq org-agenda-files '("~/org/home.org" "~/org/work/work_journal.org")))
+  (setq org-agenda-files '("~/org/home.org"
+			   "~/org/work/work_journal.org")))
 
 
 (defun misc-macOS-jc ()
@@ -41,44 +42,47 @@
   (message (documentation 'misc-macOS-jc))
   (setq mac-command-modifier 'meta) ;; so the Alt key on WASD Code can be used for 'M-x'
   (setq mac-option-modifier 'super) ;; so the key left of Alt on WAS Code can be used for 'S-p'
-  (global-unset-key (kbd "s-w")) ;; macOS: frequenly leads to accidental killing frames
-  (global-unset-key (kbd "s-n")) ;; macOS: frequenly leads to accidental new frames
-  )
+  (global-unset-key (kbd "s-w"))    ;; macOS: frequenly leads to accidental killing frames
+  (global-unset-key (kbd "s-n")))   ;; macOS: frequenly leads to accidental new frames
 
 (defun org-linux-jc ()
   "gnu/linux specific org-mode customizations"
   (message (documentation 'org-linux-jc))
   (setq org-agenda-files '("~/org/home.org"
 			   "~/org/forget_journal.org"
-                           "~/privprjs/grs/docs/plan.org"))
-  )
+                           "~/privprjs/grs/docs/plan.org")))
 
-;;; OS and env-specific settings
-(cond ((eq system-type 'cygwin)
-       (message "Windows OS")
-       (org-cygwin-jc)
-       (set-face-attribute 'default (selected-frame) :height 130)
-       )
-      ((eq system-type 'darwin)
-       (message "macOS")
-       (org-macOS-jc)
-       (misc-macOS-jc)
-       (setq default-frame-alist '((top . 0) (left . 0) (height . 60) (width . 160)))
-       (set-face-attribute 'default (selected-frame) :height 130)
-       )
-      ((eq system-type 'gnu/linux)
-       (message "gnu/linux")
-       (setq default-frame-alist '((top . 0) (left . 0) (height . 39) (width . 132)))
-       (set-face-attribute 'default (selected-frame) :height 135)
-       (org-linux-jc))
-      )
-
+;; OS-specific settings:
+;;  - org-mode
+;;  - misc
+;;  - GUI customizations
+(cl-case system-type
+  ((cygwin)
+   (message "Windows OS")
+   (org-cygwin-jc)
+   (set-face-attribute 'default (selected-frame) :height 130))
+  ((darwin)
+   (message "macOS")
+   (org-macOS-jc)
+   (misc-macOS-jc)
+   (setq default-frame-alist '((top . 0) (left . 0) (height . 60) (width . 160))))
+  ((gnu/linux)
+   (message "gnu/linux")
+   (setq default-frame-alist '((top . 0) (left . 0) (height . 39) (width . 132)))
+   (set-face-attribute 'default (selected-frame) :height 135)
+   (org-linux-jc)))
 
 (org-mode)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c b") 'org-switchb)
 (global-set-key (kbd "M-n M-i") 'helm-semantic-or-imenu)
-(global-set-key (kbd "M-n M-c M-f") '(lambda() (interactive) (org-forward-heading-same-level 1000)))
+(defun org-last-heading-same-level-jc ()
+  "move to last heading on the same level"
+  (interactive)
+  (org-forward-heading-same-level 1000)
+  (org-next-visible-heading 1)
+  (backward-char))
+(global-set-key (kbd "M-n M-c M-f") 'org-last-heading-same-level-jc)
 (setq imenu-auto-rescan t)
 ;; 2018-10-15 unclutter directories with org files
 (setq org-archive-location "~/org/archive/archive.org::* From %s")
@@ -107,16 +111,16 @@
 
 ;; 2018-12-24: Experiment with helm-mode for completion
 (unless (package-installed-p 'helm)
-  (progn    
-    (package-refresh-contents)
-    (package-install 'flyspell-correct-helm)
-    (package-install 'helm)       ;; helm is a super nice completion system
-    (package-install 'helm-rg)))  ;; install 'ripgrep' to use this
+  (package-refresh-contents)
+  (package-install 'flyspell-correct-helm)
+  (package-install 'helm)       ;; helm is a super nice completion system
+  (package-install 'helm-rg))  ;; install 'ripgrep' to use this
 (global-set-key (kbd "M-n M-f") 'helm-rg)
 (let ((modes '(helm-mode ivy-mode)))
   (funcall (cl-first (seq-filter 'functionp modes))))
-(if (functionp 'helm-mode)
-    (global-set-key (kbd "C-x C-b") 'helm-mini))
+(when (functionp 'helm-mode)
+  (global-set-key (kbd "C-x C-b") 'helm-mini)
+  (global-set-key (kbd "C-x C-f") 'helm-find-files))
 
 ;;; https://shreevatsa.wordpress.com/2007/01/06/using-emacsclient/
 (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function)
@@ -166,20 +170,17 @@
   "Append the path of an open file into the kill ring"
   (interactive "b")
   (let ((bfn (buffer-file-name (get-buffer b))))
-    (if bfn
-        (progn
-          (kill-new bfn)
-          (message bfn)))
-    )
-  )
-(global-set-key (kbd "s-k") 'kill-new-file-name)
+    (when bfn
+      (kill-new bfn)
+      (message bfn))))
+(global-set-key (kbd "M-n M-k") 'kill-new-file-name)
 
 ;;; -- start in *scratch* buffer
 (setq inhibit-startup-screen t)
 
 ;;; -- spellcheck
 (require 'flyspell-correct-helm)
-(define-key flyspell-mode-map (kbd "C-;") 'flyspell-correct-wrapper)
-(cond ((executable-find "aspell")
-       (setq ispell-program-name "aspell")
-       (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))))
+(global-set-key (kbd "M-$") 'flyspell-correct-at-point)
+(when (executable-find "aspell")
+  (setq ispell-program-name "aspell")
+  (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US")))
