@@ -24,19 +24,6 @@
   )
 (global-set-key (kbd "M-n M-p") 'sc-jc)
 
-(defun org-cygwin-jc ()
-  "Windows specific org-mode customizations"
-  (message (documentation 'org-cygwin-jc))
-  (setq org-agenda-files '("~/org/home.org"
-                           "~/privprjs/grs/docs/plan.org")))
-
-(defun org-macOS-jc ()
-  "macOS specific org-mode customizations"
-  (message (documentation 'org-macOS-jc))
-  (setq org-agenda-files '("~/org/home.org"
-			   "~/org/work/work_journal.org")))
-
-
 (defun misc-macOS-jc ()
   "macOS misc customizations"
   (message (documentation 'misc-macOS-jc))
@@ -45,33 +32,22 @@
   (global-unset-key (kbd "s-w"))    ;; macOS: frequenly leads to accidental killing frames
   (global-unset-key (kbd "s-n")))   ;; macOS: frequenly leads to accidental new frames
 
-(defun org-linux-jc ()
-  "gnu/linux specific org-mode customizations"
-  (message (documentation 'org-linux-jc))
-  (setq org-agenda-files '("~/org/home.org"
-			   "~/org/forget_journal.org"
-                           "~/privprjs/grs/docs/plan.org")))
-
 ;; OS-specific settings:
-;;  - org-mode
 ;;  - misc
 ;;  - GUI customizations
 (cl-case system-type
   ((cygwin)
    (message "Windows OS")
-   (org-cygwin-jc)
    (setq default-frame-alist '((top . 0) (left . 0) (height . 39) (width . 132)))
    (set-face-attribute 'default (selected-frame) :height 130))
   ((darwin)
    (message "macOS")
-   (org-macOS-jc)
    (misc-macOS-jc)
    (setq default-frame-alist '((top . 0) (left . 0) (height . 60) (width . 160))))
   ((gnu/linux)
    (message "gnu/linux")
    (setq default-frame-alist '((top . 0) (left . 0) (height . 39) (width . 132)))
-   (set-face-attribute 'default (selected-frame) :height 135)
-   (org-linux-jc)))
+   (set-face-attribute 'default (selected-frame) :height 135)))
 
 ;; === START: org-mode ===
 (org-mode)
