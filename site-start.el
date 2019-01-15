@@ -60,6 +60,7 @@
   ((cygwin)
    (message "Windows OS")
    (org-cygwin-jc)
+   (setq default-frame-alist '((top . 0) (left . 0) (height . 39) (width . 132)))
    (set-face-attribute 'default (selected-frame) :height 130))
   ((darwin)
    (message "macOS")
@@ -72,28 +73,32 @@
    (set-face-attribute 'default (selected-frame) :height 135)
    (org-linux-jc)))
 
+;; === START: org-mode ===
 (org-mode)
-(global-set-key (kbd "C-c a") 'org-agenda)
-(global-set-key (kbd "C-c b") 'org-switchb)
-(global-set-key (kbd "M-n M-i") 'helm-semantic-or-imenu)
+(defun org-mode-hook-jc ()
+  "org-mode hooks. auto-fill has been useful."
+  (auto-fill-mode)
+  (set-fill-column 120))
 (defun org-last-heading-same-level-jc ()
   "move to last heading on the same level"
   (interactive)
   (org-forward-heading-same-level 1000)
   (org-next-visible-heading 1)
   (backward-char))
+
+(global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c b") 'org-switchb)
+(global-set-key (kbd "M-n M-i") 'helm-semantic-or-imenu)
 (global-set-key (kbd "M-n M-c M-f") 'org-last-heading-same-level-jc)
+
+(setq org-archive-location "~/org/archive/archive.org::* From %s"
+      org-startup-folded nil  ;; https://orgmode.org/manual/Initial-visibility.html#Initial-visibility
+      org-startup-indented t  ;; https://orgmode.org/manual/Clean-view.html
+      ) ; unclutter directories with org files
+
+(add-hook 'org-mode-hook 'org-mode-hook-jc) 
+;; === STOP: org-mode ===
 (setq imenu-auto-rescan t)
-;; 2018-10-15 unclutter directories with org files
-(setq org-archive-location "~/org/archive/archive.org::* From %s")
-;; 2018-11-07 experimenting with turning on auto-fill-mode for org-mode
-(defun org-mode-hook-jc ()
-  "org-mode hooks"
-  (auto-fill-mode)
-  (set-fill-column 120))
-(add-hook 'org-mode-hook 'org-mode-hook-jc)
-(setq org-startup-folded nil  ;; https://orgmode.org/manual/Initial-visibility.html#Initial-visibility
-      org-startup-indented t) ;; https://orgmode.org/manual/Clean-view.html
 
 (global-set-key (kbd "M-s M-s") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
 (global-set-key (kbd "M-n M-r") 'revert-buffer)
