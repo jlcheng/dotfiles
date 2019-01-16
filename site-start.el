@@ -180,3 +180,9 @@
 (when (executable-find "aspell")
   (setq ispell-program-name "aspell")
   (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US")))
+
+;; https://www.emacswiki.org/emacs/RecentFiles#toc9 - prevents blocking of emacs startup
+(require 'recentf)
+(setq recentf-auto-cleanup 'never)
+(recentf-mode 1)
+
