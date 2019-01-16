@@ -124,13 +124,13 @@
 ;; https://www.emacswiki.org/emacs/BackupDirectory
 (setq
  backup-by-copying t
- backup-directory-alist `(("." . ,(expand-file-name "~/.emacs.d/backups")))
+ backup-directory-alist `(("." . ,(expand-file-name "~/.emacs.d/backups"))) ;; influences (make-backup-file-name "~/tmp.txt")
+ auto-save-file-name-transforms `((".*" ,temporary-file-directory t))       ;; influences (make-auto-save-file-name), e.g., #foo.txt#
  delete-old-versions t
  kept-new-versions 5
  kept-old-versions 3
  version-control t)
 (setq create-lockfiles nil) ;; do not create '.#lock' files
-
 
 ;;; misc
 (setq column-number-mode t)
