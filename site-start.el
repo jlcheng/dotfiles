@@ -4,6 +4,15 @@
 
 (add-to-list 'package-archives (cons "melpa" "https://melpa.org/packages/"))
 
+;; library functions
+(defun jc/file-readlines (file)
+  "Returns contents of file as list of strings"
+  (if (file-exists-p file)
+      (let* ((flist (with-temp-buffer
+		      (insert-file-contents file)
+		      (split-string (buffer-string) "\n" t))))
+	flist)))
+
 ;; Shortcut to frequently used files, can be used to replace projectile
 (defvar freq-files-def-jc '("~/privprjs/dotfiles/site-start.el" "~/org/home.org")
   "Frequently used files. Initially populated from ~/.sc-jc.txt")
