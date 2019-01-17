@@ -11,8 +11,8 @@
       (let* ((flist (with-temp-buffer
 		      (insert-file-contents file)
 		      (split-string (buffer-string) "\n" t))))
-	flist)))
-
+	flist)
+    ))
 
 ;; Shortcut to frequently used files, can be used to replace projectile
 (defvar freq-files-def-jc '("~/privprjs/dotfiles/site-start.el" "~/org/home.org")
@@ -100,9 +100,8 @@
   (if (file-exists-p file)
       (let ((flist (jc/file-readlines file)))          ; read org-jc.txt
         (setq flist (seq-filter 'file-exists-p flist)) ; check for valid files
-	(setq flist (append org-agenda-files flist))  ; merge org-jc.txt with defaults
+	(setq flist (append org-agenda-files flist))   ; merge org-jc.txt with defaults
 	(setq freq-files-def-jc (cl-remove-duplicates flist :test #'equal)))))
-
 
 
 (add-hook 'org-mode-hook 'org-mode-hook-jc) 
