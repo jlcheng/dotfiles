@@ -13,15 +13,14 @@
 		      (split-string (buffer-string) "\n" t))))
 	flist)))
 
+
 ;; Shortcut to frequently used files, can be used to replace projectile
 (defvar freq-files-def-jc '("~/privprjs/dotfiles/site-start.el" "~/org/home.org")
   "Frequently used files. Initially populated from ~/.sc-jc.txt")
 (let ((file "~/.sc-jc.txt"))
   (if (file-exists-p file)
-      (let* ((flist (with-temp-buffer
-                      (insert-file-contents file)
-                      (split-string (buffer-string) "\n" t)))
-             (flist (seq-filter 'file-exists-p flist)))
+      (let ((flist jc/file-readlines file))
+        (setq flist (seq-filter 'file-exists-p flist)))
         (setq freq-files-def-jc (cl-remove-duplicates (append freq-files-def-jc flist) :test #'equal)))))
 (defun sc-jc ()
   "Shortcut to frequently used files"
