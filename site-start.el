@@ -19,9 +19,11 @@
   "Frequently used files. Initially populated from ~/.sc-jc.txt")
 (let ((file "~/.sc-jc.txt"))
   (if (file-exists-p file)
-      (let ((flist jc/file-readlines file))
-        (setq flist (seq-filter 'file-exists-p flist)))
-        (setq freq-files-def-jc (cl-remove-duplicates (append freq-files-def-jc flist) :test #'equal)))))
+      (let ((flist (jc/file-readlines file)))          ; read sc-jc.txt
+        (setq flist (seq-filter 'file-exists-p flist)) ; check for valid files
+	(setq flist (append freq-files-def-jc flist))  ; merge sc-jc.txt with defaults
+	(setq freq-files-def-jc (cl-remove-duplicates flist :test #'equal)))))
+
 (defun sc-jc ()
   "Shortcut to frequently used files"
   (interactive)
@@ -92,6 +94,16 @@
 	'("~/org/home.org"
 	 "~/org/forget_journal.org"
 	 "~/privprjs/grs/docs/plan.org"))))
+
+;; List of files to add to org-agenda-files
+(let ((file "~/.org-jc.txt"))
+  (if (file-exists-p file)
+      (let ((flist (jc/file-readlines file)))          ; read org-jc.txt
+        (setq flist (seq-filter 'file-exists-p flist)) ; check for valid files
+	(setq flist (append org-agenda-files flist))  ; merge org-jc.txt with defaults
+	(setq freq-files-def-jc (cl-remove-duplicates flist :test #'equal)))))
+
+
 
 (add-hook 'org-mode-hook 'org-mode-hook-jc) 
 ;; === STOP: org-mode ===
