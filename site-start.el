@@ -15,24 +15,24 @@
     ))
 
 ;; Shortcut to frequently used files, can be used to replace projectile
-(defvar freq-files-def-jc '("~/privprjs/dotfiles/site-start.el" "~/org/home.org")
+(defvar jc/freq-files-def '("~/privprjs/dotfiles/site-start.el" "~/org/home.org")
   "Frequently used files. Initially populated from ~/.sc-jc.txt")
 (let ((file "~/.sc-jc.txt"))
   (if (file-exists-p file)
       (let ((flist (jc/file-readlines file)))          ; read sc-jc.txt
         (setq flist (seq-filter 'file-exists-p flist)) ; check for valid files
-	(setq flist (append freq-files-def-jc flist))  ; merge sc-jc.txt with defaults
-	(setq freq-files-def-jc (cl-remove-duplicates flist :test #'equal)))))
+	(setq flist (append jc/freq-files-def flist))  ; merge sc-jc.txt with defaults
+	(setq jc/freq-files-def (cl-remove-duplicates flist :test #'equal)))))
 
-(defun sc-jc ()
+(defun jc/shortcuts ()
   "Shortcut to frequently used files"
   (interactive)
   (find-file-existing
-   (let ((crf (cl-first (seq-filter 'functionp '(helm-comp-read ivy-completing-read ido-completing-read)))))
-     (funcall crf "freq-files-jc: " freq-files-def-jc))
+   (let ((crf (cl-first (seq-filter 'functionp '(helm-comp-read ivy-completing-read ido-completing-read completing-read)))))
+     (funcall crf "freq-files-jc: " jc/freq-files-def))
    )
   )
-(global-set-key (kbd "M-n M-p") 'sc-jc)
+(global-set-key (kbd "M-n M-p") 'jc/shortcuts)
 
 (defun misc-macOS-jc ()
   "macOS misc customizations"
@@ -101,7 +101,7 @@
       (let ((flist (jc/file-readlines file)))          ; read org-jc.txt
         (setq flist (seq-filter 'file-exists-p flist)) ; check for valid files
 	(setq flist (append org-agenda-files flist))   ; merge org-jc.txt with defaults
-	(setq freq-files-def-jc (cl-remove-duplicates flist :test #'equal)))))
+	(setq org-agenda-files (cl-remove-duplicates flist :test #'equal)))))
 
 
 (add-hook 'org-mode-hook 'org-mode-hook-jc) 
