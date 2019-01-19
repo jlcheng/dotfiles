@@ -27,20 +27,16 @@
 (defun jc/shortcuts ()
   "Shortcut to frequently used files"
   (interactive)
-  (find-file-existing
-   (let ((crf '()))
-     ;; candidate functions
-     (setq crf-list '(helm-comp-read
-		      ivy-completing-read
-		      ido-completing-read
-		      completing-read))
-     
-     ;; call using the first valid candidate
-     (setq crf-list (seq-filter 'functionp crf-list))
-     (setq crf (cl-first crf-list))
-     (funcall crf "freq-files-jc: " jc/freq-files-def))
-   )
-  )
+  (let ((crf-list nil)
+	(target nil))
+    (setq crf-list '(helm-comp-read
+		     ivy-completing-read
+		     ido-completing-read
+		     completing-read))
+    (setq crf (seq-find 'functionp crf-list))
+    (setq target (funcall crf "freq-files-jc: " jc/freq-files-def))
+    (find-file-existing target)
+    ))
 (global-set-key (kbd "M-n M-p") 'jc/shortcuts)
 
 (defun misc-macOS-jc ()
