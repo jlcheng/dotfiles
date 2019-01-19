@@ -30,6 +30,10 @@
   (find-file-existing
    (let ((crf (cl-first (seq-filter 'functionp '(helm-comp-read ivy-completing-read ido-completing-read completing-read)))))
      (funcall crf "freq-files-jc: " jc/freq-files-def))
+   (let ((crf '()))
+     (setq func-list '(helm-comp-read ivy-completing-read ido-completing-read completing-read))
+     (setq comp-func (cl-first (seq-filter 'functionp func-list)))
+     (funcall crf "freq-files-jc: " jc/freq-files-def))
    )
   )
 (global-set-key (kbd "M-n M-p") 'jc/shortcuts)
