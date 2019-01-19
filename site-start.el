@@ -27,14 +27,15 @@
 (defun jc/shortcuts ()
   "Shortcut to frequently used files"
   (interactive)
-  (let ((crf-list nil)
+  (let ((crf)
+	(crf-list nil)
 	(target nil))
     (setq crf-list '(helm-comp-read
 		     ivy-completing-read
 		     ido-completing-read
-		     completing-read))
-    (setq crf (seq-find 'functionp crf-list))
-    (setq target (funcall crf "freq-files-jc: " jc/freq-files-def))
+		     completing-read)
+	  crf (seq-find 'functionp crf-list)
+	  target (funcall crf "freq-files-jc: " jc/freq-files-def))
     (find-file-existing target)
     ))
 (global-set-key (kbd "M-n M-p") 'jc/shortcuts)
