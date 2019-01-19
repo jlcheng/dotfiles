@@ -8,10 +8,9 @@
 (defun jc/file-readlines (file)
   "Returns contents of file as list of strings"
   (if (file-exists-p file)
-      (let* ((flist (with-temp-buffer
-		      (insert-file-contents file)
-		      (split-string (buffer-string) "\n" t))))
-	flist)
+      (with-temp-buffer
+	(insert-file-contents file)
+	(split-string (buffer-string) "\n" t))
     ))
 
 ;; Shortcut to frequently used files, can be used to replace projectile
@@ -86,29 +85,17 @@
 (setq org-archive-location "~/org/archive/archive.org::* From %s"
       org-startup-folded nil  ;; https://orgmode.org/manual/Initial-visibility.html#Initial-visibility
       org-startup-indented t  ;; https://orgmode.org/manual/Clean-view.html
+      
       ) ; unclutter directories with org files
 
-(setq org-agenda-files
-      (cond
-       ((file-exists-p "~/Documents/zr")
-	'("~/org/home.org"
-	 "~/org/work/work_journal.org"))
-       ((eq system-type 'cygwin)
-	'("~/org/home.org"
-	 "~/privprjs/grs/docs/plan.org"))
-       ((eq system-type 'gnu/linux)
-	'("~/org/home.org"
-	 "~/org/forget_journal.org"
-	 "~/privprjs/grs/docs/plan.org"))))
-
 ;; List of files to add to org-agenda-files
+(setq org-agenda-files '("~/org/home.org"))
 (let ((file "~/.org-jc.txt"))
   (if (file-exists-p file)
       (let ((flist (jc/file-readlines file)))          ; read org-jc.txt
         (setq flist (seq-filter 'file-exists-p flist)) ; check for valid files
 	(setq flist (append org-agenda-files flist))   ; merge org-jc.txt with defaults
 	(setq org-agenda-files (cl-remove-duplicates flist :test #'equal)))))
-
 
 (add-hook 'org-mode-hook 'org-mode-hook-jc) 
 ;; === STOP: org-mode ===
@@ -181,20 +168,14 @@
                    (abbreviate-file-name (buffer-file-name))
                  "%b"))))
 
-;; 2018-12-06: Has not used this since it was written, though sounds useful.
-(defun eval-to-kill-ring-jc ()
-  (interactive)
-  (kill-new (with-output-to-string (princ (call-interactively 'eval-expression)))))
-(global-set-key (kbd "C-' M-:") 'eval-to-kill-ring-jc)
-
-(defun kill-new-file-name (b)
+(defun jc/kill-new-file-name (b)
   "Append the path of an open file into the kill ring"
   (interactive "b")
   (let ((bfn (buffer-file-name (get-buffer b))))
     (when bfn
       (kill-new bfn)
       (message bfn))))
-(global-set-key (kbd "M-n M-k") 'kill-new-file-name)
+(global-set-key (kbd "M-n M-k") 'jc/kill-new-file-name)
 
 ;;; -- start in *scratch* buffer
 (setq inhibit-startup-screen t)
