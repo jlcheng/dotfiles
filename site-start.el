@@ -28,11 +28,16 @@
   "Shortcut to frequently used files"
   (interactive)
   (find-file-existing
-   (let ((crf (cl-first (seq-filter 'functionp '(helm-comp-read ivy-completing-read ido-completing-read completing-read)))))
-     (funcall crf "freq-files-jc: " jc/freq-files-def))
    (let ((crf '()))
-     (setq func-list '(helm-comp-read ivy-completing-read ido-completing-read completing-read))
-     (setq comp-func (cl-first (seq-filter 'functionp func-list)))
+     ;; candidate functions
+     (setq crf-list '(helm-comp-read
+		      ivy-completing-read
+		      ido-completing-read
+		      completing-read))
+     
+     ;; call using the first valid candidate
+     (setq crf-list (seq-filter 'functionp crf-list))
+     (setq crf (cl-first crf-list))
      (funcall crf "freq-files-jc: " jc/freq-files-def))
    )
   )
