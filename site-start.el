@@ -89,13 +89,16 @@
       ) ; unclutter directories with org files
 
 ;; List of files to add to org-agenda-files
-(setq org-agenda-files '("~/org/home.org"))
-(let ((file "~/.org-jc.txt"))
-  (if (file-exists-p file)
+(defun jc/refresh-org-agenda-files ()
+  "populate org-agenda-files from ~/.org-jc.txt"
+  (interactive)
+  (setq org-agenda-files '("~/org/home.org"))
+  (let ((file "~/.org-jc.txt"))
+    (if (file-exists-p file)
       (let ((flist (jc/file-readlines file)))          ; read org-jc.txt
         (setq flist (seq-filter 'file-exists-p flist)) ; check for valid files
 	(setq flist (append org-agenda-files flist))   ; merge org-jc.txt with defaults
-	(setq org-agenda-files (cl-remove-duplicates flist :test #'equal)))))
+	(setq org-agenda-files (cl-remove-duplicates flist :test #'equal))))))
 
 (add-hook 'org-mode-hook 'org-mode-hook-jc) 
 ;; === STOP: org-mode ===
