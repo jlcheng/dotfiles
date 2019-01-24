@@ -104,12 +104,14 @@
 ;; === STOP: org-mode ===
 (setq imenu-auto-rescan t)
 
+(define-prefix-command 'jc-left-map)
+(global-set-key (kbd "M-`") 'jc-left-map)
 (global-set-key (kbd "M-s M-s") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
 (global-set-key (kbd "M-n M-r") 'revert-buffer)
 (global-set-key (kbd "M-n M-b") 'jsnice-jc)
 (global-set-key (kbd "M-n M-s") 'whitespace-mode)
-(global-set-key (kbd "M-1 M-1") 'point-to-register)
-(global-set-key (kbd "M-~ M-2") 'jump-to-register)
+(global-set-key (kbd "M-` M-r") 'point-to-register) ;; [r]emember
+(global-set-key (kbd "M-` M-g") 'jump-to-register)  ;; [g]oto
 
 ;;; enable emacsclient support unless we're running 'emacs-nox'
 (unless
