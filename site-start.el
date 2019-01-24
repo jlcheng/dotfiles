@@ -108,8 +108,8 @@
 (global-set-key (kbd "M-n M-r") 'revert-buffer)
 (global-set-key (kbd "M-n M-b") 'jsnice-jc)
 (global-set-key (kbd "M-n M-s") 'whitespace-mode)
-(global-set-key (kbd "M-n M-1") 'point-to-register)
-(global-set-key (kbd "M-n M-2") 'jump-to-register)
+(global-set-key (kbd "M-1 M-1") 'point-to-register)
+(global-set-key (kbd "M-~ M-2") 'jump-to-register)
 
 ;;; enable emacsclient support unless we're running 'emacs-nox'
 (unless
