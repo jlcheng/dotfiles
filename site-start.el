@@ -99,7 +99,7 @@
         (setq flist (seq-filter 'file-exists-p flist)) ; check for valid files
 	(setq flist (append org-agenda-files flist))   ; merge org-jc.txt with defaults
 	(setq org-agenda-files (cl-remove-duplicates flist :test #'equal))))))
-
+(jc/refresh-org-agenda-files)
 (add-hook 'org-mode-hook 'org-mode-hook-jc) 
 ;; === STOP: org-mode ===
 (setq imenu-auto-rescan t)
