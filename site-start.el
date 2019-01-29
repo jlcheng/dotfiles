@@ -83,7 +83,7 @@
 (global-set-key (kbd "M-n M-c M-f") 'org-last-heading-same-level-jc)
 
 (setq org-archive-location "~/org/archive/archive.org::* From %s"
-      org-startup-folded nil  ;; https://orgmode.org/manual/Initial-visibility.html#Initial-visibility
+      org-startup-folded t    ;; https://orgmode.org/manual/Initial-visibility.html#Initial-visibility
       org-startup-indented t  ;; https://orgmode.org/manual/Clean-view.html
       
       ) ; unclutter directories with org files
