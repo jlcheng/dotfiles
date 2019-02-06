@@ -150,6 +150,7 @@
 
 ;;; misc
 (setq column-number-mode t)
+(add-hook 'markdown-mode-hook (global-unset-key (kbd "M-n")))
 
 (defun jsnice-jc (p1 p2)
   "Runs jsnice against the region"
