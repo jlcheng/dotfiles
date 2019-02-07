@@ -104,14 +104,22 @@
 ;; === STOP: org-mode ===
 (setq imenu-auto-rescan t)
 
-(define-prefix-command 'jc-left-map)
-(global-set-key (kbd "M-`") 'jc-left-map)
 (global-set-key (kbd "M-s M-s") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
-(global-set-key (kbd "M-n M-r") 'revert-buffer)
-(global-set-key (kbd "M-n M-b") 'jsnice-jc)
-(global-set-key (kbd "M-n M-s") 'whitespace-mode)
-(global-set-key (kbd "M-` M-r") 'point-to-register) ;; [r]emember
-(global-set-key (kbd "M-` M-g") 'jump-to-register)  ;; [g]oto
+
+(defvar jc/custom-map (make-keymap))
+  (let ((map (make-keymap)))
+    (define-key map (kbd "M-r") 'revert-buffer)
+    (define-key map (kbd "M-b") 'jsnice-jc)
+    (define-key map (kbd "M-s") 'whitespace-mode)
+    map))
+(global-set-key (kbd "M-n") jc/custom-map)
+
+(defvar jc/backtick-map
+  (let ((map (make-keymap)))
+    (define-key map (kbd "M-r") 'point-to-register) ;; [r]emember
+    (define-key map (kbd "M-g") 'jump-to-register)  ;; [g]oto
+    map))
+(global-set-key (kbd "M-`") jc/backtick-map)
 
 ;;; enable emacsclient support unless we're running 'emacs-nox'
 (unless
@@ -127,7 +135,7 @@
   (package-install 'flyspell-correct-helm)
   (package-install 'helm)       ;; helm is a super nice completion system
   (package-install 'helm-rg))  ;; install 'ripgrep' to use this
-(global-set-key (kbd "M-n M-f") 'helm-rg)
+(define-key jc/custom-map (kbd "M-f") 'helm-rg)
 (let ((modes '(helm-mode ivy-mode)))
   (funcall (cl-first (seq-filter 'functionp modes))))
 (when (functionp 'helm-mode)
