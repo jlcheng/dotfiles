@@ -16,7 +16,7 @@
 ;; Keymaps
 (defvar jc/custom-map (make-keymap) "Keys bound to M-n. Personalized shortcuts.")
 (global-set-key (kbd "M-n") jc/custom-map)
-(defvar jc/backtick-map (make-keymap))
+(defvar jc/backtick-map (make-keymap) "Keys bound to M-`. Shortcuts for moving/copy/pasting.")
 (global-set-key (kbd "M-`") jc/backtick-map)
 
 ;; Shortcut to frequently used files, can be used to replace projectile
@@ -71,27 +71,26 @@
    (set-face-attribute 'default (selected-frame) :height 135)))
 
 ;; === START: org-mode ===
-(org-mode)
 (defun org-mode-hook-jc ()
   "org-mode hooks. auto-fill has been useful."
   (auto-fill-mode)
   (set-fill-column 120))
+(add-hook 'org-mode-hook 'org-mode-hook-jc)
+
 (defun org-last-heading-same-level-jc ()
   "move to last heading on the same level"
   (interactive)
   (org-forward-heading-same-level 1000)
   (org-next-visible-heading 1)
   (backward-char))
+(define-key jc/custom-map (kbd "M-c M-f") 'org-last-heading-same-level-jc)
 
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c b") 'org-switchb)
-(define-key jc/custom-map (kbd "M-i") 'helm-semantic-or-imenu)
-(define-key jc/custom-map (kbd "M-c M-f") 'org-last-heading-same-level-jc)
 
 (setq org-archive-location "~/org/archive/archive.org::* From %s"
       org-startup-folded t    ;; https://orgmode.org/manual/Initial-visibility.html#Initial-visibility
       org-startup-indented t  ;; https://orgmode.org/manual/Clean-view.html
-      
       ) ; unclutter directories with org files
 
 ;; List of files to add to org-agenda-files
@@ -106,7 +105,7 @@
 	(setq flist (append org-agenda-files flist))   ; merge org-jc.txt with defaults
 	(setq org-agenda-files (cl-remove-duplicates flist :test #'equal))))))
 (jc/refresh-org-agenda-files)
-(add-hook 'org-mode-hook 'org-mode-hook-jc) 
+
 ;; === STOP: org-mode ===
 (setq imenu-auto-rescan t)
 
@@ -116,10 +115,6 @@
 (define-key jc/custom-map (kbd "M-f") 'helm-rg)   ;; [f]ind files
 (define-key jc/custom-map (kbd "M-r") 'revert-buffer)
 (define-key jc/custom-map (kbd "M-s") 'whitespace-mode) ;; toggle [s]paces
-
-(define-key jc/backtick-map (kbd "M-r") 'point-to-register) ;; [r]emember
-(define-key jc/backtick-map (kbd "M-g") 'jump-to-register)  ;; [g]oto
-
 
 ;;; enable emacsclient support unless we're running 'emacs-nox'
 (unless
@@ -158,6 +153,11 @@
 
 ;;; misc
 (setq column-number-mode t)
+(define-key jc/custom-map (kbd "M-i") 'helm-semantic-or-imenu)
+(define-key jc/backtick-map (kbd "M-r") 'point-to-register) ;; [r]emember
+(define-key jc/backtick-map (kbd "M-g") 'jump-to-register)  ;; [g]oto
+(define-key jc/backtick-map (kbd "M-w") 'copy-to-register) ;; save to register 
+(define-key jc/backtick-map (kbd "M-y") 'insert-register)  ;; yank from register
 
 (defun jsnice-jc (p1 p2)
   "Runs jsnice against the region"
