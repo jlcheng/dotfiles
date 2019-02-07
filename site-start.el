@@ -13,6 +13,12 @@
 	(split-string (buffer-string) "\n" t))
     ))
 
+;; Keymaps
+(defvar jc/custom-map (make-keymap) "Keys bound to M-n. Personalized shortcuts.")
+(global-set-key (kbd "M-n") jc/custom-map)
+(defvar jc/backtick-map (make-keymap))
+(global-set-key (kbd "M-`") jc/backtick-map)
+
 ;; Shortcut to frequently used files, can be used to replace projectile
 (defvar jc/freq-files-def '("~/privprjs/dotfiles/site-start.el" "~/org/home.org")
   "Frequently used files. Initially populated from ~/.sc-jc.txt")
@@ -37,7 +43,7 @@
 	  target (funcall crf "freq-files-jc: " jc/freq-files-def))
     (find-file-existing target)
     ))
-(global-set-key (kbd "M-n M-p") 'jc/shortcuts)
+(define-key jc/custom-map (kbd "M-p") 'jc/shortcuts)
 
 (defun misc-macOS-jc ()
   "macOS misc customizations"
@@ -79,8 +85,8 @@
 
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c b") 'org-switchb)
-(global-set-key (kbd "M-n M-i") 'helm-semantic-or-imenu)
-(global-set-key (kbd "M-n M-c M-f") 'org-last-heading-same-level-jc)
+(define-key jc/custom-map (kbd "M-i") 'helm-semantic-or-imenu)
+(define-key jc/custom-map (kbd "M-c M-f") 'org-last-heading-same-level-jc)
 
 (setq org-archive-location "~/org/archive/archive.org::* From %s"
       org-startup-folded t    ;; https://orgmode.org/manual/Initial-visibility.html#Initial-visibility
@@ -106,20 +112,14 @@
 
 (global-set-key (kbd "M-s M-s") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
 
-(defvar jc/custom-map (make-keymap))
-  (let ((map (make-keymap)))
-    (define-key map (kbd "M-r") 'revert-buffer)
-    (define-key map (kbd "M-b") 'jsnice-jc)
-    (define-key map (kbd "M-s") 'whitespace-mode)
-    map))
-(global-set-key (kbd "M-n") jc/custom-map)
+(define-key jc/custom-map (kbd "M-j") 'jsnice-jc) ;; [j]son indent
+(define-key jc/custom-map (kbd "M-f") 'helm-rg)   ;; [f]ind files
+(define-key jc/custom-map (kbd "M-r") 'revert-buffer)
+(define-key jc/custom-map (kbd "M-s") 'whitespace-mode) ;; toggle [s]paces
 
-(defvar jc/backtick-map
-  (let ((map (make-keymap)))
-    (define-key map (kbd "M-r") 'point-to-register) ;; [r]emember
-    (define-key map (kbd "M-g") 'jump-to-register)  ;; [g]oto
-    map))
-(global-set-key (kbd "M-`") jc/backtick-map)
+(define-key jc/backtick-map (kbd "M-r") 'point-to-register) ;; [r]emember
+(define-key jc/backtick-map (kbd "M-g") 'jump-to-register)  ;; [g]oto
+
 
 ;;; enable emacsclient support unless we're running 'emacs-nox'
 (unless
@@ -187,7 +187,7 @@
     (when bfn
       (kill-new bfn)
       (message bfn))))
-(global-set-key (kbd "M-n M-k") 'jc/kill-new-file-name)
+(define-key jc/custom-map (kbd "M-k") 'jc/kill-new-file-name) ;; put filename into [k]ill ring
 
 ;;; -- start in *scratch* buffer
 (setq inhibit-startup-screen t)
