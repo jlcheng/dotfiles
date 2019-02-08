@@ -21,28 +21,28 @@
 
 ;; 2019-02-08 Deprecating jc/freq-files-def and jc/shortcuts in preference to bookmark-jump (C-x r b)
 ;; Shortcut to frequently used files, can be used to replace projectile
-(defvar jc/freq-files-def '("~/privprjs/dotfiles/site-start.el" "~/org/home.org")
-  "Frequently used files. Initially populated from ~/.sc-jc.txt")
-(let ((file "~/.sc-jc.txt"))
-  (if (file-exists-p file)
-      (let ((flist (jc/file-readlines file)))          ; read sc-jc.txt
-        (setq flist (seq-filter 'file-exists-p flist)) ; check for valid files
-	(setq flist (append jc/freq-files-def flist))  ; merge sc-jc.txt with defaults
-	(setq jc/freq-files-def (cl-remove-duplicates flist :test #'equal)))))
-(defun jc/shortcuts ()
-  "Shortcut to frequently used files"
-  (interactive)
-  (let ((crf)
-	(crf-list nil)
-	(target nil))
-    (setq crf-list '(helm-comp-read
-		     ivy-completing-read
-		     ido-completing-read
-		     completing-read)
-	  crf (seq-find 'functionp crf-list)
-	  target (funcall crf "freq-files-jc: " jc/freq-files-def))
-    (find-file-existing target)
-    ))
+;; (defvar jc/freq-files-def '("~/privprjs/dotfiles/site-start.el" "~/org/home.org")
+;;   "Frequently used files. Initially populated from ~/.sc-jc.txt")
+;; (let ((file "~/.sc-jc.txt"))
+;;   (if (file-exists-p file)
+;;       (let ((flist (jc/file-readlines file)))          ; read sc-jc.txt
+;;         (setq flist (seq-filter 'file-exists-p flist)) ; check for valid files
+;; 	(setq flist (append jc/freq-files-def flist))  ; merge sc-jc.txt with defaults
+;; 	(setq jc/freq-files-def (cl-remove-duplicates flist :test #'equal)))))
+;; (defun jc/shortcuts ()
+;;   "Shortcut to frequently used files"
+;;   (interactive)
+;;   (let ((crf)
+;; 	(crf-list nil)
+;; 	(target nil))
+;;     (setq crf-list '(helm-comp-read
+;; 		     ivy-completing-read
+;; 		     ido-completing-read
+;; 		     completing-read)
+;; 	  crf (seq-find 'functionp crf-list)
+;; 	  target (funcall crf "freq-files-jc: " jc/freq-files-def))
+;;     (find-file-existing target)
+;;     ))
 ;; (define-key jc/custom-map (kbd "M-p") 'jc/shortcuts)
 (define-key jc/custom-map (kbd "M-p") 'bookmark-jump)
 
@@ -125,12 +125,18 @@
   ;; Ubuntu: run a no-op command to bring the window into focus
   (add-hook 'server-visit-hook (lambda() (message " "))))
 
-;; 2018-12-24: Experiment with helm-mode for completion
-(unless (package-installed-p 'helm)
-  (package-refresh-contents)
-  (package-install 'flyspell-correct-helm)
-  (package-install 'helm)       ;; helm is a super nice completion system
-  (package-install 'helm-rg))  ;; install 'ripgrep' to use this
+(defun jc/init/installs ()
+  "Installs favorite packages"
+  (unless (package-installed-p 'helm) ;; helm is a super nice completion system
+    (package-refresh-contents)
+    (package-install 'flyspell-correct-helm)
+    (package-install 'helm)      
+    (package-install 'helm-rg))  ;; install 'ripgrep' to use this
+  (unless (package-installed-p 'origami)
+    (package-refresh-contents)
+    (package-install 'origami)))
+(jc/init/installs)
+
 (define-key jc/custom-map (kbd "M-f") 'helm-rg)
 (let ((modes '(helm-mode ivy-mode)))
   (funcall (cl-first (seq-filter 'functionp modes))))
@@ -155,10 +161,12 @@
 ;;; misc
 (setq column-number-mode t)
 (define-key jc/custom-map (kbd "M-i") 'helm-semantic-or-imenu)
+(define-key jc/custom-map (kbd "M-t") 'origami-toggle-all-nodes)  ;; [t]oggle
 (define-key jc/backtick-map (kbd "M-r") 'point-to-register) ;; [r]emember
 (define-key jc/backtick-map (kbd "M-g") 'jump-to-register)  ;; [g]oto
 (define-key jc/backtick-map (kbd "M-w") 'copy-to-register) ;; save to register 
 (define-key jc/backtick-map (kbd "M-y") 'insert-register)  ;; yank from register
+
 
 (defun jsnice-jc (p1 p2)
   "Runs jsnice against the region"
