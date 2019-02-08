@@ -19,6 +19,7 @@
 (defvar jc/backtick-map (make-keymap) "Keys bound to M-`. Shortcuts for moving/copy/pasting.")
 (global-set-key (kbd "M-`") jc/backtick-map)
 
+;; 2019-02-08 Deprecating jc/freq-files-def and jc/shortcuts in preference to bookmark-jump (C-x r b)
 ;; Shortcut to frequently used files, can be used to replace projectile
 (defvar jc/freq-files-def '("~/privprjs/dotfiles/site-start.el" "~/org/home.org")
   "Frequently used files. Initially populated from ~/.sc-jc.txt")
@@ -28,7 +29,6 @@
         (setq flist (seq-filter 'file-exists-p flist)) ; check for valid files
 	(setq flist (append jc/freq-files-def flist))  ; merge sc-jc.txt with defaults
 	(setq jc/freq-files-def (cl-remove-duplicates flist :test #'equal)))))
-
 (defun jc/shortcuts ()
   "Shortcut to frequently used files"
   (interactive)
@@ -43,7 +43,8 @@
 	  target (funcall crf "freq-files-jc: " jc/freq-files-def))
     (find-file-existing target)
     ))
-(define-key jc/custom-map (kbd "M-p") 'jc/shortcuts)
+;; (define-key jc/custom-map (kbd "M-p") 'jc/shortcuts)
+(define-key jc/custom-map (kbd "M-p") 'bookmark-jump)
 
 (defun misc-macOS-jc ()
   "macOS misc customizations"
