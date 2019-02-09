@@ -26,8 +26,8 @@
     ))
 
 ;; Keymaps
-(defvar jc/custom-map (make-keymap) "Keys bound to M-n. Personalized shortcuts.")
-(global-set-key (kbd "M-n") jc/custom-map)
+(defvar jc/right-map (make-keymap) "Keys whose suffix are optimized for the right hand.")
+(global-set-key (kbd "M-n") jc/right-map)
 (defvar jc/backtick-map (make-keymap) "Keys bound to M-`. Shortcuts for moving/copy/pasting.")
 (global-set-key (kbd "M-`") jc/backtick-map)
 
@@ -55,8 +55,8 @@
 ;; 	  target (funcall crf "freq-files-jc: " jc/freq-files-def))
 ;;     (find-file-existing target)
 ;;     ))
-;; (define-key jc/custom-map (kbd "M-p") 'jc/shortcuts)
-(define-key jc/custom-map (kbd "M-p") 'bookmark-jump)
+;; (define-key jc/right-map (kbd "M-p") 'jc/shortcuts)
+(define-key jc/right-map (kbd "M-p") 'bookmark-jump)
 
 (defun misc-macOS-jc ()
   "macOS misc customizations"
@@ -96,7 +96,7 @@
   (org-forward-heading-same-level 1000)
   (org-next-visible-heading 1)
   (backward-char))
-(define-key jc/custom-map (kbd "M-c M-f") 'org-last-heading-same-level-jc)
+(define-key jc/right-map (kbd "M-c M-f") 'org-last-heading-same-level-jc)
 
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c b") 'org-switchb)
@@ -130,10 +130,10 @@
 
 (global-set-key (kbd "M-s M-s") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
 
-(define-key jc/custom-map (kbd "M-j") 'jsnice-jc) ;; [j]son indent
-(define-key jc/custom-map (kbd "M-f") 'helm-rg)   ;; [f]ind files
-(define-key jc/custom-map (kbd "M-r") 'revert-buffer)
-(define-key jc/custom-map (kbd "M-s") 'whitespace-mode) ;; toggle [s]paces
+(define-key jc/right-map (kbd "M-j") 'jsnice-jc) ;; [j]son indent
+(define-key jc/right-map (kbd "M-f") 'helm-rg)   ;; [f]ind files
+(define-key jc/right-map (kbd "M-r") 'revert-buffer)
+(define-key jc/right-map (kbd "M-s") 'whitespace-mode) ;; toggle [s]paces
 
 ;;; enable emacsclient support unless we're running 'emacs-nox'
 (unless
@@ -143,7 +143,7 @@
   ;; Ubuntu: run a no-op command to bring the window into focus
   (add-hook 'server-visit-hook (lambda() (message " "))))
 
-(define-key jc/custom-map (kbd "M-f") 'helm-rg)
+(define-key jc/right-map (kbd "M-f") 'helm-rg)
 (let ((modes '(helm-mode ivy-mode)))
   (funcall (cl-first (seq-filter 'functionp modes))))
 (when (functionp 'helm-mode)
@@ -166,8 +166,8 @@
 
 ;;; misc
 (setq column-number-mode t)
-(define-key jc/custom-map (kbd "M-i") 'helm-semantic-or-imenu)
-(define-key jc/custom-map (kbd "M-t") 'origami-toggle-all-nodes)  ;; [t]oggle
+(define-key jc/right-map (kbd "M-i") 'helm-semantic-or-imenu)
+(define-key jc/right-map (kbd "M-t") 'origami-toggle-all-nodes)  ;; [t]oggle
 (define-key jc/backtick-map (kbd "M-r") 'point-to-register) ;; [r]emember
 (define-key jc/backtick-map (kbd "M-g") 'jump-to-register)  ;; [g]oto
 (define-key jc/backtick-map (kbd "M-w") 'copy-to-register) ;; save to register 
@@ -202,7 +202,7 @@
     (when bfn
       (kill-new bfn)
       (message bfn))))
-(define-key jc/custom-map (kbd "M-k") 'jc/kill-new-file-name) ;; put filename into [k]ill ring
+(define-key jc/right-map (kbd "M-k") 'jc/kill-new-file-name) ;; put filename into [k]ill ring
 
 ;;; -- start in *scratch* buffer
 (setq inhibit-startup-screen t)
