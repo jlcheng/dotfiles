@@ -17,8 +17,10 @@ title() {
 	export PS1="\[\033]0;$1 \h\007\]${CLPART}"
     fi
 }
-alias emacs="emacsclient -n"
-alias emacs-start="/usr/bin/emacs &> /dev/null &"
+if [ "$USER" != "vagrant" ]; then
+  alias emacs="emacsclient -n"
+  alias emacs-start="/usr/bin/emacs &> /dev/null &"
+fi
 
 # git
 export GIT_EDITOR="emacsclient"
