@@ -26,8 +26,10 @@
     ))
 
 ;; Keymaps
-(defvar jc/right-map (make-keymap) "Keys whose suffix are optimized for the right hand.")
+(defvar jc/right-map (make-keymap) "Keys whose suffix are intended for the right hand.")
 (global-set-key (kbd "M-n") jc/right-map)
+(defvar jc/left-map (make-keymap) "Keys whose suffix are intended for the left hand.")
+(global-set-key (kbd "M-c") jc/left-map)
 (defvar jc/backtick-map (make-keymap) "Keys bound to M-`. Shortcuts for moving/copy/pasting.")
 (global-set-key (kbd "M-`") jc/backtick-map)
 
@@ -118,21 +120,21 @@
 	(setq flist (append org-agenda-files flist))   ; merge org-jc.txt with defaults
 	(setq org-agenda-files (cl-remove-duplicates flist :test #'equal))))))
 (jc/refresh-org-agenda-files)
-
 ;; === STOP: org-mode ===
 
 ;; === START: origami-mode ===
-(add-hook 'emacs-lisp-mode-hook 'origami-mode)
+(defun jc/origami-mode-init ()
+  "Init-time customizations for origami-mode"
+  (add-hook 'emacs-lisp-mode-hook 'origami-mode)
+  (setq origami-show-fold-header t))
+(jc/origami-mode-init)
 ;; === STOP: origami-mode ===
 
 
-(setq imenu-auto-rescan t)
-
 (global-set-key (kbd "M-s M-s") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
-
 (define-key jc/right-map (kbd "M-j") 'jsnice-jc) ;; [j]son indent
 (define-key jc/right-map (kbd "M-f") 'helm-rg)   ;; [f]ind files
-(define-key jc/right-map (kbd "M-r") 'revert-buffer)
+(define-key jc/left-map (kbd "M-r") 'revert-buffer)
 (define-key jc/right-map (kbd "M-s") 'whitespace-mode) ;; toggle [s]paces
 
 ;;; enable emacsclient support unless we're running 'emacs-nox'
@@ -166,13 +168,13 @@
 
 ;;; misc
 (setq column-number-mode t)
+(setq imenu-auto-rescan t)
 (define-key jc/right-map (kbd "M-i") 'helm-semantic-or-imenu)
-(define-key jc/right-map (kbd "M-t") 'origami-toggle-all-nodes)  ;; [t]oggle
+(define-key jc/left-map (kbd "M-t") 'origami-toggle-all-nodes)  ;; [t]oggle
 (define-key jc/backtick-map (kbd "M-r") 'point-to-register) ;; [r]emember
 (define-key jc/backtick-map (kbd "M-g") 'jump-to-register)  ;; [g]oto
 (define-key jc/backtick-map (kbd "M-w") 'copy-to-register) ;; save to register 
 (define-key jc/backtick-map (kbd "M-y") 'insert-register)  ;; yank from register
-
 
 (defun jsnice-jc (p1 p2)
   "Runs jsnice against the region"
