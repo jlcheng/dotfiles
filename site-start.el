@@ -2,7 +2,19 @@
 ;;; Installation --- 
 ;;;   echo '(load-file (expand-file-name "~/privprjs/dotfiles/site-start.el"))' >> ~/.emacs.d/init.el
 
+;; Required packages
 (add-to-list 'package-archives (cons "melpa" "http://melpa.org/packages/"))
+(defun jc/init/installs ()
+  "Installs favorite packages"
+  (unless (package-installed-p 'helm) ;; helm is a super nice completion system
+    (package-refresh-contents)
+    (package-install 'flyspell-correct-helm)
+    (package-install 'helm)      
+    (package-install 'helm-rg))  ;; install 'ripgrep' to use this
+  (unless (package-installed-p 'origami)
+    (package-refresh-contents)
+    (package-install 'origami)))
+(jc/init/installs)
 
 ;; library functions
 (defun jc/file-readlines (file)
@@ -72,11 +84,11 @@
    (set-face-attribute 'default (selected-frame) :height 135)))
 
 ;; === START: org-mode ===
-(defun org-mode-hook-jc ()
+(defun jc/org-mode-hook ()
   "org-mode hooks. auto-fill has been useful."
   (auto-fill-mode)
   (set-fill-column 120))
-(add-hook 'org-mode-hook 'org-mode-hook-jc)
+(add-hook 'org-mode-hook 'jc/org-mode-hook)
 
 (defun org-last-heading-same-level-jc ()
   "move to last heading on the same level"
@@ -108,6 +120,12 @@
 (jc/refresh-org-agenda-files)
 
 ;; === STOP: org-mode ===
+
+;; === START: origami-mode ===
+(add-hook 'emacs-lisp-mode-hook 'origami-mode)
+;; === STOP: origami-mode ===
+
+
 (setq imenu-auto-rescan t)
 
 (global-set-key (kbd "M-s M-s") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
@@ -124,18 +142,6 @@
   (server-start)
   ;; Ubuntu: run a no-op command to bring the window into focus
   (add-hook 'server-visit-hook (lambda() (message " "))))
-
-(defun jc/init/installs ()
-  "Installs favorite packages"
-  (unless (package-installed-p 'helm) ;; helm is a super nice completion system
-    (package-refresh-contents)
-    (package-install 'flyspell-correct-helm)
-    (package-install 'helm)      
-    (package-install 'helm-rg))  ;; install 'ripgrep' to use this
-  (unless (package-installed-p 'origami)
-    (package-refresh-contents)
-    (package-install 'origami)))
-(jc/init/installs)
 
 (define-key jc/custom-map (kbd "M-f") 'helm-rg)
 (let ((modes '(helm-mode ivy-mode)))
