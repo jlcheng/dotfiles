@@ -2,7 +2,7 @@
 ;;; Installation --- 
 ;;;   echo '(load-file (expand-file-name "~/privprjs/dotfiles/site-start.el"))' >> ~/.emacs.d/init.el
 
-(add-to-list 'package-archives (cons "melpa" "https://melpa.org/packages/"))
+(add-to-list 'package-archives (cons "melpa" "http://melpa.org/packages/"))
 
 ;; library functions
 (defun jc/file-readlines (file)
