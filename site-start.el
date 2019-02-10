@@ -141,7 +141,7 @@
 
 (global-set-key (kbd "M-s M-s") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
 (define-key jc/right-map (kbd "M-j") 'jsnice-jc) ;; [j]son indent
-(define-key jc/right-map (kbd "M-f") 'helm-rg)   ;; [f]ind files
+(define-key jc/left-map (kbd "M-f") 'helm-rg)   ;; [f]ind files
 (define-key jc/left-map (kbd "M-r") 'revert-buffer)
 (define-key jc/right-map (kbd "M-s") 'whitespace-mode) ;; toggle [s]paces
 
