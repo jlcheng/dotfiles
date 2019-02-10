@@ -32,6 +32,14 @@
 (global-set-key (kbd "M-c") jc/left-map)
 (defvar jc/backtick-map (make-keymap) "Keys bound to M-`. Shortcuts for moving/copy/pasting.")
 (global-set-key (kbd "M-`") jc/backtick-map)
+(defun jc/show-keymaps ()
+  "Shows my personalized keymaps"
+  (interactive)
+  (with-output-to-temp-buffer "*jc/keymaps help*"
+    (seq-map (lambda (elt)
+	       (princ (format "=== %s ===\n" elt))
+	       (princ (substitute-command-keys (format "\\{%s}" elt))))
+	     '(jc/right-map jc/left-map jc/backtick-map))))
 
 ;; 2019-02-08 Deprecating jc/freq-files-def and jc/shortcuts in preference to bookmark-jump (C-x r b)
 ;; Shortcut to frequently used files, can be used to replace projectile
