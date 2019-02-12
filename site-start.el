@@ -29,7 +29,7 @@
 (defvar jc/right-map (make-keymap) "Keys whose suffix are intended for the right hand.")
 (global-set-key (kbd "M-n") jc/right-map)
 (defvar jc/left-map (make-keymap) "Keys whose suffix are intended for the left hand.")
-(global-set-key (kbd "M-c") jc/left-map)
+(global-set-key (kbd "s-f") jc/left-map)
 (defvar jc/backtick-map (make-keymap) "Keys bound to M-`. Shortcuts for moving/copy/pasting.")
 (global-set-key (kbd "M-`") jc/backtick-map)
 (defun jc/show-keymaps ()
@@ -41,32 +41,6 @@
 	       (princ (substitute-command-keys (format "\\{%s}" elt))))
 	     '(jc/right-map jc/left-map jc/backtick-map))))
 
-;; 2019-02-08 Deprecating jc/freq-files-def and jc/shortcuts in preference to bookmark-jump (C-x r b)
-;; Shortcut to frequently used files, can be used to replace projectile
-;; (defvar jc/freq-files-def '("~/privprjs/dotfiles/site-start.el" "~/org/home.org")
-;;   "Frequently used files. Initially populated from ~/.sc-jc.txt")
-;; (let ((file "~/.sc-jc.txt"))
-;;   (if (file-exists-p file)
-;;       (let ((flist (jc/file-readlines file)))          ; read sc-jc.txt
-;;         (setq flist (seq-filter 'file-exists-p flist)) ; check for valid files
-;; 	(setq flist (append jc/freq-files-def flist))  ; merge sc-jc.txt with defaults
-;; 	(setq jc/freq-files-def (cl-remove-duplicates flist :test #'equal)))))
-;; (defun jc/shortcuts ()
-;;   "Shortcut to frequently used files"
-;;   (interactive)
-;;   (let ((crf)
-;; 	(crf-list nil)
-;; 	(target nil))
-;;     (setq crf-list '(helm-comp-read
-;; 		     ivy-completing-read
-;; 		     ido-completing-read
-;; 		     completing-read)
-;; 	  crf (seq-find 'functionp crf-list)
-;; 	  target (funcall crf "freq-files-jc: " jc/freq-files-def))
-;;     (find-file-existing target)
-;;     ))
-;; (define-key jc/right-map (kbd "M-p") 'jc/shortcuts)
-(define-key jc/right-map (kbd "M-p") 'bookmark-jump)
 
 (defun misc-macOS-jc ()
   "macOS misc customizations"
@@ -141,8 +115,8 @@
 
 (global-set-key (kbd "M-s M-s") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
 (define-key jc/right-map (kbd "M-j") 'jsnice-jc) ;; [j]son indent
-; (define-key jc/left-map (kbd "M-f") 'helm-rg)   ;; 2019-02-10: Not useful unless its starts at project root
-(define-key jc/left-map (kbd "M-r") 'revert-buffer)
+(define-key jc/right-map (kbd "M-p") 'bookmark-jump)
+(define-key jc/left-map (kbd "s-r") 'revert-buffer)
 (define-key jc/right-map (kbd "M-s") 'whitespace-mode) ;; toggle [s]paces
 
 ;;; enable emacsclient support unless we're running 'emacs-nox'
@@ -178,7 +152,7 @@
 (setq column-number-mode t)
 (setq imenu-auto-rescan t)
 (define-key jc/right-map (kbd "M-i") 'helm-semantic-or-imenu)
-(define-key jc/left-map (kbd "M-t") 'origami-toggle-all-nodes)  ;; [t]oggle
+(define-key jc/left-map (kbd "s-t") 'origami-toggle-all-nodes)  ;; [t]oggle
 (define-key jc/backtick-map (kbd "M-r") 'point-to-register) ;; [r]emember
 (define-key jc/backtick-map (kbd "M-g") 'jump-to-register)  ;; [g]oto
 (define-key jc/backtick-map (kbd "M-w") 'copy-to-register) ;; save to register 
