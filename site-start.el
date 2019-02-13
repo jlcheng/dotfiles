@@ -83,7 +83,7 @@
 (define-key jc/right-map (kbd "M-c M-f") 'org-last-heading-same-level-jc)
 
 (global-set-key (kbd "C-c a") 'org-agenda)
-(global-set-key (kbd "C-c b") 'org-switchb)
+(define-key jc/left-map (kbd "s-b") 'org-switchb)
 
 (setq org-archive-location "~/org/archive/archive.org::* From %s"
       org-startup-folded t    ;; https://orgmode.org/manual/Initial-visibility.html#Initial-visibility
