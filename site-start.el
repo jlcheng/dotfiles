@@ -108,6 +108,7 @@
 (defun jc/origami-mode-init ()
   "Init-time customizations for origami-mode"
   (add-hook 'emacs-lisp-mode-hook 'origami-mode)
+  (add-hook 'python-mode-hook 'origami-mode)
   (setq origami-show-fold-header t))
 (jc/origami-mode-init)
 ;; === STOP: origami-mode ===
@@ -116,8 +117,10 @@
 (global-set-key (kbd "M-s M-s") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
 (define-key jc/right-map (kbd "M-j") 'jsnice-jc) ;; [j]son indent
 (define-key jc/right-map (kbd "M-p") 'bookmark-jump)
+(define-key jc/right-map (kbd "M-h") 'command-history)
 (define-key jc/left-map (kbd "s-r") 'revert-buffer)
 (define-key jc/left-map (kbd "s-s") 'whitespace-mode) ;; toggle [s]paces
+
 
 ;;; enable emacsclient support unless we're running 'emacs-nox'
 (unless
