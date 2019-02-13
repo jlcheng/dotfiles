@@ -160,7 +160,7 @@
 (define-key jc/backtick-map (kbd "M-g") 'jump-to-register)  ;; [g]oto
 (define-key jc/backtick-map (kbd "M-w") 'copy-to-register) ;; save to register 
 (define-key jc/backtick-map (kbd "M-y") 'insert-register)  ;; yank from register
-(add-hook 'markdown-mode-hook (global-set-key (kbd "M-n") jc/right-map))
+(add-hook 'markdown-mode-hook '(lambda () (define-key markdown-mode-map (kbd "M-n") nil)))
 
 (defun jsnice-jc (p1 p2)
   "Runs jsnice against the region"
