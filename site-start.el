@@ -117,7 +117,7 @@
 (define-key jc/right-map (kbd "M-j") 'jsnice-jc) ;; [j]son indent
 (define-key jc/right-map (kbd "M-p") 'bookmark-jump)
 (define-key jc/left-map (kbd "s-r") 'revert-buffer)
-(define-key jc/right-map (kbd "M-s") 'whitespace-mode) ;; toggle [s]paces
+(define-key jc/left-map (kbd "s-s") 'whitespace-mode) ;; toggle [s]paces
 
 ;;; enable emacsclient support unless we're running 'emacs-nox'
 (unless
