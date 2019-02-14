@@ -190,7 +190,7 @@
     (when bfn
       (kill-new bfn)
       (message bfn))))
-(define-key jc/right-map (kbd "M-k") 'jc/kill-new-file-name) ;; put filename into [k]ill ring
+(define-key jc/right-map (kbd "M-n M-f") 'jc/kill-new-file-name) ;; put filename into [k]ill ring
 
 ;;; -- start in *scratch* buffer
 (setq inhibit-startup-screen t)
