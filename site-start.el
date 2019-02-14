@@ -27,11 +27,11 @@
 
 ;; Keymaps
 (defvar jc/right-map (make-keymap) "Keys whose suffix are intended for the right hand.")
-(global-set-key (kbd "M-n") jc/right-map)
+(define-key global-map (kbd "M-n") jc/right-map)
 (defvar jc/left-map (make-keymap) "Keys whose suffix are intended for the left hand.")
-(global-set-key (kbd "M-c") jc/left-map)
+(define-key global-map (kbd "M-c") jc/left-map)
 (defvar jc/backtick-map (make-keymap) "Keys bound to M-`. Shortcuts for moving/copy/pasting.")
-(global-set-key (kbd "M-`") jc/backtick-map)
+(define-key global-map (kbd "M-`") jc/backtick-map)
 (defun jc/show-keymaps ()
   "Shows my personalized keymaps"
   (interactive)
@@ -40,7 +40,7 @@
 	       (princ (format "=== %s ===\n" elt))
 	       (princ (substitute-command-keys (format "\\{%s}" elt))))
 	     '(jc/right-map jc/left-map jc/backtick-map))))
-
+(define-key jc/right-map (kbd "M-n M-k") 'jc/show-keymaps)
 
 (defun misc-macOS-jc ()
   "macOS misc customizations"
