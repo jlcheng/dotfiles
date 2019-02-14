@@ -81,8 +81,8 @@
   (org-next-visible-heading 1)
   (backward-char))
 (define-key jc/right-map (kbd "M-c M-f") 'org-last-heading-same-level-jc)
-
 (global-set-key (kbd "C-c a") 'org-agenda)
+(define-key org-mode-map (kbd "C-c C-0") 'org-mark-ring-goto)
 (define-key jc/left-map (kbd "M-b") 'org-switchb)
 
 (setq org-archive-location "~/org/archive/archive.org::* From %s"
