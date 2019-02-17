@@ -3,6 +3,7 @@
 ;;;   echo '(load-file (expand-file-name "~/privprjs/dotfiles/site-start.el"))' >> ~/.emacs.d/init.el
 
 ;; Required packages
+(package-initialize)
 (add-to-list 'package-archives (cons "melpa" "http://melpa.org/packages/"))
 (defun jc/init/installs ()
   "Installs favorite packages"
