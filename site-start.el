@@ -72,7 +72,8 @@
 (defun jc/org-mode-hook ()
   "org-mode hooks. auto-fill has been useful."
   (auto-fill-mode)
-  (set-fill-column 120))
+  (set-fill-column 120)
+  (define-key org-mode-map (kbd "C-c C-0") 'org-mark-ring-goto))
 (add-hook 'org-mode-hook 'jc/org-mode-hook)
 
 (defun org-last-heading-same-level-jc ()
@@ -83,7 +84,6 @@
   (backward-char))
 (define-key jc/right-map (kbd "M-c M-f") 'org-last-heading-same-level-jc)
 (global-set-key (kbd "C-c a") 'org-agenda)
-(define-key org-mode-map (kbd "C-c C-0") 'org-mark-ring-goto)
 (define-key jc/left-map (kbd "M-b") 'org-switchb)
 
 (setq org-archive-location "~/org/archive/archive.org::* From %s"

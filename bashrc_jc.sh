@@ -88,14 +88,11 @@ fi
 if [[ ":$PATH:" != *":$HOME/bin:"* ]]; then
     export PATH="$PATH:$HOME/bin"
 fi
-jf ()
-{
-  /usr/bin/find . -iname "*${1}.*"
-}
 
-jfe ()
-{
-  /usr/bin/find . -name "*.${1}"
+sjc () {
+    if [ -f ~/.ssh/autokey ]; then
+	ssh-add ~/.ssh/autokey
+    fi
 }
 
 # map gcal to cal3
