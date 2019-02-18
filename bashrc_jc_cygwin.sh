@@ -38,7 +38,7 @@ PATH=`echo -n ${PATH} | awk -v RS=: -v ORS=: '/cygdrive\/c\/WINDOWS\/system32/ {
 alias find=/usr/bin/find
 export GIT_EDITOR="emacs-nox -Q"
 
-# ssh
+# === START: ssh ===
 SSH_TMP=~/.ssh-agent.tmp
 if [ -f $SSH_TMP ]; then
     SSH_PID=`cat ~/.ssh-agent.tmp | sed  -rn 's/.+pid ([0-9]+);/\1/p'`
@@ -54,6 +54,6 @@ if [ -z "$SSH_AGENT_PID" ]; then
     . $SSH_TMP
 fi
 alias ssh="ssh -q"
-# /ssh
+# === END: ssh ===
 
 echo "bashrc_jc_cygwin.sh"

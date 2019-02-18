@@ -14,7 +14,9 @@
     (package-install 'helm-rg))  ;; install 'ripgrep' to use this
   (unless (package-installed-p 'origami)
     (package-refresh-contents)
-    (package-install 'origami)))
+    (package-install 'origami))
+  (unless (package-installed-p 'flyspell-correct-helm)
+    (package-install 'flyspell-correct-helm)))
 (jc/init/installs)
 
 ;; library functions
