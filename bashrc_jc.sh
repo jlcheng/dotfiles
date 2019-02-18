@@ -110,7 +110,7 @@ then
     alias diff='colordiff -wu'
 fi
 
-[ -f "~/.git-completion.bash" ] && source ~/.git-completion.bash
+test -f ~/.git-completion.bash && source ~/.git-completion.bash
 
 sjc () {
     if [ -f ~/.ssh/autokey ]; then
