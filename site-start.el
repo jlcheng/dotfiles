@@ -200,7 +200,7 @@
 ;;; -- start in *scratch* buffer
 (setq inhibit-startup-screen t)
 
-;;; -- spellcheck
+;;; === START: spellcheck ===
 (require 'flyspell-correct-helm)
 (when (executable-find "aspell")
   (setq ispell-program-name "aspell")
@@ -213,6 +213,7 @@
     (ispell-word)))
 (define-key jc/c-1-map (kbd "C-2") 'flyspell-mode)
 (define-key jc/c-1-map (kbd "C-4") 'jc/correct-at-word)
+;;; === END: spellcheck ===
 ;; https://www.emacswiki.org/emacs/RecentFiles#toc9 - prevents blocking of emacs startup
 (require 'recentf)
 (setq recentf-auto-cleanup 'never)
