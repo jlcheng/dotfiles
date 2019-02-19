@@ -35,7 +35,7 @@
 (define-key global-map (kbd "M-c") jc/left-map)
 (defvar jc/backtick-map (make-keymap) "Keys bound to M-`. Shortcuts for moving/copy/pasting.")
 (define-key globa?l-map (kbd "M-`") jc/backtick-map)
-(defvar jc/one-map (make-keymap) "Keys bound to C-1. Shortcuts for misc.")
+(defvar jc/c-1-map (make-keymap) "Keys bound to C-1. Shortcuts for misc.")
 (defun jc/show-keymaps ()
   "Shows my personalized keymaps"
   (interactive)
