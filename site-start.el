@@ -207,6 +207,7 @@
   (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US")))
 (defun jc/correct-at-word ()
   "If flyspell-mode, prefer it, otherwise use ispell-word"
+  (interactive)
   (if flyspell-mode
       (flyspell-correct-at-point)
     (ispell-word)))
