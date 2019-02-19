@@ -206,7 +206,7 @@
 (when (executable-find "aspell")
   (setq ispell-program-name "aspell")
   (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US")))
-
+(define-key jc/c-1-map (kbd "C-4") 'flyspell-correct-at-point)
 ;; https://www.emacswiki.org/emacs/RecentFiles#toc9 - prevents blocking of emacs startup
 (require 'recentf)
 (setq recentf-auto-cleanup 'never)
