@@ -24,8 +24,8 @@
   "Returns contents of file as list of strings"
   (if (file-exists-p file)
       (with-temp-buffer
-	(insert-file-contents file)
-	(split-string (buffer-string) "\n" t))
+        (insert-file-contents file)
+        (split-string (buffer-string) "\n" t))
     ))
 
 ;; Keymaps
@@ -40,9 +40,9 @@
   (interactive)
   (with-output-to-temp-buffer "*jc/keymaps help*"
     (seq-map (lambda (elt)
-	       (princ (format "=== %s ===\n" elt))
-	       (princ (substitute-command-keys (format "\\{%s}" elt))))
-	     '(jc/right-map jc/left-map jc/c-1-map))))
+               (princ (format "=== %s ===\n" elt))
+               (princ (substitute-command-keys (format "\\{%s}" elt))))
+             '(jc/right-map jc/left-map jc/c-1-map))))
 (define-key jc/right-map (kbd "M-n M-k") 'jc/show-keymaps)
 
 (defun misc-macOS-jc ()
@@ -102,8 +102,8 @@
     (if (file-exists-p file)
       (let ((flist (jc/file-readlines file)))          ; read org-jc.txt
         (setq flist (seq-filter 'file-exists-p flist)) ; check for valid files
-	(setq flist (append org-agenda-files flist))   ; merge org-jc.txt with defaults
-	(setq org-agenda-files (cl-remove-duplicates flist :test #'equal))))))
+        (setq flist (append org-agenda-files flist))   ; merge org-jc.txt with defaults
+        (setq org-agenda-files (cl-remove-duplicates flist :test #'equal))))))
 (jc/refresh-org-agenda-files)
 ;; === STOP: org-mode ===
 
@@ -151,14 +151,14 @@
  delete-old-versions t
  kept-new-versions 5
  kept-old-versions 3
- version-control t)
-(setq create-lockfiles nil) ;; do not create '.#lock' files
+ version-control t
+ create-lockfiles nil)
 
 ;;; misc
 (setq column-number-mode t)
 (setq imenu-auto-rescan t)
-(customize-set-variable 'confirm-kill-emacs 'y-or-n-p)
-(customize-set-variable 'register-preview-delay 0)
+(setq confirm-kill-emacs 'y-or-n-p)
+(setq register-preview-delay 0)
 (define-key jc/right-map (kbd "M-i") 'helm-semantic-or-imenu)
 (define-key jc/left-map (kbd "M-t") 'origami-toggle-all-nodes)  ;; [t]oggle
 (define-key jc/c-1-map (kbd "C-r") 'point-to-register) ;; [r]emember
