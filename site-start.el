@@ -33,8 +33,6 @@
 (define-key global-map (kbd "M-n") jc/right-map)
 (defvar jc/left-map (make-keymap) "Keys whose suffix are intended for the left hand.")
 (define-key global-map (kbd "M-c") jc/left-map)
-(defvar jc/backtick-map (make-keymap) "Keys bound to M-`. Shortcuts for moving/copy/pasting.")
-(define-key global-map (kbd "M-`") jc/backtick-map)
 (defvar jc/c-1-map (make-keymap) "Keys bound to C-1. Shortcuts for misc.")
 (define-key global-map (kbd "C-1") jc/c-1-map)
 (defun jc/show-keymaps ()
@@ -44,7 +42,7 @@
     (seq-map (lambda (elt)
 	       (princ (format "=== %s ===\n" elt))
 	       (princ (substitute-command-keys (format "\\{%s}" elt))))
-	     '(jc/right-map jc/left-map jc/backtick-map))))
+	     '(jc/right-map jc/left-map jc/c-1-map))))
 (define-key jc/right-map (kbd "M-n M-k") 'jc/show-keymaps)
 
 (defun misc-macOS-jc ()
@@ -159,12 +157,12 @@
 ;;; misc
 (setq column-number-mode t)
 (setq imenu-auto-rescan t)
+(customize-set-variable 'confirm-kill-emacs 'y-or-n-p)
+(customize-set-variable 'register-preview-delay 0)
 (define-key jc/right-map (kbd "M-i") 'helm-semantic-or-imenu)
 (define-key jc/left-map (kbd "M-t") 'origami-toggle-all-nodes)  ;; [t]oggle
-(define-key jc/backtick-map (kbd "M-r") 'point-to-register) ;; [r]emember
-(define-key jc/backtick-map (kbd "M-g") 'jump-to-register)  ;; [g]oto
-(define-key jc/backtick-map (kbd "M-w") 'copy-to-register) ;; save to register 
-(define-key jc/backtick-map (kbd "M-y") 'insert-register)  ;; yank from register
+(define-key jc/c-1-map (kbd "C-r") 'point-to-register) ;; [r]emember
+(define-key jc/c-1-map (kbd "C-g") 'jump-to-register)  ;; [g]oto
 (add-hook 'markdown-mode-hook '(lambda () (define-key markdown-mode-map (kbd "M-n") nil)))
 
 (defun jsnice-jc (p1 p2)
