@@ -217,4 +217,11 @@
 (setq recentf-auto-cleanup 'never)
 (recentf-mode 1)
 
-;; 2019-02-22 experiment with emacs key to rsync 
+;; 2019-02-22 experiment with emacs key to rsync automagically
+(defun jc/sync-zrdev ()
+  "Runs rsync to zrdev, when on zr laptop"
+  (interactive)
+  (if (file-readable-p "~/ziprecruiter/")
+      (async-shell-command "rsync -v -z --progress --exclude '.git' --exclude '.pyc' --archive  --stats --safe-links ~/ziprecruiter/ dev:~/ziprecruiter"))
+  )
+(define-key jc/left-map (kbd "M-d M-d") `jc/sync-zrdev)
