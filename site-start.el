@@ -217,3 +217,4 @@
 (setq recentf-auto-cleanup 'never)
 (recentf-mode 1)
 
+;; 2019-02-22 experiment with emacs key to rsync 
