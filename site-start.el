@@ -222,6 +222,6 @@
   "Runs rsync to zrdev, when on zr laptop"
   (interactive)
   (if (file-readable-p "~/ziprecruiter/")
-      (async-shell-command "rsync -v -z --progress --exclude '.git' --exclude '.pyc' --archive  --stats --safe-links ~/ziprecruiter/ dev:~/ziprecruiter"))
+      (async-shell-command "rsync -v -z --progress --exclude '.git' --exclude '*.pyc' --archive  --stats --safe-links ~/ziprecruiter/ dev:~/ziprecruiter"))
   )
 (define-key jc/left-map (kbd "M-d M-d") `jc/sync-zrdev)
