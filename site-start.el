@@ -186,10 +186,10 @@
                    (abbreviate-file-name (buffer-file-name))
                  "%b"))))
 
-(defun jc/kill-new-file-name (b)
+(defun jc/kill-new-file-name ()
   "Append the path of an open file into the kill ring"
-  (interactive "b")
-  (let ((bfn (buffer-file-name (get-buffer b))))
+  (interactive)
+  (let ((bfn (buffer-file-name)))
     (when bfn
       (kill-new bfn)
       (message bfn))))
