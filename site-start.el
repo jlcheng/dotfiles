@@ -105,6 +105,8 @@
         (setq flist (append org-agenda-files flist))   ; merge org-jc.txt with defaults
         (setq org-agenda-files (cl-remove-duplicates flist :test #'equal))))))
 (jc/refresh-org-agenda-files)
+
+(setq org-use-speed-commands t) ;; 2019-02-26 Trying this (use 'n' and 'p' to navigate up and down)
 ;; === STOP: org-mode ===
 
 ;; === START: origami-mode ===
