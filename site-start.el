@@ -84,7 +84,7 @@
   (org-forward-heading-same-level 1000)
   (org-next-visible-heading 1)
   (backward-char))
-(define-key jc/right-map (kbd "M-c M-f") 'org-last-heading-same-level-jc)
+(define-key jc/left-map (kbd "M-c M-f") 'org-last-heading-same-level-jc)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (define-key jc/left-map (kbd "M-b") 'org-switchb)
 
