@@ -120,6 +120,20 @@
 	  (unless (seq-contains flist newfile)
 	    (write-region newfile nil org-agendas-file 'append))
 	  ))))
+(defun jc/org-append-agenda-file-this ()
+  "append this buffer to ~/.org-jc.txt"
+  (interactive)
+  (let ((bfn (buffer-file-name)))
+    (if (file-exists-p buffer-file-name)
+	(progn 
+	  (jc/org-append-agenda-file bfn)
+	  (jc/org-refresh-agenda-files)
+	  (find-file "~/.org-jc.txt"))
+      )
+    )
+  )
+
+  
 
 (setq org-use-speed-commands t) ;; 2019-02-26 Trying this (use 'n' and 'p' to navigate up and down)
 ;; === STOP: org-mode ===
