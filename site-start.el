@@ -95,12 +95,12 @@
 (define-key jc/left-map (kbd "M-b") 'org-switchb)
 
 (setq org-archive-location "~/org/archive/archive.org::* From %s"
-      org-startup-folded t    ;; https://orgmode.org/manual/Initial-visibility.html#Initial-visibility
-      org-startup-indented t  ;; https://orgmode.org/manual/Clean-view.html
+      org-startup-folded 'content ;; https://orgmode.org/manual/Initial-visibility.html#Initial-visibility
+      org-startup-indented t      ;; https://orgmode.org/manual/Clean-view.html
       ) ; unclutter directories with org files
 
 ;; List of files to add to org-agenda-files
-(defun jc/refresh-org-agenda-files ()
+(defun jc/org-refresh-agenda-files ()
   "populate org-agenda-files from ~/.org-jc.txt"
   (interactive)
   (setq org-agenda-files '("~/org/home.org"))
@@ -110,8 +110,8 @@
         (setq flist (seq-filter 'file-exists-p flist)) ; check for valid files
         (setq flist (append org-agenda-files flist))   ; merge org-jc.txt with defaults
         (setq org-agenda-files (cl-remove-duplicates flist :test #'equal))))))
-(jc/refresh-org-agenda-files)
-(defun jc/append-org-agenda-file (newfile)
+(jc/org-refresh-agenda-files)
+(defun jc/org-append-agenda-file (newfile)
   "append a file, if non-present, to ~/.org-jc.txt"
   (interactive)
   (let ((org-agendas-file "~/.org-jc.txt"))
