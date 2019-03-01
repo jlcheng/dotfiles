@@ -105,6 +105,15 @@
         (setq flist (append org-agenda-files flist))   ; merge org-jc.txt with defaults
         (setq org-agenda-files (cl-remove-duplicates flist :test #'equal))))))
 (jc/refresh-org-agenda-files)
+(defun jc/append-org-agenda-file (newfile)
+  "append a file, if non-present, to ~/.org-jc.txt"
+  (interactive)
+  (let ((file "~/.org-jc.txt"))
+    (if (file-exists-p file)
+	(let ((flist (jc/file-readlines file)))          ; read org-jc.txt
+	  (message "%s %s" flist newfile)
+          (message "%s" (cl-find flist newfile)   ; merge org-jc.txt with defaults
+          )))))
 
 (setq org-use-speed-commands t) ;; 2019-02-26 Trying this (use 'n' and 'p' to navigate up and down)
 ;; === STOP: org-mode ===
