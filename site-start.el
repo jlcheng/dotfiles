@@ -111,9 +111,9 @@
   (let ((file "~/.org-jc.txt"))
     (if (file-exists-p file)
 	(let ((flist (jc/file-readlines file)))          ; read org-jc.txt
-	  (message "%s %s" flist newfile)
-          (message "%s" (cl-find flist newfile)   ; merge org-jc.txt with defaults
-          )))))
+	  (unless (seq-contains flist newfile)
+	    (write-region newfile nil file 'append))
+	    ))))
 
 (setq org-use-speed-commands t) ;; 2019-02-26 Trying this (use 'n' and 'p' to navigate up and down)
 ;; === STOP: org-mode ===
