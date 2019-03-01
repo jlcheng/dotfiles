@@ -38,11 +38,17 @@
 (defun jc/show-keymaps ()
   "Shows my personalized keymaps"
   (interactive)
-  (with-output-to-temp-buffer "*jc/keymaps help*"
-    (seq-map (lambda (elt)
-               (princ (format "=== %s ===\n" elt))
-               (princ (substitute-command-keys (format "\\{%s}" elt))))
-             '(jc/right-map jc/left-map jc/c-1-map))))
+  (let ((jc/keymaps [jc/right-map jc/left-map jc/c-1-map]))
+    (with-output-to-temp-buffer "*jc/keymaps help*"
+      (seq-map (lambda (elt)
+	       (let ((p))
+		 (princ (format "=== %s ===\n" elt))
+		 (setq p (substitute-command-keys (format "\\{%s}" elt)))
+		 (setq p (replace-regexp-in-string "^.+Prefix Command$" "" p))
+		 (setq p (replace-regexp-in-string "\n*\n" "\n" p))
+		 (princ p)
+		 ))
+             jc/keymaps))))
 (define-key jc/right-map (kbd "M-n M-k") 'jc/show-keymaps)
 
 (defun misc-macOS-jc ()
