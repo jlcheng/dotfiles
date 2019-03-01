@@ -108,12 +108,12 @@
 (defun jc/append-org-agenda-file (newfile)
   "append a file, if non-present, to ~/.org-jc.txt"
   (interactive)
-  (let ((file "~/.org-jc.txt"))
-    (if (file-exists-p file)
-	(let ((flist (jc/file-readlines file)))          ; read org-jc.txt
+  (let ((org-agendas-file "~/.org-jc.txt"))
+    (if (file-exists-p org-agendas-file)
+	(let ((flist (jc/file-readlines org-agendas-file)))          ; read org-jc.txt
 	  (unless (seq-contains flist newfile)
-	    (write-region newfile nil file 'append))
-	    ))))
+	    (write-region newfile nil org-agendas-file 'append))
+	  ))))
 
 (setq org-use-speed-commands t) ;; 2019-02-26 Trying this (use 'n' and 'p' to navigate up and down)
 ;; === STOP: org-mode ===
