@@ -125,7 +125,7 @@ sjc () {
 
 gobox () {
     # starts Go-ready environment in Vagrant
-    cd ~/privprjs/vagrant-go
+    cd ~/privprjs/playground/vagrant-go
     vagrant up
     vagrant ssh
 }
