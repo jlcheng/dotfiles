@@ -22,7 +22,7 @@ if [ "$USER" != "vagrant" ]; then
   alias emacs-start="/usr/bin/emacs &> /dev/null &"
 fi
 
-# git
+# === START: git ===
 export GIT_EDITOR="emacsclient"
 gitdiffjc ()
 {
@@ -76,7 +76,7 @@ gitopenjc ()
     fi
 }
 # git config --global pretty.sum "format:%C(auto)%m %h %<(14)%cr %<(20,trunc)%ae %d %s "
-# /git
+# === END: git ===
 
 export EDITOR=vi
 if [[ ":$PATH:" != *":/sbin:"* ]]; then
@@ -121,6 +121,13 @@ sjc () {
             ssh-add ~/.ssh/autokey
         fi
     fi 
+}
+
+gobox () {
+    # starts Go-ready environment in Vagrant
+    cd ~/privprjs/vagrant-go
+    vagrant up
+    vagrant ssh
 }
 
 echo "bashrc_jc.sh"
