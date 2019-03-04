@@ -94,7 +94,7 @@
 (global-set-key (kbd "C-c a") 'org-agenda)
 (define-key jc/left-map (kbd "M-b") 'org-switchb)
 
-(setq org-archive-location "~/org/archive/archive.org::* From %s"
+(setq org-archive-location "~/org/archive/%s_archive.org::datetree/* Finished Tasks"
       org-startup-folded 'content ;; https://orgmode.org/manual/Initial-visibility.html#Initial-visibility
       org-startup-indented t      ;; https://orgmode.org/manual/Clean-view.html
       ) ; unclutter directories with org files
