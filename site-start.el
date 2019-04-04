@@ -210,6 +210,7 @@
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin")) ;; Needed for M-x shell-command
 (add-to-list 'exec-path "/usr/local/bin")                  ;; Needed for (executable-find ...)
 (if (functionp 'global-company-mode) (global-company-mode))
+(if (functionp 'which-key-mode) (which-key-mode))
 
 ;; 2018-10-29: Sets full file path in title
 (setq frame-title-format
