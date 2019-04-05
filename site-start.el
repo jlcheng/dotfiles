@@ -254,13 +254,13 @@
   "Runs rsync to zrdev, when on zr laptop"
   (interactive)
   (if (file-readable-p "~/ziprecruiter/")
-      (async-shell-command "rsync -v -z --progress --exclude '.git' --exclude '*.pyc' --archive  --stats --safe-links ~/ziprecruiter/ dev:~/ziprecruiter"))
+      (async-shell-command "rsync -v -z --progress --exclude '.git' --exclude '*.pyc' --exclude '.terraform' --archive  --stats --safe-links ~/ziprecruiter/ dev:~/ziprecruiter"))
   )
 (defun jc/sync-zrjump ()
   "Runs rsync to zrdev, when on zr laptop"
   (interactive)
   (if (file-readable-p "~/ziprecruiter/")
-      (async-shell-command "rsync -v -z --progress --exclude '.git' --exclude '*.pyc' --archive  --stats --safe-links ~/ziprecruiter/ jump:~/ziprecruiter"))
+      (async-shell-command "rsync -v -z --progress --exclude '.git' --exclude '*.pyc' --exclude '.terraform' --archive  --stats --safe-links ~/ziprecruiter/ jump:~/ziprecruiter"))
   )
 (defun jc/sync-sb2 ()
   "Runs rsync to zrdev, when on zr laptop"
