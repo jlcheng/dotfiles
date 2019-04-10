@@ -79,7 +79,6 @@
 ;; === START: org-mode ===
 (defun jc/org-mode-hook ()
   "org-mode hooks. auto-fill has been useful."
-  (auto-fill-mode)
   (set-fill-column 120)
   (define-key org-mode-map (kbd "C-c C-0") 'org-mark-ring-goto))
 (add-hook 'org-mode-hook 'jc/org-mode-hook)
@@ -271,3 +270,11 @@
 (define-key jc/left-map (kbd "M-d M-d") `jc/sync-zrdev)
 (define-key jc/left-map (kbd "M-d M-j") `jc/sync-zrjump)
 
+(defun jc/hotkey1 ()
+  "Hotkey 1"
+  (interactive)
+  (delete-other-windows)
+  (split-window-horizontally)
+  (bookmark-jump "work/todo")
+  (bookmark-jump-other-window "people.org"))
+(define-key jc/right-map (kbd "M-1") `jc/hotkey1)
