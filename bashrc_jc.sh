@@ -75,7 +75,7 @@ gitopenjc ()
         echo "$o" | awk '{print NR":", $0}'
     fi
 }
-# git config --global pretty.sum "format:%C(auto)%m %h %<(14)%cr %<(20,trunc)%ae %d %s "
+# git config --global format.pretty "format:%C(auto)%m %H %<(14)%cr %<(20,trunc)%ae %d %s "
 # === END: git ===
 
 export EDITOR=vi

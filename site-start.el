@@ -15,6 +15,9 @@
   (unless (package-installed-p 'origami)
     (package-refresh-contents)
     (package-install 'origami))
+  (unless (package-installed-p 'json-navigator) ;; 2019-04-16: try json-navigator - tab, shift-tab, enter
+    (package-refresh-contents)
+    (package-install 'json-navigator))
   (unless (package-installed-p 'flyspell-correct-helm)
     (package-install 'flyspell-correct-helm)))
 (jc/init/installs)
@@ -89,7 +92,7 @@
   (org-forward-heading-same-level 1000)
   (org-next-visible-heading 1)
   (backward-char))
-(define-key jc/left-map (kbd "M-c M-f") 'org-last-heading-same-level-jc)
+(define-key jc/left-map (kbd "M-f") 'org-last-heading-same-level-jc)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (define-key jc/left-map (kbd "M-b") 'org-switchb)
 
@@ -198,13 +201,16 @@
 (defun jsnice-jc (p1 p2)
   "Runs jsnice against the region"
   (interactive "r")
-  (let ((jsnice-path (expand-file-name "~/bin/jsnice")))
-    (cond ((eq system-type 'cygwin)
-           (setq jsnice-path "C:\\cygwin64\\home\\johnl\\bin\\jsnice.exe")))
-    (if (executable-find jsnice-path)
-        (shell-command-on-region
-         p1 p2 jsnice-path nil t "*Minibuf-0*" t)
-      (message (format "%s not installed" jsnice-path)))))
+  (if (functionp 'json-pretty-print)
+      (json-pretty-print p1 p2)
+    (let ((jsnice-path (expand-file-name "~/bin/jsnice")))
+      (cond ((eq system-type 'cygwin)
+             (setq jsnice-path "C:\\cygwin64\\home\\johnl\\bin\\jsnice.exe")))
+      (if (executable-find jsnice-path)
+          (shell-command-on-region
+           p1 p2 jsnice-path nil t "*Minibuf-0*" t)
+	(message (format "%s not installed" jsnice-path))))))
+
 
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin")) ;; Needed for M-x shell-command
 (add-to-list 'exec-path "/usr/local/bin")                  ;; Needed for (executable-find ...)
@@ -249,26 +255,24 @@
 (recentf-mode 1)
 
 ;; 2019-02-22 experiment with emacs key to rsync automagically
-(defun jc/sync-zrdev ()
+(defun jc/sync/zr/dev ()
   "Runs rsync to zrdev, when on zr laptop"
   (interactive)
   (if (file-readable-p "~/ziprecruiter/")
-      (async-shell-command "rsync -v -z --progress --exclude '.git' --exclude '*.pyc' --exclude '.terraform' --archive  --stats --safe-links ~/ziprecruiter/ dev:~/ziprecruiter"))
+      (async-shell-command "rsync -v -z --progress --exclude '.git' --exclude '*.pyc' --exclude '.terraform' --exclude '.idea' --archive  --stats --safe-links ~/ziprecruiter/ dev:~/ziprecruiter"))
   )
-(defun jc/sync-zrjump ()
+(defun jc/sync/zr/jump ()
   "Runs rsync to zrdev, when on zr laptop"
   (interactive)
   (if (file-readable-p "~/ziprecruiter/")
-      (async-shell-command "rsync -v -z --progress --exclude '.git' --exclude '*.pyc' --exclude '.terraform' --archive  --stats --safe-links ~/ziprecruiter/ jump:~/ziprecruiter"))
+      (async-shell-command "rsync -v -z --progress --exclude '.git' --exclude '*.pyc' --exclude '.terraform' --exclude '.idea' --archive  --stats --safe-links ~/ziprecruiter/ jump:~/ziprecruiter"))
   )
-(defun jc/sync-sb2 ()
+(defun jc/sync/zr/sb2 ()
   "Runs rsync to zrdev, when on zr laptop"
   (interactive)
   (if (file-readable-p "~/ziprecruiter/")
-      (async-shell-command "rsync -v -z --progress --exclude '.git' --exclude '*.pyc' --archive  --stats --safe-links ~/ziprecruiter/ sandbox2:~/ziprecruiter"))
+      (async-shell-command "rsync -v -z --progress --exclude '.git' --exclude '*.pyc' --exclude '.terraform' --exclude '.idea' --archive  --stats --safe-links ~/ziprecruiter/ sandbox2:~/ziprecruiter"))
   )
-(define-key jc/left-map (kbd "M-d M-d") `jc/sync-zrdev)
-(define-key jc/left-map (kbd "M-d M-j") `jc/sync-zrjump)
 
 (defun jc/hotkey1 ()
   "Hotkey 1"
