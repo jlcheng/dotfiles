@@ -273,6 +273,12 @@
   (if (file-readable-p "~/ziprecruiter/")
       (async-shell-command "rsync -v -z --progress --exclude '.git' --exclude '*.pyc' --exclude '.terraform' --exclude '.idea' --archive  --stats --safe-links ~/ziprecruiter/ sandbox2:~/ziprecruiter"))
   )
+(defun jc/sync/zr/ops ()
+  "Runs rsync to ops, when on zr laptop"
+  (interactive)
+  (if (file-readable-p "~/ziprecruiter/")
+      (async-shell-command "rsync -v -z --progress --exclude '.git' --exclude '*.pyc' --exclude '.terraform' --exclude '.idea' --archive  --stats --safe-links ~/ziprecruiter/ ops:~/ziprecruiter"))
+  )
 
 (defun jc/hotkey1 ()
   "Hotkey 1"
