@@ -280,6 +280,19 @@
       (async-shell-command "rsync -v -z --progress --exclude '.git' --exclude '*.pyc' --exclude '.terraform' --exclude '.idea' --archive  --stats --safe-links ~/ziprecruiter/ ops:~/ziprecruiter"))
   )
 
+(defun jc/screenup()
+  "move the page up by 1 line"
+  (interactive)
+  (forward-line -1)
+  (recenter))
+(defun jc/screendown()
+  "move the page down by 1 line"
+  (interactive)
+  (forward-line 1)
+  (recenter))
+(global-set-key (kbd "M-[") 'jc/screenup)
+(global-set-key (kbd "M-]") 'jc/screendown)
+  
 (defun jc/hotkey1 ()
   "Hotkey 1"
   (interactive)
