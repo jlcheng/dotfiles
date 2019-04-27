@@ -283,12 +283,12 @@
 (defun jc/screenup()
   "move the page up by 1 line"
   (interactive)
-  (forward-line -1)
+  (previous-line 5)
   (recenter))
 (defun jc/screendown()
   "move the page down by 1 line"
   (interactive)
-  (forward-line 1)
+  (next-line 5)
   (recenter))
 (global-set-key (kbd "M-[") 'jc/screenup)
 (global-set-key (kbd "M-]") 'jc/screendown)
