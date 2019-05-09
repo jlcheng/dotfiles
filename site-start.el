@@ -255,29 +255,30 @@
 (recentf-mode 1)
 
 ;; 2019-02-22 experiment with emacs key to rsync automagically
+(defvar jc/sync/zr/cmdbase "rsync -v -z --delete --progress --exclude '__pycache__' --exclude '.git' --exclude '*.pyc' --exclude '.terraform' --exclude '.idea' --archive  --stats --safe-links ~/ziprecruiter/")
 (defun jc/sync/zr/dev ()
   "Runs rsync to zrdev, when on zr laptop"
   (interactive)
   (if (file-readable-p "~/ziprecruiter/")
-      (async-shell-command "rsync -v -z --progress --exclude '.git' --exclude '*.pyc' --exclude '.terraform' --exclude '.idea' --archive  --stats --safe-links ~/ziprecruiter/ dev:~/ziprecruiter"))
+      (async-shell-command (format "%s %s" jc/sync/zr/cmdbase "dev:~/ziprecruiter")))
   )
 (defun jc/sync/zr/jump ()
   "Runs rsync to zrdev, when on zr laptop"
   (interactive)
   (if (file-readable-p "~/ziprecruiter/")
-      (async-shell-command "rsync -v -z --progress --exclude '.git' --exclude '*.pyc' --exclude '.terraform' --exclude '.idea' --archive  --stats --safe-links ~/ziprecruiter/ jump:~/ziprecruiter"))
+      (async-shell-command (format "%s %s" jc/sync/zr/cmdbase "jump:~/ziprecruiter")))
   )
 (defun jc/sync/zr/sb2 ()
   "Runs rsync to zrdev, when on zr laptop"
   (interactive)
   (if (file-readable-p "~/ziprecruiter/")
-      (async-shell-command "rsync -v -z --progress --exclude '.git' --exclude '*.pyc' --exclude '.terraform' --exclude '.idea' --archive  --stats --safe-links ~/ziprecruiter/ sandbox2:~/ziprecruiter"))
+      (async-shell-command (format "%s %s" jc/sync/zr/cmdbase "sandbox2:~/ziprecruiter")))
   )
 (defun jc/sync/zr/ops ()
   "Runs rsync to ops, when on zr laptop"
   (interactive)
   (if (file-readable-p "~/ziprecruiter/")
-      (async-shell-command "rsync -v -z --progress --exclude '.git' --exclude '*.pyc' --exclude '.terraform' --exclude '.idea' --archive  --stats --safe-links ~/ziprecruiter/ ops:~/ziprecruiter"))
+      (async-shell-command (format "%s %s" jc/sync/zr/cmdbase "ops:~/ziprecruiter")))
   )
 
 (defun jc/screenup()
