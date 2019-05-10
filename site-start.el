@@ -255,7 +255,7 @@
 (recentf-mode 1)
 
 ;; 2019-02-22 experiment with emacs key to rsync automagically
-(defvar jc/sync/zr/cmdbase "rsync -v -z --delete --progress --exclude '__pycache__' --exclude '.git' --exclude '*.pyc' --exclude '.terraform' --exclude '.idea' --archive  --stats --safe-links ~/ziprecruiter/")
+(defvar jc/sync/zr/cmdbase "rsync -v -z --delete --progress --exclude '__pycache__' --exclude '.git' --exclude '*.pyc' --exclude '.terraform' --exclude '.idea' --exclude '*.so' --archive  --stats --safe-links ~/ziprecruiter/")
 (defun jc/sync/zr/dev ()
   "Runs rsync to zrdev, when on zr laptop"
   (interactive)
