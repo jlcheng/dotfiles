@@ -301,3 +301,11 @@
   (bookmark-jump "work/todo")
   (bookmark-jump-other-window "people.org"))
 (define-key jc/right-map (kbd "M-1") `jc/hotkey1)
+
+(progn
+  (setq test1 '(1 3 5))
+  (setq test2 '(7 9))
+  (message "1: %s" test1)
+  (setq test3 (-concat test1 test2))
+  (message "2: %s" test3)
+  )
