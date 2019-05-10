@@ -309,3 +309,6 @@
   (setq test3 (-concat test1 test2))
   (message "2: %s" test3)
   )
+
+
+(setq flycheck-checkers (-concat flycheck-checkers '(perl-pa perl-sv perl-common)))
