@@ -303,6 +303,5 @@
 (define-key jc/right-map (kbd "M-1") `jc/hotkey1)
 
 ;; golint
-(add-to-list 'load-path (concat (getenv "GOPATH")  "/src/github.com/golang/lint/misc/emacs"))
-(require 'golint)
+(load-file "~/.emacs.d/golint.el")
 
