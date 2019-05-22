@@ -280,8 +280,8 @@
   (interactive)
   (next-line 5)
   (recenter))
-(global-set-key (kbd "M-[") 'jc/screenup)
-(global-set-key (kbd "M-]") 'jc/screendown)
+; (global-set-key (kbd "M-[") 'jc/screenup)    ;; removed because they break copy-pasting for emacs running in a terminal
+; (global-set-key (kbd "M-]") 'jc/screendown)  ;; removed because they break copy-pasting for emacs running in a terminal
   
 (defun jc/hotkey1 ()
   "Hotkey 1"
