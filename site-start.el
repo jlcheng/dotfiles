@@ -18,7 +18,7 @@
   (unless (package-installed-p 'json-navigator) ;; 2019-04-16: try json-navigator - tab, shift-tab, enter
     (package-refresh-contents)
     (package-install 'json-navigator))
-  (unless (package-installed-p 'projectile) ;; 201-05-18 try projectile
+  (unless (package-installed-p 'projectile) ;; 2019-05-18 try projectile; 2019-05-22 (liking it)
     (package-refresh-contents)
     (package-install 'projectile)
     (package-install 'helm-projectile))
@@ -291,7 +291,4 @@
   (bookmark-jump "work/todo")
   (bookmark-jump-other-window "people.org"))
 (define-key jc/right-map (kbd "M-1") `jc/hotkey1)
-
-;; golint
-(load-file "~/.emacs.d/golint.el")
 
