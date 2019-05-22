@@ -110,6 +110,8 @@ then
     alias diff='colordiff -wu'
 fi
 
+alias less='less -r'
+
 test -f ~/.git-completion.bash && source ~/.git-completion.bash
 
 sjc () {

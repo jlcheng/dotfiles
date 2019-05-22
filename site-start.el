@@ -18,6 +18,10 @@
   (unless (package-installed-p 'json-navigator) ;; 2019-04-16: try json-navigator - tab, shift-tab, enter
     (package-refresh-contents)
     (package-install 'json-navigator))
+  (unless (package-installed-p 'projectile) ;; 201-05-18 try projectile
+    (package-refresh-contents)
+    (package-install 'projectile)
+    (package-install 'helm-projectile))
   (unless (package-installed-p 'flyspell-correct-helm)
     (package-install 'flyspell-correct-helm)))
 (jc/init/installs)
@@ -170,8 +174,9 @@
 (let ((modes '(helm-mode ivy-mode)))
   (funcall (cl-first (seq-filter 'functionp modes))))
 (when (functionp 'helm-mode)
-  (global-set-key (kbd "C-x C-b") 'helm-mini)
-  (global-set-key (kbd "C-x C-f") 'helm-find-files))
+  (define-key global-map (kbd "C-x C-f") 'helm-find-files)
+  (define-key global-map (kbd "C-x C-b") 'helm-mini)
+  (define-key global-map (kbd "M-x") 'helm-M-x))
 
 ;;; https://shreevatsa.wordpress.com/2007/01/06/using-emacsclient/
 (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function)
@@ -193,7 +198,7 @@
 (setq confirm-kill-emacs 'y-or-n-p)
 (setq register-preview-delay 0)
 (define-key jc/right-map (kbd "M-i") 'helm-semantic-or-imenu)
-(define-key jc/left-map (kbd "M-t") 'origami-toggle-all-nodes)  ;; [t]oggle
+(define-key jc/left-map (kbd "t") 'origami-toggle-all-nodes)  ;; [t]oggle
 (define-key jc/c-1-map (kbd "C-r") 'point-to-register) ;; [r]emember
 (define-key jc/c-1-map (kbd "C-g") 'jump-to-register)  ;; [g]oto
 (add-hook 'markdown-mode-hook '(lambda () (define-key markdown-mode-map (kbd "M-n") nil)))
@@ -249,37 +254,22 @@
 (define-key jc/c-1-map (kbd "C-2") 'flyspell-mode)
 (define-key jc/c-1-map (kbd "C-4") 'jc/correct-at-word)
 ;;; === END: spellcheck ===
+
+;;; === START: recentf ===
 ;; https://www.emacswiki.org/emacs/RecentFiles#toc9 - prevents blocking of emacs startup
 (require 'recentf)
 (setq recentf-auto-cleanup 'never)
-(recentf-mode 1)
+(recentf-mode)
+;;; === END: recentf ===
 
-(defvar jc/sync/zr/cmdbase "rsync -v -z --progress --exclude '__pycache__' --exclude '.git' --exclude '*.pyc' --exclude '.terraform' --exclude '.idea' --exclude '*.so' --archive  --stats --safe-links ~/ziprecruiter/")
-(defun jc/sync/zr/dev ()
-  "Runs rsync to zrdev, when on zr laptop"
-  (interactive)
-  (if (file-readable-p "~/ziprecruiter/")
-      (async-shell-command (format "%s %s" jc/sync/zr/cmdbase "dev:~/ziprecruiter")))
-  )
-(defun jc/sync/zr/jump ()
-  "Runs rsync to zrdev, when on zr laptop"
-  (interactive)
-  (if (file-readable-p "~/ziprecruiter/")
-      (async-shell-command (format "%s %s" jc/sync/zr/cmdbase "jump:~/ziprecruiter")))
-  )
-(defun jc/sync/zr/sb2 ()
-  "Runs rsync to zrdev, when on zr laptop"
-  (interactive)
-  (if (file-readable-p "~/ziprecruiter/")
-      (async-shell-command (format "%s %s" jc/sync/zr/cmdbase "sandbox2:~/ziprecruiter")))
-  )
-(defun jc/sync/zr/ops ()
-  "Runs rsync to ops, when on zr laptop"
-  (interactive)
-  (if (file-readable-p "~/ziprecruiter/")
-      (async-shell-command (format "%s %s" jc/sync/zr/cmdbase "ops:~/ziprecruiter")))
-  )
+(define-key global-map (kbd "C-S-f") 'helm-projectile-rg)
 
+
+(defun jc/git/log ()
+  "Runs git status. Mostly a toy function to show how async-shell-command works."
+  (interactive)
+  (async-shell-command "PAGER=cat git log --pretty=oneline -l 25")
+  )
 (defun jc/screenup()
   "move the page up by 1 line"
   (interactive)
