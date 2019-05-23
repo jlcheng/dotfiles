@@ -56,4 +56,18 @@ fi
 alias ssh="ssh -q"
 # === END: ssh ===
 
+# vagrant
+jc.v.grs () {
+    cd $HOME/privprjs/playground/vagrant-go
+    echo "checking if VM is up..."
+    status=$(vagrant status | egrep ^go\\b | awk '{print $2'})
+    if [ $status == "running" ]; then
+        echo "VM running. Connecting..."
+        vagrant ssh
+    else
+	echo "VM not running. Running 'vagrant up'..."
+        vagrant up && vagrant ssh
+    fi
+}
+
 echo "bashrc_jc_cygwin.sh"
