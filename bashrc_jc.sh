@@ -34,47 +34,6 @@ gitdiffjc ()
     echo $CMD
     eval $CMD
 }
-gitnewjc ()
-{
-    T='origin/master'
-    if [ -n "$1" ]; then
-        T="$1"
-    fi
-    CMD='git log --right-only --boundary --pretty="format:%C(auto)%m %h %<(14)%cr %<(20,trunc)%ae %d %s" ${T}...HEAD'
-    echo $CMD
-    eval $CMD
-}
-gitstatjc ()
-{
-    T='origin/master'
-    if [ -n "$1" ]; then
-        T="$1"
-    fi
-    CMD="git diff --stat $(git merge-base $T HEAD)"
-    echo $CMD
-    $CMD
-}
-gitopenjc ()
-{
-    if [ -z "$1" ]; then
-        echo "usage: jge <file>"
-        return
-    fi
-    target="$1"
-    o=`git ls-files | grep $target`
-    if [ "$?" != 0 ]; then
-        echo "$o"
-        return
-    fi
-    if [ `echo "$o" | wc -l` -eq 1 ]; then
-        $GIT_EDITOR "$o"
-    elif [ -n "$2" ]; then
-        $GIT_EDITOR `echo "$o"|sed "$2q;d"`
-    else
-        echo "multiple candidates:"
-        echo "$o" | awk '{print NR":", $0}'
-    fi
-}
 # git config --global format.pretty "format:%C(auto)%m %H %<(14)%cr %<(20,trunc)%ae %d %s "
 # === END: git ===
 
@@ -114,22 +73,8 @@ alias less='less -r'
 
 test -f ~/.git-completion.bash && source ~/.git-completion.bash
 
-sjc () {
-    if [ -f ~/.ssh/autokey ]; then
-        ssh-add -l | grep autokey > /dev/null
-        if [ "$?" == "0" ]; then
-            ssh-add -l
-        else
-            ssh-add ~/.ssh/autokey
-        fi
-    fi 
-}
-
-gobox () {
-    # starts Go-ready environment in Vagrant
-    cd ~/privprjs/playground/vagrant-go
-    vagrant up
-    vagrant ssh
+jc.help() {
+    declare -F | egrep "(\bjc|jc\b)"
 }
 
 echo "bashrc_jc.sh"
