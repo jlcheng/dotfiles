@@ -157,6 +157,9 @@
 (jc/origami-mode-init)
 ;; === STOP: origami-mode ===
 
+;; === START: go-mode ===
+;; === STOP: go-mode ===
+
 
 (global-set-key (kbd "M-s M-s") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
 (define-key jc/right-map (kbd "M-j") 'jsnice-jc) ;; [j]son indent
