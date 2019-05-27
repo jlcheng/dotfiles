@@ -158,6 +158,11 @@
 ;; === STOP: origami-mode ===
 
 ;; === START: go-mode ===
+(defun jc/org-mode-init ()
+  "Init-time customizations for org-mode"
+  (setq go-test-args "-v")
+  )
+(jc/org-mode-init)
 ;; === STOP: go-mode ===
 
 
