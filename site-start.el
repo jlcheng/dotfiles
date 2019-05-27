@@ -5,6 +5,7 @@
 ;; Required packages
 (package-initialize)
 (add-to-list 'package-archives (cons "melpa" "http://melpa.org/packages/"))
+(setq package-archives '(("melpa" . "http://melpa.org/packages/")))
 (defun jc/init/installs ()
   "Installs favorite packages"
   (unless (package-installed-p 'helm) ;; helm is a super nice completion system
@@ -22,6 +23,9 @@
     (package-refresh-contents)
     (package-install 'projectile)
     (package-install 'helm-projectile))
+  (unless (package-installed-p 'go-playground) ;; 2019-05-27 try go-playground
+    (package-refresh-contents)
+    (package-install 'go-playground))
   (unless (package-installed-p 'flyspell-correct-helm)
     (package-install 'flyspell-correct-helm)))
 (jc/init/installs)
