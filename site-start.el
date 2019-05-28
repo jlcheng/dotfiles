@@ -274,8 +274,10 @@
 (recentf-mode)
 ;;; === END: recentf ===
 
+;;; === START: projectile ===
 (define-key global-map (kbd "C-S-f") 'helm-projectile-rg)
-
+(define-key jc/right-map (kbd "C-x C-f") 'helm-projectile-find-file)
+;;; === END: projectile ===
 
 (defun jc/git/log ()
   "Runs git status. Mostly a toy function to show how async-shell-command works."
