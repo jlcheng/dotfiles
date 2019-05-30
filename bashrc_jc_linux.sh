@@ -1,23 +1,17 @@
 # === START: ssh ===
 jc.ssh.sock() {
-    if [ -z "SSH_AUTH_SOCK" ]; then
-	# If $SSH_AUTH_SOCK is not set, try to find it
-	SSH_TMP=~/.ssh-agent.tmp
-	if [ -f $SSH_TMP ]; then
-	    SSH_PID=`cat ~/.ssh-agent.tmp | sed  -rn 's/.+pid ([0-9]+);/\1/p'`
-	    if [ "$?" == "0" ] && [ -n "$SSH_PID" ]; then
-		ps -p $SSH_PID > /dev/null
-		if [ "$?" == "0" ]; then
-		    . $SSH_TMP
-		fi
-	    fi
+    socket_file=~/.ssh/agent_socket_tmp    
+    # If $SSH_AUTH_SOCK is not set, try to find it within $socket_file
+    if [[ -z "SSH_AUTH_SOCK" ]]; then
+	if [[ -f $socket_file ]]; then
+	    . $socket_file
 	fi
-	if [ -z "$SSH_AGENT_PID" ]; then
-	    ssh-agent > $SSH_TMP
-	    . $SSH_TMP
-	fi
-    else
-	# Check that 
+    fi
+
+    do_agent=0
+    # Now we have a $SSH_AUTH_SOCK that is possibly invalid
+    if [[ ! -S $SSH_AUTH_SOCK ]] ; then
+
     fi
 }
 # === END: ssh ===
