@@ -170,6 +170,9 @@
 (jc/org-mode-init)
 ;; === STOP: go-mode ===
 
+;; === START: python-mode ===
+(setq python-shell-interpreter "python3")
+;; === STOP: python-mode ===
 
 (global-set-key (kbd "M-s M-s") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
 (define-key jc/right-map (kbd "M-j") 'jsnice-jc) ;; [j]son indent
