@@ -26,6 +26,9 @@
   (unless (package-installed-p 'go-playground) ;; 2019-05-27 try go-playground
     (package-refresh-contents)
     (package-install 'go-playground))
+  (unless (package-installed-p 'which-key) ;; 2019-05-27 try go-playground
+    (package-refresh-contents)
+    (package-install 'which-key))
   (unless (package-installed-p 'flyspell-correct-helm)
     (package-install 'flyspell-correct-helm)))
 (jc/init/installs)
