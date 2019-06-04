@@ -107,6 +107,8 @@
 (setq org-archive-location "~/org/archive/%s_archive.org::datetree/* Finished Tasks"
       org-startup-folded 'content ;; https://orgmode.org/manual/Initial-visibility.html#Initial-visibility
       org-startup-indented t      ;; https://orgmode.org/manual/Clean-view.html
+      org-src-fontify-natively t
+      org-src-tab-acts-natively t
       ) ; unclutter directories with org files
 
 ;; List of files to add to org-agenda-files
