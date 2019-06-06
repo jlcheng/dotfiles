@@ -292,18 +292,18 @@
   (interactive)
   (async-shell-command "PAGER=cat git log --pretty=oneline -l 25")
   )
-(defun jc/screenup()
-  "move the page up by 1 line"
+(defun jc/scroll-up-command()
+  "scroll-up-command followed by recentering"
   (interactive)
-  (previous-line 5)
+  (scroll-up-command)
   (recenter))
-(defun jc/screendown()
+(defun jc/scroll-down-command()
   "move the page down by 1 line"
   (interactive)
-  (next-line 5)
+  (scroll-down-command)
   (recenter))
-; (global-set-key (kbd "M-[") 'jc/screenup)    ;; removed because they break copy-pasting for emacs running in a terminal
-; (global-set-key (kbd "M-]") 'jc/screendown)  ;; removed because they break copy-pasting for emacs running in a terminal
+(global-set-key (kbd "C-v") 'jc/scroll-up-command)    ;; removed because they break copy-pasting for emacs running in a terminal
+(global-set-key (kbd "M-v") 'jc/scroll-down-command)  ;; removed because they break copy-pasting for emacs running in a terminal
   
 (defun jc/hotkey1 ()
   "Hotkey 1"
