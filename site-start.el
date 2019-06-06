@@ -217,6 +217,7 @@
 (setq imenu-auto-rescan t)
 (setq confirm-kill-emacs 'y-or-n-p)
 (setq register-preview-delay 0)
+(setq scroll-error-top-bottom t)
 (define-key jc/right-map (kbd "M-i") 'helm-semantic-or-imenu)
 (define-key jc/left-map (kbd "t") 'origami-toggle-all-nodes)  ;; [t]oggle
 (define-key jc/c-1-map (kbd "C-r") 'point-to-register) ;; [r]emember
@@ -302,8 +303,8 @@
   (interactive)
   (scroll-down-command)
   (recenter))
-(global-set-key (kbd "C-v") 'jc/scroll-up-command)    ;; removed because they break copy-pasting for emacs running in a terminal
-(global-set-key (kbd "M-v") 'jc/scroll-down-command)  ;; removed because they break copy-pasting for emacs running in a terminal
+;(global-set-key (kbd "C-v") 'jc/scroll-up-command)    ;; removed because they break copy-pasting for emacs running in a terminal
+;(global-set-key (kbd "M-v") 'jc/scroll-down-command)  ;; removed because they break copy-pasting for emacs running in a terminal
   
 (defun jc/hotkey1 ()
   "Hotkey 1"
