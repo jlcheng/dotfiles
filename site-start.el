@@ -29,6 +29,9 @@
   (unless (package-installed-p 'which-key) ;; 2019-05-27 try go-playground
     (package-refresh-contents)
     (package-install 'which-key))
+  (unless (package-installed-p 'graphviz-dot-mode)
+    (package-refresh-contents)
+    (package-installe 'graphviz-dot-mode))
   (unless (package-installed-p 'flyspell-correct-helm)
     (package-install 'flyspell-correct-helm)))
 (jc/init/installs)
