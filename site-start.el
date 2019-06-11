@@ -3,35 +3,41 @@
 ;;;   echo '(load-file (expand-file-name "~/privprjs/dotfiles/site-start.el"))' >> ~/.emacs.d/init.el
 
 ;; Required packages
+(defvar jc/package-refreshed-p nil "Sets to t once we ran package-refresh-contents once")
+(defun jc/package-refresh-contents-once ()
+  "Runs package-refresh-contents once per session"
+  (unless jc/package-refreshed-p
+    (package-refresh-contents)
+    (setq jc/package-refreshed-p t)))    
 (package-initialize)
 (add-to-list 'package-archives (cons "melpa" "http://melpa.org/packages/"))
 (setq package-archives '(("melpa" . "http://melpa.org/packages/")))
 (defun jc/init/installs ()
   "Installs favorite packages"
   (unless (package-installed-p 'helm) ;; helm is a super nice completion system
-    (package-refresh-contents)
+    (jc/package-refresh-contents-once)
     (package-install 'flyspell-correct-helm)
     (package-install 'helm)      
     (package-install 'helm-rg))  ;; install 'ripgrep' to use this
   (unless (package-installed-p 'origami)
-    (package-refresh-contents)
+    (jc/package-refresh-contents-once)
     (package-install 'origami))
   (unless (package-installed-p 'json-navigator) ;; 2019-04-16: try json-navigator - tab, shift-tab, enter
-    (package-refresh-contents)
+    (jc/package-refresh-contents-once)
     (package-install 'json-navigator))
   (unless (package-installed-p 'projectile) ;; 2019-05-18 try projectile; 2019-05-22 (liking it)
-    (package-refresh-contents)
+    (jc/package-refresh-contents-once)
     (package-install 'projectile)
     (package-install 'helm-projectile))
   (unless (package-installed-p 'go-playground) ;; 2019-05-27 try go-playground
-    (package-refresh-contents)
+    (jc/package-refresh-contents-once)
     (package-install 'go-playground))
   (unless (package-installed-p 'which-key) ;; 2019-05-27 try go-playground
-    (package-refresh-contents)
+    (jc/package-refresh-contents-once)
     (package-install 'which-key))
   (unless (package-installed-p 'graphviz-dot-mode)
-    (package-refresh-contents)
-    (package-installe 'graphviz-dot-mode))
+    (jc/package-refresh-contents-once)
+    (package-install 'graphviz-dot-mode))
   (unless (package-installed-p 'flyspell-correct-helm)
     (package-install 'flyspell-correct-helm)))
 (jc/init/installs)
