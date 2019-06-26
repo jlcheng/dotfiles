@@ -70,7 +70,7 @@ then
 fi
 
 alias less='less -r'
-alias r7='4gt qc'
+alias r4='4gt qc'
 
 test -f ~/.git-completion.bash && source ~/.git-completion.bash
 
