@@ -106,7 +106,7 @@
   (define-key org-mode-map (kbd "C-c C-0") 'org-mark-ring-goto))
 (add-hook 'org-mode-hook 'jc/org-mode-hook)
 
-(defun org-last-heading-same-level-jc ()
+(defun org-last-heading-same-level-jc () ;; 2019-06-26: Do I ever use this function?
   "move to last heading on the same level"
   (interactive)
   (org-forward-heading-same-level 1000)
