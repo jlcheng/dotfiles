@@ -160,11 +160,15 @@
 ;; === STOP: origami-mode ===
 
 ;; === START: go-mode ===
-(defun jc/org-mode-init ()
+(defun jc/go-mode-init ()
   "Init-time customizations for org-mode"
   (setq go-test-args "-v")
   )
-(jc/org-mode-init)
+(jc/go-mode-init)
+(defun jc/go-mode-hook ()
+  (define-key jc/left-map (kbd "M-d") 'godoc-at-point)
+  (define-key jc/left-map (kbd "C-d") 'godoc))
+(add-hook 'go-mode-hook 'jc/go-mode-hook)
 ;; === STOP: go-mode ===
 
 ;; === START: python-mode ===
@@ -238,7 +242,9 @@
 
 
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin")) ;; Needed for M-x shell-command
+(setenv "PATH" (concat (getenv "PATH") (concat ":" (expand-file-name "~/go/bin"))))
 (add-to-list 'exec-path "/usr/local/bin")                  ;; Needed for (executable-find ...)
+(add-to-list 'exec-path (expand-file-name "~/go/bin"))
 (if (functionp 'global-company-mode) (global-company-mode))
 (if (functionp 'which-key-mode) (which-key-mode))
 
