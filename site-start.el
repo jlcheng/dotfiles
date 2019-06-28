@@ -165,6 +165,7 @@
   (setq go-test-args "-v")
   )
 (jc/go-mode-init)
+(setq godoc-at-point-function 'godoc-gogetdoc)
 (defun jc/go-mode-hook ()
   (define-key jc/left-map (kbd "M-d") 'godoc-at-point)
   (define-key jc/left-map (kbd "C-d") 'godoc))
