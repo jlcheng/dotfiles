@@ -78,4 +78,13 @@ jc.help() {
     declare -F | egrep "(\bjc|jc\b)"
 }
 
+jc.e() {
+    which fzf > /dev/null
+    if [[ $? == 0 ]]; then
+	emacs $(fzf)
+    else
+	echo "fzf is not installed."
+    fi 
+}
+
 echo "bashrc_jc.sh"
