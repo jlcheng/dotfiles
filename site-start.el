@@ -192,7 +192,7 @@
   ;; Ubuntu: run a no-op command to bring the window into focus
   (add-hook 'server-visit-hook (lambda() (message " "))))
 
-(define-key jc/right-map (kbd "M-f") 'helm-rg)
+(define-key jc/right-map (kbd "f") 'helm-rg)
 (let ((modes '(helm-mode ivy-mode)))
   (funcall (cl-first (seq-filter 'functionp modes))))
 (when (functionp 'helm-mode)
@@ -262,7 +262,7 @@
     (when bfn
       (kill-new bfn)
       (message bfn))))
-(define-key jc/right-map (kbd "M-n f") 'jc/kill-new-file-name) ;; put filename into [k]ill ring
+(define-key jc/right-map (kbd "M-f") 'jc/kill-new-file-name) ;; put filename into [k]ill ring
 
 ;;; -- start in *scratch* buffer
 (setq inhibit-startup-screen t)
