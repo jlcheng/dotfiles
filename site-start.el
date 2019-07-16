@@ -8,7 +8,7 @@
   "Runs package-refresh-contents once per session"
   (unless jc/package-refreshed-p
     (package-refresh-contents)
-    (setq jc/package-refreshed-p t)))    
+    (setq jc/package-refreshed-p t)))
 (package-initialize)
 (add-to-list 'package-archives (cons "melpa" "http://melpa.org/packages/"))
 (setq package-archives '(("melpa" . "http://melpa.org/packages/")))
