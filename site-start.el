@@ -15,7 +15,6 @@
     (unless (package-installed-p package)
       (jc/package-refresh-contents-once)
       (package-install package))))
-
 (package-initialize)
 (add-to-list 'package-archives (cons "melpa" "http://melpa.org/packages/"))
 (setq package-archives '(("melpa" . "http://melpa.org/packages/")))
@@ -24,10 +23,12 @@
   (jc/ensure-packages
    'flyspell-correct-helm 'helm 'helm-rg ;; helm is a super nice completion system
    'projectile 'helm-projectile ;; 2019-05-22 tried and loved it
-   'go-playground   ;; 2019-05-27 tried and loved it
-   'which-key       ;; 2019-07-15 tried and liked it
+   'go-playground		;; 2019-05-27 tried and loved it
+   'which-key			;; 2019-07-15 tried and liked it
    'graphviz-dot-mode
-   'flyspell-correct-helm ;; 2019-07-15 on the fence about it
+   'flyspell-correct-helm	;; 2019-07-15 on the fence about it
+   'origami
+   'try				;; 2019-07-15 allows one to try packages without installing them
    ))
 (jc/init/installs)
 
