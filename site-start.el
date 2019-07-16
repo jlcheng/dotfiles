@@ -9,42 +9,26 @@
   (unless jc/package-refreshed-p
     (package-refresh-contents)
     (setq jc/package-refreshed-p t)))
-(defun jc/ensure-packages (packages)
+(defun jc/ensure-packages (&rest packages)
   "Installs the listed packages."
-  (mapcar (lambda (x) (message x)) packages)
-  )
+  (dolist (package packages)
+    (unless (package-installed-p package)
+      (jc/package-refresh-contents-once)
+      (package-install package))))
 
 (package-initialize)
 (add-to-list 'package-archives (cons "melpa" "http://melpa.org/packages/"))
 (setq package-archives '(("melpa" . "http://melpa.org/packages/")))
 (defun jc/init/installs ()
   "Installs favorite packages"
-  (unless (package-installed-p 'helm) ;; helm is a super nice completion system
-    (jc/package-refresh-contents-once)
-    (package-install 'flyspell-correct-helm)
-    (package-install 'helm)      
-    (package-install 'helm-rg))  ;; install 'ripgrep' to use this
-  (unless (package-installed-p 'origami)
-    (jc/package-refresh-contents-once)
-    (package-install 'origami))
-  (unless (package-installed-p 'json-navigator) ;; 2019-04-16: try json-navigator - tab, shift-tab, enter
-    (jc/package-refresh-contents-once)
-    (package-install 'json-navigator))
-  (unless (package-installed-p 'projectile) ;; 2019-05-18 try projectile; 2019-05-22 (liking it)
-    (jc/package-refresh-contents-once)
-    (package-install 'projectile)
-    (package-install 'helm-projectile))
-  (unless (package-installed-p 'go-playground) ;; 2019-05-27 try go-playground
-    (jc/package-refresh-contents-once)
-    (package-install 'go-playground))
-  (unless (package-installed-p 'which-key) ;; 2019-05-27 try go-playground
-    (jc/package-refresh-contents-once)
-    (package-install 'which-key))
-  (unless (package-installed-p 'graphviz-dot-mode)
-    (jc/package-refresh-contents-once)
-    (package-install 'graphviz-dot-mode))
-  (unless (package-installed-p 'flyspell-correct-helm)
-    (package-install 'flyspell-correct-helm)))
+  (jc/ensure-packages
+   'flyspell-correct-helm 'helm 'helm-rg ;; helm is a super nice completion system
+   'projectile 'helm-projectile ;; 2019-05-22 tried and loved it
+   'go-playground   ;; 2019-05-27 tried and loved it
+   'which-key       ;; 2019-07-15 tried and liked it
+   'graphviz-dot-mode
+   'flyspell-correct-helm ;; 2019-07-15 on the fence about it
+   ))
 (jc/init/installs)
 
 ;; library functions
