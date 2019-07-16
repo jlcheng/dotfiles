@@ -9,11 +9,11 @@
   (unless jc/package-refreshed-p
     (package-refresh-contents)
     (setq jc/package-refreshed-p t)))
-(defun jc/package-ensure (package &optional packages)
-  "Installs a package. Updates the packages archive if necessary."
-  (setq packages (append packages package))
-  (message (format "packages: %s" packages)))
-    
+(defun jc/ensure-packages (packages)
+  "Installs the listed packages."
+  (mapcar (lambda (x) (message x)) packages)
+  )
+
 (package-initialize)
 (add-to-list 'package-archives (cons "melpa" "http://melpa.org/packages/"))
 (setq package-archives '(("melpa" . "http://melpa.org/packages/")))
