@@ -7,7 +7,5 @@ if [[ -z $SSH_AUTH_SOCK ]] ; then
 fi
 # === END: ssh ===
 
-# === START: aws ===
 
-# === END: aws ===
 echo "bashrc_jc_linux.sh"
