@@ -160,16 +160,6 @@
   (define-key jc/left-map (kbd "M-d") 'godoc-at-point)
   (define-key jc/left-map (kbd "C-d") 'godoc))
 (add-hook 'go-mode-hook 'jc/go-mode-hook)
-(defun jc/import-hop ()
-  "Jumps to the import area, or else jumps back"
-  (interactive)
-  (if (get-register (string-to-char "."))
-      (progn
-	(jump-to-register (get-register (string-to-char ".")))
-	(delete (get-register (string-to-char ".")) register-alist))
-    (progn
-	(point-to-register ".")
-	(goto-char (point-min)))))
 ;; === STOP: go-mode ===
 
 ;; === START: python-mode ===
