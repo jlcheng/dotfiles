@@ -153,6 +153,7 @@
 (defun jc/go-mode-init ()
   "Init-time customizations for org-mode"
   (setq go-test-args "-v")
+  
   )
 (jc/go-mode-init)
 (setq godoc-at-point-function 'godoc-gogetdoc)
@@ -160,6 +161,7 @@
   (define-key jc/left-map (kbd "M-d") 'godoc-at-point)
   (define-key jc/left-map (kbd "C-d") 'godoc))
 (add-hook 'go-mode-hook 'jc/go-mode-hook)
+(add-hook 'before-save-hook 'gofmt-before-save)
 ;; === STOP: go-mode ===
 
 ;; === START: python-mode ===
