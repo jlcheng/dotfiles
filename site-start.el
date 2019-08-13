@@ -1,4 +1,4 @@
-;; site-start.el --- personalization -*- lexical-binding: t -*-
+; site-start.el --- personalization -*- lexical-binding: t -*-
 ;;; Installation --- 
 ;;;   echo '(load-file (expand-file-name "~/privprjs/dotfiles/site-start.el"))' >> ~/.emacs.d/init.el
 
@@ -16,7 +16,6 @@
       (jc/package-refresh-contents-once)
       (package-install package))))
 (package-initialize)
-(add-to-list 'package-archives (cons "melpa" "http://melpa.org/packages/"))
 (setq package-archives '(("melpa" . "http://melpa.org/packages/")))
 (defun jc/init/installs ()
   "Installs favorite packages"
@@ -158,7 +157,7 @@
     (define-key jc/left-map (kbd "M-d") 'godoc-at-point)
     (define-key jc/left-map (kbd "C-d") 'godoc))
   (add-hook 'go-mode-hook 'jc/go-mode-hook)
-  (add-hook 'before-save-hook 'gofmt-before-save)  
+  (add-hook 'before-save-hook 'gofmt-before-save)
   )
 (jc/go-mode-init)
 ;; === STOP: go-mode ===
