@@ -20,14 +20,14 @@
 (defun jc/init/installs ()
   "Installs favorite packages"
   (jc/ensure-packages
-   'flyspell-correct-helm 'helm 'helm-rg ;; helm is a super nice completion system
+   'flyspell-correct-helm 'helm 'helm-rg ;; helm is a super nice completion system 
    'projectile 'helm-projectile ;; 2019-05-22 tried and loved it
    'go-playground		;; 2019-05-27 tried and loved it
-   'which-key			;; 2019-07-15 tried and liked it
    'graphviz-dot-mode
-   'flyspell-correct-helm	;; 2019-07-15 on the fence about it
+   'markdown-mode
    'origami
    'try				;; 2019-07-15 allows one to try packages without installing them
+   'which-key			;; 2019-07-15 tried and liked it   
    ))
 (jc/init/installs)
 
@@ -85,13 +85,13 @@
    (setq default-frame-alist '((top . 0) (left . 0) (height . 60) (width . 160))))
   ((gnu/linux)
    (message "gnu/linux")
-   (setq default-frame-alist '((top . 0) (left . 0) (height . 39) (width . 132)))
-   (set-face-attribute 'default (selected-frame) :height 135)))
+   (setq default-frame-alist '((top . 0) (left . 0) (height . 39) (width . 227)))
+   (set-face-attribute 'default (selected-frame))))
 
 ;; === START: org-mode ===
 (defun jc/org-mode-hook ()
   "org-mode hooks. auto-fill has been useful."
-  (set-fill-column 120)
+  (set-fill-column 100)
   (define-key org-mode-map (kbd "C-c C-0") 'org-mark-ring-goto))
 (add-hook 'org-mode-hook 'jc/org-mode-hook)
 
@@ -219,8 +219,13 @@
 (define-key jc/left-map (kbd "t") 'origami-toggle-all-nodes)  ;; [t]oggle
 (define-key jc/c-1-map (kbd "C-r") 'point-to-register) ;; [r]emember
 (define-key jc/c-1-map (kbd "C-g") 'jump-to-register)  ;; [g]oto
-(add-hook 'markdown-mode-hook '(lambda () (define-key markdown-mode-map (kbd "M-n") nil)))
 
+;; === START: markdown-mode ===
+(defun jc/markdown-mode-hook()
+  (define-key markdown-mode-map (kbd "M-n") nil)
+  (set-fill-column 100))
+(add-hook 'markdown-mode-hook 'jc/markdown-mode-hook)
+;; === END: markdown-mode ===
 (defun jsnice-jc (p1 p2)
   "Runs jsnice against the region"
   (interactive "r")
@@ -233,7 +238,6 @@
           (shell-command-on-region
            p1 p2 jsnice-path nil t "*Minibuf-0*" t)
 	(message (format "%s not installed" jsnice-path))))))
-
 
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin")) ;; Needed for M-x shell-command
 (setenv "PATH" (concat (getenv "PATH") (concat ":" (expand-file-name "~/go/bin"))))
@@ -314,3 +318,16 @@
   (bookmark-jump-other-window "people.org"))
 (define-key jc/right-map (kbd "M-1") `jc/hotkey1)
 
+(defun jc/window-width-66 ()
+  (interactive)
+  (let ((target (- (floor (* (frame-width) 0.66)) (window-width))))
+    (window-resize nil target t)))
+(defun jc/enlarge-window-horizontally ()
+  (interactive)
+  (enlarge-window-horizontally 15))
+(defun jc/shrink-window-horizontally ()
+  (interactive)
+  (shrink-window-horizontally 15)))
+(define-key jc/right-map (kbd "M-w") `jc/window-width-66)
+(define-key jc/right-map (kbd "M-.") `jc/enlarge-window-horizontally)
+(define-key jc/right-map (kbd "M-,") `jc/shrink-window-horizontally)
