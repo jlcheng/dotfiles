@@ -153,6 +153,8 @@
   "Init-time customizations for org-mode"
   (setq go-test-args "-v")
   (setq godoc-at-point-function 'godoc-gogetdoc)
+  (unless (executable-find "gogetdoc")
+    (message "gogetdoc not installed! (go get -u -v github.com/zmb3/gogetdoc)"))
   (defun jc/go-mode-hook ()
     (define-key jc/left-map (kbd "M-d") 'godoc-at-point)
     (define-key jc/left-map (kbd "C-d") 'godoc))
