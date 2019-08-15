@@ -85,7 +85,7 @@
    (setq default-frame-alist '((top . 0) (left . 0) (height . 60) (width . 160))))
   ((gnu/linux)
    (message "gnu/linux")
-   (setq default-frame-alist '((top . 0) (left . 0) (height . 39) (width . 227)))
+   (setq default-frame-alist '((top . 0) (left . 0) (height . 61) (width . 217)))
    (set-face-attribute 'default (selected-frame))))
 
 ;; === START: org-mode ===
@@ -327,7 +327,7 @@
   (enlarge-window-horizontally 15))
 (defun jc/shrink-window-horizontally ()
   (interactive)
-  (shrink-window-horizontally 15)))
+  (shrink-window-horizontally 15))
 (define-key jc/right-map (kbd "M-w") `jc/window-width-66)
 (define-key jc/right-map (kbd "M-.") `jc/enlarge-window-horizontally)
 (define-key jc/right-map (kbd "M-,") `jc/shrink-window-horizontally)
