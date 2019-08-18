@@ -74,6 +74,12 @@
 ;; OS-specific settings:
 ;;  - misc
 ;;  - GUI customizations
+(defun jc/customize-frame (height width)
+  (interactive)
+  (set-frame-width (dframe-current-frame) width)
+  (set-frame-height nil height)
+  (setq default-frame-alist '((top . 0) (left . 0) (height . height) (width . width))))
+  
 (cl-case system-type
   ((cygwin)
    (message "Windows OS")
