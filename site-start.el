@@ -40,6 +40,13 @@
         (split-string (buffer-string) "\n" t))
     ))
 
+(defvar jc/scratch-buffer-name "qweqwe" "Name of a scratch buffer that is transient")
+(defun jc/open-scratch ()
+  "Opens the buffer named by jc/scratch-buffer-name"
+  (interactive)
+  (switch-to-buffer jc/scratch-buffer-name))
+
+
 ;; Keymaps
 (defvar jc/right-map (make-keymap) "Keys whose suffix are intended for the right hand.")
 (define-key global-map (kbd "M-n") jc/right-map)
@@ -62,6 +69,7 @@
 		 ))
              jc/keymaps))))
 (define-key jc/right-map (kbd "M-n M-k") 'jc/show-keymaps)
+(define-key jc/left-map (kbd "M-q") 'jc/open-scratch)
 
 (defun misc-macOS-jc ()
   "macOS misc customizations"
