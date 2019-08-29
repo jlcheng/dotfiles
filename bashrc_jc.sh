@@ -72,7 +72,14 @@ fi
 alias less='less -r'
 alias r4='4gt qc'
 
-test -f ~/.git-completion.bash && source ~/.git-completion.bash
+git_completion=~/.git-completion.bash
+if [[ -f $git_completion ]]; then
+    source ~/.git-completion.bash
+elif command -v curl 1>/dev/null 2>&1; then
+    echo "installing git-completion.bash"
+    curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o $git_completion
+    source $git_completion
+fi
 
 jc.help() {
     declare -F | egrep "(\bjc|jc\b)"
