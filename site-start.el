@@ -21,7 +21,7 @@
   "Installs favorite packages"
   (jc/ensure-packages
    'flyspell-correct-helm 'helm 'helm-rg ;; helm is a super nice completion system 
-   'projectile ;; 2019-05-22 tried and loved it
+   'projectile 'helm-projectile ;; 2019-05-22 tried and loved it
    'go-playground		;; 2019-05-27 tried and loved it
    'graphviz-dot-mode
    'markdown-mode
@@ -299,6 +299,7 @@
 ;;; === START: projectile ===
 (define-key global-map (kbd "C-S-f") 'helm-projectile-rg)
 (define-key jc/right-map (kbd "C-x C-f") 'projectile-find-file)
+(helm-projectile-on)
 ;;; === END: projectile ===
 
 (defun jc/git/log ()
