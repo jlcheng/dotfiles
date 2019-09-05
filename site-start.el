@@ -298,7 +298,7 @@
 
 ;;; === START: projectile ===
 (define-key global-map (kbd "C-S-f") 'helm-projectile-rg)
-(define-key jc/right-map (kbd "C-x C-f") 'projectile-find-file)
+(define-key jc/right-map (kbd "C-x C-f") 'helm-projectile-find-file)
 (helm-projectile-on)
 ;;; === END: projectile ===
 
