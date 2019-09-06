@@ -20,7 +20,8 @@
 (defun jc/init/installs ()
   "Installs favorite packages"
   (jc/ensure-packages
-   'flyspell-correct-helm 'helm 'helm-rg ;; helm is a super nice completion system 
+   'flyspell-correct-helm 'helm 'helm-rg ;; helm is a super nice completion system
+   'magit
    'projectile 'helm-projectile ;; 2019-05-22 tried and loved it
    'go-playground		;; 2019-05-27 tried and loved it
    'graphviz-dot-mode
