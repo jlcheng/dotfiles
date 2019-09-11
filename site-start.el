@@ -22,6 +22,7 @@
   (jc/ensure-packages
    'flyspell-correct-helm 'helm 'helm-rg ;; helm is a super nice completion system
    'magit
+   'php-mode                    ;; 2019-09-11 php? I'm doing this because of work :(
    'projectile 'helm-projectile ;; 2019-05-22 tried and loved it
    'go-playground		;; 2019-05-27 tried and loved it
    'graphviz-dot-mode
