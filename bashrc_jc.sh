@@ -17,7 +17,7 @@ title() {
         export PS1="\[\033]0;$1 \h\007\]${CLPART}"
     fi
 }
-if [ "$USER" != "vagrant" ]; then
+if [ "$USER" != "vagrant" ] && [ ! -f /etc/ec2_version ] ; then
   alias emacs="emacsclient -n"
   alias emacs-start="/usr/bin/emacs &> /dev/null &"
 fi
@@ -71,6 +71,7 @@ fi
 
 alias less='less -r'
 alias r4='4gt qc'
+alias tma='tmux attach-session'
 
 git_completion=~/.git-completion.bash
 if [[ -f $git_completion ]]; then
