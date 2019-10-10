@@ -28,6 +28,7 @@
    'graphviz-dot-mode
    'markdown-mode
    'origami
+   'terraform-mode              ;; 2019-10-10 trying terraform
    'try				;; 2019-07-15 allows one to try packages without installing them
    'which-key			;; 2019-07-15 tried and liked it   
    ))
