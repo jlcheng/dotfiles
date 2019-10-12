@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import os.path
+import os
 
 def install_line(cid, file_name, line):
     file_name = os.path.expanduser(file_name)
@@ -22,9 +23,23 @@ def install_line(cid, file_name, line):
     else:
         print(f"{cid} already installed")
 
+def install_link(src, dst):
+    dst = os.path.expanduser(dst)
+    do_install = not os.path.exists(dst)
+
+    if do_install:
+        print(f"installing {src} to {dst}")
+        os.symlink(os.path.abspath(src), dst)
+    else:
+        print(f"{src} already installed")
+    
+        
 def main():
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
+    
     install_line("bashrc_jc.sh", "~/.bashrc", ". ~/privprjs/dotfiles/bashrc_jc.sh")
     install_line("init.el", "~/.emacs.d/init.el", '(load-file (expand-file-name "~/privprjs/dotfiles/site-start.el"))')
+    install_link("tmux.conf", "~/.tmux.conf")
 
 
 if __name__ == '__main__':
