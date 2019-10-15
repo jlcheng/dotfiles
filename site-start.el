@@ -114,6 +114,7 @@
   (backward-char))
 (define-key jc/left-map (kbd "M-f") 'org-last-heading-same-level-jc)
 (global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c C-x C-f") 'helm-projectile-find-file)
 (define-key jc/left-map (kbd "M-b") 'org-switchb)
 
 (setq org-archive-location "~/org/archive/%s_archive.org::datetree/* Finished Tasks"
