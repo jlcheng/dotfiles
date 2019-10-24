@@ -34,9 +34,7 @@ gitdiffjc ()
     echo $CMD
     eval $CMD
 }
-# git config --global format.pretty "format:%C(auto)%m %H %<(14)%cr %<(20,trunc)%ae %d %s "
-# git config --global format.pretty "format:%C(auto)%h %<(14)%cr %<(20,trunc)%ae %s%d"
-# git log --pretty="format:%C(auto)%m %H %<(14)%cr %<(20,trunc)%ae %d %s "
+# git config --global pretty.j "format:%C(auto)%h %<(14)%cr %<(20,trunc)%ae %s%d"
 # === END: git ===
 
 export EDITOR=vi
