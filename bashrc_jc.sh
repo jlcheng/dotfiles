@@ -35,6 +35,7 @@ gitdiffjc ()
     eval $CMD
 }
 # git config --global pretty.j "format:%C(auto)%h %<(14)%cr %<(20,trunc)%ae %s%d"
+# git config --global format.pretty "format:%C(auto)%h %<(14)%cr %<(20,trunc)%ae %s%d"
 # === END: git ===
 
 export EDITOR=vi
@@ -81,19 +82,10 @@ jc.help() {
 jc.e() {
     which fzf > /dev/null
     if [[ $? == 0 ]]; then
-        emacs $(fzf)
+	emacs $(fzf)
     else
-        echo "fzf is not installed."
+	echo "fzf is not installed."
     fi 
-}
-
-jc.pa() {
-    if [[ -f requirements.txt ]]; then
-        v=$(basename $PWD)
-        if [[ -d ~/.venv/${v} ]]; then
-            source ~/.venv/${v}/bin/activate
-        fi
-    fi
 }
 
 echo "bashrc_jc.sh"
