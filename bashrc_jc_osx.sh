@@ -12,37 +12,6 @@ if [ -d "/Applications/Emacs.app" ]; then
   GIT_EDITOR="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -q -a vim"
 fi
 
-export ZRAUTH="--author jcheng --author christopher --author darias --author dustin --author gregm --author jzhuang --author jgoodknight --author mirani --author nishok --author rwinslow --author zach"
-# git config format.pretty "format:%C(auto)%m %h %<(14)%cr %<(20,trunc)%ae %d %s " # for zr only
-gitdiffjczr ()
-{
-    T='origin/master'
-    if [ -n "$1" ]; then
-        T="$1"
-    fi
-    ZRST="--author jcheng --author christopher --author darias --author dustin --author gregm --author jzhuang --author jgoodknight --author mirani --author nishok --author rwinslow --author zach"
-    git log ${ZRST} --left-right --boundary --pretty="format:%C(auto)%m %h %<(14)%cr %<(20,trunc)%ae %d %s" ${T}...HEAD
-}
-
-forgt ()
-{
-    POPDIR=$PWD
-    T='TODO'
-    if [ -n "$1" ]; then
-	T="$1"
-    fi
-    cd $HOME/Documents/zr
-    ack $1
-    cd $HOME/org
-    ack $1
-    cd $POPDIR
-}
-
-cspy()
-{
-    csearch -f py "$1"
-}
-
 # 1) force ls to have color; 2) optimize lscolors for black background
 export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
