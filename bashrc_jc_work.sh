@@ -1,11 +1,15 @@
 ppactivate ()
 {
-    envdir=python_env
-    if [[ -d $envdir ]]; then
+    venvdir=python_env
+    if [[ $PWD == *"playground"* ]]; then
+        venvdir=$HOME/.venv/pp_playground
+    fi
+
+    if [[ -d $venvdir ]]; then
         if [[ -n "$VIRTUAL_ENV" ]]; then
             deactivate
         fi
-        source $envdir/bin/activate
+        source $venvdir/bin/activate
     else
         echo "venv directory not found"
     fi
