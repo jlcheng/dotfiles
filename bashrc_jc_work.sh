@@ -2,9 +2,9 @@ ppactivate ()
 {
     envdir=python_env
     if [[ -d $envdir ]]; then
-        echo 1
-        test -z $VIRTUAL_ENV && deactivate || true
-        echo 2
+        if [[ -n "$VIRTUAL_ENV" ]]; then
+            deactivate
+        fi
         source $envdir/bin/activate
     else
         echo "venv directory not found"
