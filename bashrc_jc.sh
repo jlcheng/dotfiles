@@ -88,4 +88,13 @@ jc.e() {
     fi 
 }
 
+# === START: privmono ===
+if [[ -f $HOME/privprjs/privmono/bash/venv.sh ]]; then
+    source $HOME/privprjs/privmono/bash/venv.sh
+fi
+
+export APP_CONFIG_TOML=$HOME/.privmono.toml
+
+# === END: privmono ===
+
 echo "bashrc_jc.sh"
