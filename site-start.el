@@ -310,6 +310,14 @@
 (helm-projectile-on)
 ;;; === END: projectile ===
 
+;;; === START: flycheck ===
+(custom-set-variables
+ '(flycheck-python-pycompile-executable "python3")
+ '(flycheck-python-flake8-executable "python3")
+ '(flycheck-python-pylint-executable "python3"))
+(add-hook 'python-mode-hook 'flycheck-mode)
+;;; === END: flycheck === 
+
 (defun jc/git/log ()
   "Runs git status. Mostly a toy function to show how async-shell-command works."
   (interactive)
