@@ -312,9 +312,11 @@
 
 ;;; === START: flycheck ===
 (custom-set-variables
- '(flycheck-python-pycompile-executable "python3")
+ '(flycheck-json-python-json-executable "python3")
  '(flycheck-python-flake8-executable "python3")
- '(flycheck-python-pylint-executable "python3"))
+ '(flycheck-python-pycompile-executable "python3")
+ '(flycheck-python-pylint-executable "python3")
+ )
 (add-hook 'python-mode-hook 'flycheck-mode)
 ;;; === END: flycheck === 
 
