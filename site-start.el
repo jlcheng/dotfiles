@@ -316,8 +316,10 @@
  '(flycheck-python-flake8-executable "python3")
  '(flycheck-python-pycompile-executable "python3")
  '(flycheck-python-pylint-executable "python3")
+ '(flycheck-disabled-checkers '(python-pylint))
  )
 (add-hook 'python-mode-hook 'flycheck-mode)
+
 ;;; === END: flycheck === 
 
 (defun jc/git/log ()
