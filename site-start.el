@@ -21,6 +21,7 @@
   "Installs favorite packages"
   (jc/ensure-packages
    'flyspell-correct-helm 'helm 'helm-rg ;; helm is a super nice completion system
+   'flycheck-pyflakes
    'magit
    'php-mode                    ;; 2019-09-11 php? I'm doing this because of work :(
    'projectile 'helm-projectile ;; 2019-05-22 tried and loved it
