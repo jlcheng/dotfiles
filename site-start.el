@@ -261,7 +261,7 @@
 (add-to-list 'exec-path "/usr/local/bin")                  ;; Needed for (executable-find ...)
 (add-to-list 'exec-path (expand-file-name "~/go/bin"))
 (add-to-list 'exec-path "/Library/Frameworks/Python.framework/Versions/3.6/bin/mypy") ;; hack for mac os
-(if (functionp 'global-company-mode) (global-company-mode))
+;; (if (functionp 'global-company-mode) (global-company-mode)) 2019-11-20 Disabled for testing
 (if (functionp 'which-key-mode) (which-key-mode))
 
 ;; 2018-10-29: Sets full file path in title
