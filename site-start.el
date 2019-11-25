@@ -148,11 +148,14 @@
     )
   )
 (setq org-agenda-files "~/.org-jc.txt")
-  
-(setq org-todo-keywords
-      '((sequence "TODO" "|" "DONE")
-        (sequence "REPORT" "BUG" "KNOWNCAUSE" "|" "FIXED")
+
+(custom-set-variables
+ '(org-todo-keywords '((sequence "TODO" "DOING" "|" "DONE")
+		       (sequence "REPORT" "BUG" "KNOWNCAUSE" "|" "FIXED")
+		       (sequence "UNPAUSED" "PUNTED" "|" "PAUSED")
         (sequence "|" "CANCELED")))
+ )
+
 
 (setq org-use-speed-commands t) ;; 2019-02-26 Trying this (use 'n' and 'p' to navigate up and down)
 ;; === STOP: org-mode ===
