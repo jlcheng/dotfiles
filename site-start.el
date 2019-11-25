@@ -127,7 +127,7 @@
       ) ; unclutter directories with org files
 
 (defun jc/org-append-agenda-file (newfile)
-  "append a file, if non-present, to ~/.org-jc.txt"
+  "Append a file, if non-present, to ~/.org-jc.txt; 2019-11-25 - I am only keeping this function as a reference on elisp code. I hardly ever use it."
   (interactive)
   (let ((org-agendas-file "~/.org-jc.txt"))
     (if (file-exists-p org-agendas-file)
@@ -136,7 +136,7 @@
 	    (write-region newfile nil org-agendas-file 'append))
 	  ))))
 (defun jc/org-append-agenda-file-this ()
-  "append this buffer to ~/.org-jc.txt"
+  "Append this buffer to ~/.org-jc.txt; 2019-11-25 - I am only keeping this function as a reference on elisp code. I hardly ever use it."
   (interactive)
   (let ((bfn (buffer-file-name)))
     (if (file-exists-p buffer-file-name)
@@ -149,6 +149,10 @@
   )
 (setq org-agenda-files "~/.org-jc.txt")
   
+(setq org-todo-keywords
+      '((sequence "TODO" "|" "DONE")
+        (sequence "REPORT" "BUG" "KNOWNCAUSE" "|" "FIXED")
+        (sequence "|" "CANCELED")))
 
 (setq org-use-speed-commands t) ;; 2019-02-26 Trying this (use 'n' and 'p' to navigate up and down)
 ;; === STOP: org-mode ===
