@@ -183,7 +183,6 @@
     (define-key jc/left-map (kbd "C-d") 'godoc))
   (add-hook 'go-mode-hook 'jc/go-mode-hook)
   (add-hook 'before-save-hook 'gofmt-before-save)
-  (add-hook 'go-mode-hook 'lsp-deferred)
   )
 (jc/go-mode-init)
 ;; === STOP: go-mode ===
