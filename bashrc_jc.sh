@@ -93,7 +93,7 @@ if [[ -f $HOME/privprjs/privmono/bash/venv.sh ]]; then
     source $HOME/privprjs/privmono/bash/venv.sh
 fi
 
-export APP_CONFIG_TOML=$HOME/.privmono.toml
+export APP_CONFIG_TOML=$HOME/.privmono.d/local.toml
 
 # === END: privmono ===
 
