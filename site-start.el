@@ -150,8 +150,8 @@
 (setq org-agenda-files "~/.org-jc.txt")
 
 (custom-set-variables
+ ;; (org-todo-keywords '((sequence "REPORT" "BUG" "KNOWNCAUSE" "|" "FIXED"))) ;; 2020-01-02 - example
  '(org-todo-keywords '((sequence "TODO" "|" "DONE")
-		       (sequence "REPORT" "BUG" "KNOWNCAUSE" "|" "FIXED") ;; 2019-11-25 - example only. 
 		       (sequence "WK_CODING" "WK_PENDING_PR" "|" "WK_MERGED")
 		       (sequence "WK_TODO" "WK_DOING" "|" "WK_DONE")
 		       (sequence "UNPAUSED" "PUNTED" "|" "PAUSED")
