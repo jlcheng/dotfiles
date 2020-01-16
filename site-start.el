@@ -75,6 +75,12 @@
              jc/keymaps))))
 (define-key jc/right-map (kbd "M-n M-k") 'jc/show-keymaps)
 (define-key jc/left-map (kbd "M-q") 'jc/open-scratch)
+(defun jc/init/unmap ()
+  "unmap keybinds that are not user friendly"
+  (define-key org-mode-map (kbd "C-c C-n") nil) ;; next heading, but cut across different levels
+  (define-key org-mode-map (kbd "C-c C-p") nil) ;; prev heading
+  )
+(jc/init/unmap)
 
 (defun misc-macOS-jc ()
   "macOS misc customizations"
