@@ -75,13 +75,6 @@
              jc/keymaps))))
 (define-key jc/right-map (kbd "M-n M-k") 'jc/show-keymaps)
 (define-key jc/left-map (kbd "M-q") 'jc/open-scratch)
-(defun jc/init/unmap ()
-  "unmap keybinds that are not user friendly"
-  (define-key org-mode-map (kbd "C-c C-n") nil) ;; next heading, but cut across different levels
-  (define-key org-mode-map (kbd "C-c C-p") nil) ;; prev heading
-  (define-key org-mode-map (kbd "C-c C-x C-f") nil) ;; Unset org-emphasize, conflicts with search
-  )
-(jc/init/unmap)
 
 (defun misc-macOS-jc ()
   "macOS misc customizations"
@@ -111,8 +104,11 @@
 ;; === START: org-mode ===
 (defun jc/org-mode-hook ()
   "org-mode hooks. auto-fill has been useful."
-  (set-fill-column 100)
-  (define-key org-mode-map (kbd "C-c C-0") 'org-mark-ring-goto))
+  (define-key org-mode-map (kbd "C-c C-0") 'org-mark-ring-goto)
+  (define-key org-mode-map (kbd "C-c C-n") nil) ;; next heading, but cut across different levels
+  (define-key org-mode-map (kbd "C-c C-p") nil) ;; prev heading
+  (define-key org-mode-map (kbd "C-c C-x C-f") nil) ;; Unset org-emphasize, conflicts with search
+  (set-fill-column 100))
 (add-hook 'org-mode-hook 'jc/org-mode-hook)
 
 (defun org-last-heading-same-level-jc () ;; 2019-06-26: Do I ever use this function?
