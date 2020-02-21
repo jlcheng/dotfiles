@@ -294,6 +294,15 @@
 ;;; -- start in *scratch* buffer
 (setq inhibit-startup-screen t)
 
+;;; === START: helm ===
+(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; 2020-02-21 try http://tuhdo.github.io/helm-intro.html 
+(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
+(define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
+;; (helm-autoresize-mode t) ;; comment out, the selected entry moving down as the buffer resizes is too jarring
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+(global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
+;;; === END: helm ===
+
 ;;; === START: spellcheck ===
 (require 'flyspell-correct-helm)
 (when (executable-find "aspell")
