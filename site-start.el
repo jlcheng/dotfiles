@@ -195,7 +195,7 @@
 ;; === STOP: python-mode ===
 
 (global-set-key (kbd "M-s M-s") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
-(global-set-key (kbd "C-S-s") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
+(global-set-key (kbd "M-S") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
 (define-key jc/right-map (kbd "M-j") 'jsnice-jc) ;; [j]son indent
 (define-key jc/right-map (kbd "M-p") 'bookmark-jump)
 (define-key jc/right-map (kbd "M-h") 'command-history)
