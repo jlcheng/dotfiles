@@ -21,7 +21,6 @@
   "Installs favorite packages"
   (jc/ensure-packages
    'flyspell-correct-helm 'helm 'helm-rg ;; helm is a super nice completion system
-   'flycheck-pyflakes
    'magit
    'php-mode                    ;; 2019-09-11 php? I'm doing this because of work :(
    'projectile 'helm-projectile ;; 2019-05-22 tried and loved it
@@ -51,6 +50,13 @@
   (interactive)
   (switch-to-buffer jc/scratch-buffer-name))
 
+;; fix paths
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin")) ;; Needed for M-x shell-command
+(setenv "PATH" (concat (getenv "PATH") (concat ":" (expand-file-name "~/go/bin"))))
+(setenv "PATH" (concat (getenv "PATH") ":/Library/Frameworks/Python.framework/Versions/3.6/bin/mypy")) ;; hack for mac os
+(add-to-list 'exec-path "/usr/local/bin")                  ;; Needed for (executable-find ...)
+(add-to-list 'exec-path (expand-file-name "~/go/bin"))
+(add-to-list 'exec-path "/Library/Frameworks/Python.framework/Versions/3.6/bin/mypy") ;; hack for mac os
 
 ;; Keymaps
 (defvar jc/right-map (make-keymap) "Keys whose suffix are intended for the right hand.")
@@ -158,7 +164,11 @@
 		       (sequence "WK_CODING" "WK_PENDING_PR" "|" "WK_MERGED")
 		       (sequence "WK_TODO" "WK_DOING" "|" "WK_DONE")
 		       (sequence "UNPAUSED" "PUNTED" "|" "PAUSED")
-        (sequence "|" "CANCELED")))
+		       (sequence "|" "CANCELED")))
+ ; themes
+ '(ansi-color-names-vector
+   ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#e090d7" "#8cc4ff" "#eeeeec"])
+ '(custom-enabled-themes (quote (manoj-dark))) 
  )
 
 
@@ -268,12 +278,6 @@
            p1 p2 jsnice-path nil t "*Minibuf-0*" t)
 	(message (format "%s not installed" jsnice-path))))))
 
-(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin")) ;; Needed for M-x shell-command
-(setenv "PATH" (concat (getenv "PATH") (concat ":" (expand-file-name "~/go/bin"))))
-(setenv "PATH" (concat (getenv "PATH") ":/Library/Frameworks/Python.framework/Versions/3.6/bin/mypy")) ;; hack for mac os
-(add-to-list 'exec-path "/usr/local/bin")                  ;; Needed for (executable-find ...)
-(add-to-list 'exec-path (expand-file-name "~/go/bin"))
-(add-to-list 'exec-path "/Library/Frameworks/Python.framework/Versions/3.6/bin/mypy") ;; hack for mac os
 ;; (if (functionp 'global-company-mode) (global-company-mode)) 2019-11-20 Disabled for testing
 (if (functionp 'which-key-mode) (which-key-mode))
 
@@ -335,12 +339,18 @@
 ;;; === START: flycheck ===
 (custom-set-variables
  '(flycheck-json-python-json-executable "python3")
- '(flycheck-python-flake8-executable "python3")
  '(flycheck-python-pycompile-executable "python3")
- '(flycheck-python-pylint-executable "python3")
- '(flycheck-disabled-checkers '(python-pylint))
+ '(flycheck-disabled-checkers '(python-pylint go-golint)) ;; 2020-02-26 trying flycheck for go
  )
 (add-hook 'python-mode-hook 'flycheck-mode)
+(add-hook 'go-mode-hook 'flycheck-mode)
+
+;; 2020-02-26 Tried golint and got numerous false positives, e.g., "document your functions". Not used.
+(defun jc/go/flycheck-init ()
+  "Activates golint for flycheck"
+  (add-to-list 'load-path (concat (getenv "HOME")  "/go/src/golang.org/x/lint/misc/emacs/"))
+  (require 'golint)
+  (add-hook 'go-mode-hook `golint))
 
 ;;; === END: flycheck === 
 
