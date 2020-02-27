@@ -85,6 +85,8 @@
 (defun misc-macOS-jc ()
   "macOS misc customizations"
   (message (documentation 'misc-macOS-jc))
+  (setq flycheck-python-mypy-executable "/Library/Frameworks/Python.framework/Versions/3.7/bin/mypy")
+  (setq flycheck-python-flake8-executable "/Library/Frameworks/Python.framework/Versions/3.7/bin/flake8")
   (setq mac-command-modifier 'meta) ;; so the Alt key on WASD Code can be used for 'M-x'
   (setq mac-option-modifier 'super) ;; so the key left of Alt on WAS Code can be used for 'S-p'
   (global-unset-key (kbd "s-w"))    ;; macOS: frequenly leads to accidental killing frames
