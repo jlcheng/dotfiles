@@ -251,11 +251,12 @@
 (setq confirm-kill-emacs 'y-or-n-p)
 (setq register-preview-delay 0)
 (setq scroll-error-top-bottom t)
-(show-paren-mode 1)
 (setq show-paren-delay 0)
 (custom-set-variables
  '(global-auto-revert-mode t)
  '(auto-revert-interval 1))
+(show-paren-mode 1)
+(global-eldoc-mode -1)
 (define-key jc/right-map (kbd "M-i") 'helm-semantic-or-imenu)
 (define-key jc/left-map (kbd "t") 'origami-toggle-all-nodes)  ;; [t]oggle
 (define-key jc/c-1-map (kbd "C-r") 'point-to-register) ;; [r]emember
