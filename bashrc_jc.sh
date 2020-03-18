@@ -4,6 +4,8 @@
 export HISTCONTROL=ignoredups
 export HISTFILE=$HOME/.bash_history
 export HISTIGNORE='&:ls:[bf]g:exit'
+export HISTSIZE=50000
+export HISTFILESIZE=50000
 export PATH="/usr/bin:$PATH:$HOME/go/bin"
 export GOPATH=$HOME/go
 
