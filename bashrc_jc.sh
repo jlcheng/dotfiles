@@ -9,25 +9,15 @@ export HISTFILESIZE=50000
 export PATH="/usr/bin:$PATH:$HOME/go/bin"
 export GOPATH=$HOME/go
 
-jc_parse_git_branch() {
-     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-}
-export PS1="\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
 # from a combination of http://tldp.org/HOWTO/Xterm-Title-4.html 
 #                   and http://bashrcgenerator.com/ (2018-11-02)
-PS1="\[$(tput bold)\][\[$(tput sgr0)\]\[$(tput setaf 3)\]\h\[$(tput setaf 15)\]: \[$(tput bold)\]\[$(tput setaf 2)\]\W\[$(tput setaf 7)\]]\n\\$ \[$(tput sgr0)\]"
+export PS1="\[\033[38;5;11m\]\h\[$(tput sgr0)\]: \[$(tput sgr0)\]\[\033[38;5;10m\]\W\[$(tput sgr0)\]\n\\$ \[$(tput sgr0)\]"
+# from https://github.com/magicmonty/bash-git-prompt
 if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
     GIT_PROMPT_ONLY_IN_REPO=1
     source $HOME/.bash-git-prompt/gitprompt.sh
 fi
 
-title() {
-    if [ -z "$1" ]; then
-        echo "title required"
-    else
-        export PS1="\[\033]0;$1 \h\007\]${CLPART}"
-    fi
-}
 if [ "$USER" != "vagrant" ] && [ ! -f /etc/ec2_version ] ; then
   alias emacs="emacsclient -n"
   alias emacs-start="/usr/bin/emacs &> /dev/null &"
