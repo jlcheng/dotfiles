@@ -66,6 +66,7 @@ fi
 alias less='less -r'
 alias r4='4gt qc'
 alias tma='tmux attach-session -d'
+alias rt='[[ -f rt.py ]] && ./rt.py'
 
 git_completion=~/.git-completion.bash
 if [[ -f $git_completion ]]; then
