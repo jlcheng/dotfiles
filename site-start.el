@@ -253,6 +253,7 @@
 (setq scroll-error-top-bottom t)
 (setq show-paren-delay 0)
 (custom-set-variables
+ '(fill-column 120)
  '(global-auto-revert-mode t)
  '(auto-revert-interval 1))
 (show-paren-mode 1)
