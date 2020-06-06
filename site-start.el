@@ -116,7 +116,7 @@
   (define-key org-mode-map (kbd "C-c C-n") nil) ;; next heading, but cut across different levels
   (define-key org-mode-map (kbd "C-c C-p") nil) ;; prev heading
   (define-key org-mode-map (kbd "C-c C-x C-f") nil) ;; Unset org-emphasize, conflicts with search
-  (set-fill-column 100))
+  (set-fill-column 120))
 (add-hook 'org-mode-hook 'jc/org-mode-hook)
 
 (defun org-last-heading-same-level-jc () ;; 2019-06-26: Do I ever use this function?
@@ -265,7 +265,7 @@
 ;; === START: markdown-mode ===
 (defun jc/markdown-mode-hook()
   (define-key markdown-mode-map (kbd "M-n") nil)
-  (set-fill-column 100))
+  (set-fill-column 120))
 (add-hook 'markdown-mode-hook 'jc/markdown-mode-hook)
 ;; === END: markdown-mode ===
 (defun jsnice-jc (p1 p2)
