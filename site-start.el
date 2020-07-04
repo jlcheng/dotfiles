@@ -188,7 +188,7 @@
 
 ;; === START: go-mode ===
 (defun jc/go-mode-init ()
-  "Init-time customizations for org-mode"
+  "Init-time customizations for go-mode"
   (setq go-test-args "-v")
   (setq godoc-at-point-function 'godoc-gogetdoc)
   (unless (executable-find "gogetdoc")
@@ -201,6 +201,14 @@
   )
 (jc/go-mode-init)
 ;; === STOP: go-mode ===
+
+;; === START: terraform-mode ===
+(defun jc/terraform-mode-init()
+  "Init-time customizations for terraform-mode"
+  (add-hook 'terraform-mode-hook #'terraform-format-on-save-mode)
+  )
+(jc/terraform-mode-init)
+;; === STOP: terraform-mode ===
 
 ;; === START: python-mode ===
 (setq python-shell-interpreter "python3")
