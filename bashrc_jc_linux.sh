@@ -7,5 +7,10 @@ if [[ -z $SSH_AUTH_SOCK ]] ; then
 fi
 # === END: ssh ===
 
+# === START: terraform ===
+# Setting TF_DATA_DIR is an experiment. The documentation suggests this is not needed
+# but it will keep the size of my repositories down
+export TF_DATA_DIR=$HOME/.terraform/v12
+# === END: terraform ===
 
 echo "bashrc_jc_linux.sh"
