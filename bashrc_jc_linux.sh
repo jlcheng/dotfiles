@@ -8,9 +8,9 @@ fi
 # === END: ssh ===
 
 # === START: terraform ===
-# Setting TF_DATA_DIR is an experiment. The documentation suggests this is not needed
-# but it will keep the size of my repositories down
-export TF_DATA_DIR=$HOME/.terraform/v12
+# Setting TF_DATA_DIR is a bad idea. It forces all terraform workspaces to use the same terraform version
+# in terraform.required_version file
+# export TF_DATA_DIR=$HOME/.terraform/v12
 # === END: terraform ===
 
 echo "bashrc_jc_linux.sh"
