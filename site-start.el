@@ -170,7 +170,11 @@
  ; themes
  '(ansi-color-names-vector
    ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#e090d7" "#8cc4ff" "#eeeeec"])
- '(custom-enabled-themes (quote (deeper-blue))) 
+ '(custom-enabled-themes (quote (deeper-blue)))
+
+ '(org-src-block-faces
+   '(("emacs-lisp" (:background "#EEE2FF"))
+     ("python" (:foreground "#e5ffb8"))))
  )
 
 
