@@ -1,4 +1,4 @@
 [flake8]
-# W391: blank line at end of file
-ignore = W391
-max-line-length = 120
+# W391: blank line at end of file, E501: line too long
+ignore = W391, E501
+
