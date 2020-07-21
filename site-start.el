@@ -173,8 +173,8 @@
  '(custom-enabled-themes (quote (deeper-blue)))
 
  '(org-src-block-faces
-   '(("emacs-lisp" (:background "#EEE2FF"))
-     ("python" (:foreground "#e5ffb8"))))
+   '(("emacs-lisp" (:background "#FFFFFF"))
+     ("text" (:foreground "#e5ffb8"))))
  )
 
 
