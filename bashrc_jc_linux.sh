@@ -10,6 +10,8 @@ fi
 # === START: kde ===
 if [[ -f /usr/bin/kde-open5 ]]; then
     alias open=/usr/bin/kde-open5
+else
+    alias open=false
 fi
 # === END: kde ===
 
