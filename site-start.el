@@ -92,6 +92,13 @@
   (global-unset-key (kbd "s-w"))    ;; macOS: frequenly leads to accidental killing frames
   (global-unset-key (kbd "s-n")))   ;; macOS: frequenly leads to accidental new frames
 
+
+(defun misc-linux-jc()
+  "linux misc customizations"
+  (custom-set-variables
+   '(flycheck-python-flake8-executable "/home/jcheng/.venv/privmono/bin/flake8")
+   ))
+
 ;; OS-specific settings:
 ;;  - misc
 ;;  - GUI customizations
@@ -106,6 +113,7 @@
    (setq default-frame-alist '((top . 0) (left . 0) (height . 60) (width . 160))))
   ((gnu/linux)
    (message "gnu/linux")
+   (misc-linux-jc)
    (setq default-frame-alist '((top . 0) (left . 0) (height . 61) (width . 217)))
    (set-face-attribute 'default (selected-frame))))
 
