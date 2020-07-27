@@ -97,6 +97,8 @@
   "linux misc customizations"
   (custom-set-variables
    '(flycheck-python-flake8-executable "/home/jcheng/.venv/privmono/bin/flake8")
+   '(flycheck-python-mypy-executable "/home/jcheng/.venv/privmono/bin/mypy")
+   '(flycheck-python-mypy-ini "/home/jcheng/privprjs/privmono/mypy.ini")
    ))
 
 ;; OS-specific settings:
