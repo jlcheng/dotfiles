@@ -186,8 +186,9 @@
 
    '(org-src-block-faces
      '(("emacs-lisp" (:background "#EEE2FF"))
-       ("lisp" (:foreground "#FFFFFF"))
+       ("text" (:foreground "#FFFFFF"))
        ))
+   '(org-fontify-quote-and-verse-blocks t)
    )
   (setq org-use-speed-commands t) ;; 2019-02-26 Trying this (use 'n' and 'p' to navigate up and down)
   )
