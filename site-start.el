@@ -168,27 +168,29 @@
       )
     )
   )
-(setq org-agenda-files "~/.org-jc.txt")
 
-(custom-set-variables
- ;; (org-todo-keywords '((sequence "REPORT" "BUG" "KNOWNCAUSE" "|" "FIXED"))) ;; 2020-01-02 - example
- '(org-todo-keywords '((sequence "TODO" "|" "DONE")
-		       (sequence "WK_CODING" "WK_PENDING_PR" "|" "WK_MERGED")
-		       (sequence "WK_TODO" "WK_DOING" "|" "WK_DONE")
-		       (sequence "UNPAUSED" "PUNTED" "|" "PAUSED")
-		       (sequence "|" "CANCELED")))
- ; themes
- '(ansi-color-names-vector
-   ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#e090d7" "#8cc4ff" "#eeeeec"])
- '(custom-enabled-themes (quote (deeper-blue)))
+(defun jc/org-setup()
+  "org-mode customizations"
+  (setq org-agenda-files "~/.org-jc.txt")
+  (custom-set-variables
+   ;; (org-todo-keywords '((sequence "REPORT" "BUG" "KNOWNCAUSE" "|" "FIXED"))) ;; 2020-01-02 - example
+   '(org-todo-keywords '((sequence "TODO" "|" "DONE")
+			 (sequence "WK_CODING" "WK_PENDING_PR" "|" "WK_MERGED")
+			 (sequence "WK_TODO" "WK_DOING" "|" "WK_DONE")
+			 (sequence "UNPAUSED" "PUNTED" "|" "PAUSED")
+			 (sequence "|" "CANCELED")))
+					; themes
+   '(ansi-color-names-vector
+     ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#e090d7" "#8cc4ff" "#eeeeec"])
+   '(custom-enabled-themes (quote (deeper-blue)))
 
- '(org-src-block-faces
-   '(("emacs-lisp" (:background "#EEE2FF"))
-     ("text" (:foreground "#FFFFFF"))))
- )
-
-
-(setq org-use-speed-commands t) ;; 2019-02-26 Trying this (use 'n' and 'p' to navigate up and down)
+   '(org-src-block-faces
+     '(("emacs-lisp" (:background "#EEE2FF"))
+       ("fundamental" (:foreground "#FFFFFF"))))
+   )
+  (setq org-use-speed-commands t) ;; 2019-02-26 Trying this (use 'n' and 'p' to navigate up and down)
+  )
+(jc/org-setup)
 ;; === STOP: org-mode ===
 
 ;; === START: origami-mode ===
