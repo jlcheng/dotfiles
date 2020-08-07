@@ -179,8 +179,6 @@
    ;; (org-todo-keywords '((sequence "REPORT" "BUG" "KNOWNCAUSE" "|" "FIXED"))) ;; 2020-01-02 - example
    '(org-todo-keywords '((sequence "TODO" "|" "DONE")
 			 (sequence "WK_CODING" "WK_PENDING_PR" "|" "WK_MERGED")
-			 (sequence "WK_TODO" "WK_DOING" "|" "WK_DONE")
-			 (sequence "UNPAUSED" "PUNTED" "|" "PAUSED")
 			 (sequence "|" "CANCELED")))
 					; themes
    '(ansi-color-names-vector
