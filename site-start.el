@@ -185,6 +185,8 @@
      ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#e090d7" "#8cc4ff" "#eeeeec"])
    '(custom-enabled-themes (quote (manoj-dark)))
 
+   ;; 2020-08-14 Graphviz
+   '(graphviz-dot-auto-preview-on-save t)
    '(org-fontify-quote-and-verse-blocks t)
    )
   (setq org-use-speed-commands t) ;; 2019-02-26 Trying this (use 'n' and 'p' to navigate up and down)
