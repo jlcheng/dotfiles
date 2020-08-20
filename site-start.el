@@ -119,9 +119,6 @@
    (setq default-frame-alist '((top . 0) (left . 0) (height . 61) (width . 217)))
    (set-face-attribute 'default (selected-frame))))
 
-;; === START: js-mode ===
-;; === END: js-mode ===
-
 ;; === START: org-mode ===
 (defun jc/org-mode-hook ()
   "org-mode hooks. auto-fill has been useful."
