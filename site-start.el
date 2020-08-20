@@ -399,12 +399,10 @@
 ;(global-set-key (kbd "M-v") 'jc/scroll-down-command)  ;; removed because they break copy-pasting for emacs running in a terminal
   
 (defun jc/hotkey1 ()
-  "Hotkey 1"
+  "An example of binding some function to a hot key"
   (interactive)
   (delete-other-windows)
-  (split-window-horizontally)
-  (bookmark-jump "work/todo")
-  (bookmark-jump-other-window "people.org"))
+  (split-window-horizontally))
 (define-key jc/right-map (kbd "M-1") `jc/hotkey1)
 
 (defun jc/window-width-66 ()
@@ -420,3 +418,9 @@
 (define-key jc/right-map (kbd "M-w") `jc/window-width-66)
 (define-key jc/right-map (kbd "M-.") `jc/enlarge-window-horizontally)
 (define-key jc/right-map (kbd "M-,") `jc/shrink-window-horizontally)
+
+(defun jc/org-time-stamp-inactive ()
+  "Run org-time-stamp-inactive in all modes"
+  (interactive)
+  (org-timestamp-inactive))
+(define-key jc/right-map (kbd "!") `jc/org-time-stamp-inactive)
