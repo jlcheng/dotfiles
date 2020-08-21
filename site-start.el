@@ -276,9 +276,9 @@
 (setq show-paren-delay 0)
 (custom-set-variables
  '(fill-column 120)
- '(global-auto-revert-mode t)
  '(auto-revert-interval 1))
 (show-paren-mode 1)
+(global-auto-revert-mode t)
 (global-eldoc-mode -1)
 (define-key jc/right-map (kbd "M-i") 'helm-semantic-or-imenu)
 (define-key jc/left-map (kbd "t") 'origami-toggle-all-nodes)  ;; [t]oggle
