@@ -234,6 +234,7 @@
 (define-key jc/right-map (kbd "M-j") 'jsnice-jc) ;; [j]son indent
 (define-key jc/right-map (kbd "M-p") 'bookmark-jump)
 (define-key jc/right-map (kbd "M-h") 'command-history)
+(define-key jc/right-map (kbd "M-k") 'kill-current-buffer)
 (define-key jc/left-map (kbd "M-r") 'revert-buffer)
 (define-key jc/left-map (kbd "M-s") 'whitespace-mode) ;; toggle [s]paces
 
