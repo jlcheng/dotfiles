@@ -278,7 +278,8 @@
 (setq show-paren-delay 0)
 (custom-set-variables
  '(fill-column 120)
- '(auto-revert-interval 1))
+ '(auto-revert-interval 1)
+ '(kill-whole-line t))
 (show-paren-mode 1)
 (global-auto-revert-mode t)
 (global-eldoc-mode -1)
@@ -287,6 +288,17 @@
 (define-key jc/left-map (kbd "t") 'origami-toggle-all-nodes)  ;; [t]oggle
 (define-key jc/c-1-map (kbd "C-r") 'point-to-register) ;; [r]emember
 (define-key jc/c-1-map (kbd "C-g") 'jump-to-register)  ;; [g]oto
+;; === START: aliases ===
+(defalias 'yes-or-no-p 'y-or-n-p)
+(defalias 'list-buffers 'ibuffer)
+(defalias 'rg 'helm-projectile-rg)
+(defalias 'cst 'org-cut-subtree)
+;; === END: aliases ===
+
+
+;; 2020-10-04 Trying out from from https://gist.github.com/mookid/64941602b840ca5ce81e2b3017d1e0a5
+;; 2020-10-05 Stopped using repeatable zap-to-char since it breaks zapping backward
+(define-key global-map [remap zap-to-char] 'zap-up-to-char)
 
 ;; === START: markdown-mode ===
 (defun jc/markdown-mode-hook()
