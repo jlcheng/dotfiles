@@ -293,6 +293,7 @@
 (defalias 'list-buffers 'ibuffer)
 (defalias 'rg 'helm-projectile-rg)
 (defalias 'cst 'org-cut-subtree)
+(defalias 'sc 'org-show-children)
 ;; === END: aliases ===
 
 
