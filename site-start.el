@@ -89,6 +89,7 @@
   (setq flycheck-python-flake8-executable "/Library/Frameworks/Python.framework/Versions/3.7/bin/flake8")
   (setq mac-command-modifier 'meta) ;; so the Alt key on WASD Code can be used for 'M-x'
   (setq mac-option-modifier 'super) ;; so the key left of Alt on WAS Code can be used for 'S-p'
+  (global-unset-key (kbd "C-x m"))  ;; I'll never compose-mail on emacs
   (global-unset-key (kbd "s-w"))    ;; macOS: frequenly leads to accidental killing frames
   (global-unset-key (kbd "s-n")))   ;; macOS: frequenly leads to accidental new frames
 
@@ -125,6 +126,7 @@
   (define-key org-mode-map (kbd "C-c C-0") 'org-mark-ring-goto)
   (define-key org-mode-map (kbd "C-c C-n") nil) ;; next heading, but cut across different levels
   (define-key org-mode-map (kbd "C-c C-p") nil) ;; prev heading
+  (define-key org-mode-map (kbd "C-c s") 'org-show-subtree)
   (define-key org-mode-map (kbd "C-c C-x C-f") nil) ;; Unset org-emphasize, conflicts with search
   (set-fill-column 120))
 (add-hook 'org-mode-hook 'jc/org-mode-hook)
