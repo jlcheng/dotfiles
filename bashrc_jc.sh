@@ -39,6 +39,13 @@ gitdiffjc ()
 # git config --global format.pretty "format:%C(auto)%h %<(14)%cr %<(20,trunc)%ae %s%d"
 # === END: git ===
 
+# === START: fzf ===
+if [ -f "$HOME/pubprjs/fzf/shell/completion.bash" ]; then
+    source $HOME/pubprjs/fzf/shell/completion.bash
+    source $HOME/pubprjs/fzf/shell/key-bindings.bash
+fi
+# === END: fzf ===
+
 export EDITOR=vi
 if [[ ":$PATH:" != *":/sbin:"* ]]; then
     export PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin"
