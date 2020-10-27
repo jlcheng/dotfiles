@@ -281,7 +281,8 @@
 (custom-set-variables
  '(fill-column 120)
  '(auto-revert-interval 1)
- '(kill-whole-line t))
+ '(kill-whole-line t)
+ '(visible-bell))
 (show-paren-mode 1)
 (global-auto-revert-mode t)
 (global-eldoc-mode -1)
