@@ -442,3 +442,10 @@
   (interactive)
   (org-timestamp-inactive))
 (define-key jc/right-map (kbd "!") `jc/org-time-stamp-inactive)
+
+(defun jc/emacs-notes ()
+  "Open up emacs notes in the other window"
+  (interactive)
+  (bookmark-jump "emacs_notes.org" 'switch-to-buffer-other-window)
+  (outline-show-all))
+(define-key jc/right-map (kbd "M-e") `jc/emacs-notes)
