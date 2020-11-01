@@ -25,6 +25,7 @@
    'php-mode                    ;; 2019-09-11 php? I'm doing this because of work :(
    'projectile 'helm-projectile ;; 2019-05-22 tried and loved it
    'python-mode
+   'python-black                ;; 2020-10-31 trying black
    'go-playground		;; 2019-05-27 tried and loved it
    'graphviz-dot-mode
    'markdown-mode
@@ -228,7 +229,12 @@
 ;; === STOP: terraform-mode ===
 
 ;; === START: python-mode ===
-(setq python-shell-interpreter "python3")
+(defun jc/python-init()
+  "Init-time customizations for Python"
+  (custom-set-variables
+   '(python-shell-interpreter "python3"))
+  (python-black-on-save-mode))
+(jc/python-init)
 ;; === STOP: python-mode ===
 
 (global-set-key (kbd "M-s M-s") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
