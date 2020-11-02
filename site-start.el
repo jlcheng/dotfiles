@@ -297,6 +297,7 @@
 (define-key jc/left-map (kbd "t") 'origami-toggle-all-nodes)  ;; [t]oggle
 (define-key jc/c-1-map (kbd "C-r") 'point-to-register) ;; [r]emember
 (define-key jc/c-1-map (kbd "C-g") 'jump-to-register)  ;; [g]oto
+(define-key jc/right-map (kbd "M-b") 'ibuffer)  ;; i[b]uffer
 ;; === START: aliases ===
 (defalias 'yes-or-no-p 'y-or-n-p)
 (defalias 'list-buffers 'ibuffer)
