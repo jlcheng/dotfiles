@@ -91,6 +91,7 @@
   (setq mac-command-modifier 'meta) ;; so the Alt key on WASD Code can be used for 'M-x'
   (setq mac-option-modifier 'super) ;; so the key left of Alt on WAS Code can be used for 'S-p'
   (global-unset-key (kbd "C-x m"))  ;; I'll never compose-mail on emacs
+  (global-unset-key (kbd "C-x b"))  ;; Replace with helm-mini
   (global-unset-key (kbd "s-w"))    ;; macOS: frequenly leads to accidental killing frames
   (global-unset-key (kbd "s-n")))   ;; macOS: frequenly leads to accidental new frames
 
@@ -241,14 +242,6 @@
   ;; Ubuntu: run a no-op command to bring the window into focus
   (add-hook 'server-visit-hook (lambda() (message " "))))
 
-(define-key jc/right-map (kbd "f") 'helm-rg)
-(let ((modes '(helm-mode ivy-mode)))
-  (funcall (cl-first (seq-filter 'functionp modes))))
-(when (functionp 'helm-mode)
-  (define-key global-map (kbd "C-x C-f") 'helm-find-files)
-  (define-key global-map (kbd "C-x C-b") 'helm-mini)
-  (define-key global-map (kbd "M-x") 'helm-M-x))
-
 ;;; https://shreevatsa.wordpress.com/2007/01/06/using-emacsclient/
 (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function)
 
@@ -352,6 +345,13 @@
 
 ;;; === START: helm ===
 (defun jc/init/helm ()
+  (define-key jc/right-map (kbd "f") 'helm-rg)
+  (let ((modes '(helm-mode ivy-mode)))
+    (funcall (cl-first (seq-filter 'functionp modes))))
+  (when (functionp 'helm-mode)
+    (define-key global-map (kbd "C-x C-f") 'helm-find-files)
+    (define-key global-map (kbd "C-x b") 'helm-mini)
+    (define-key global-map (kbd "M-x") 'helm-M-x))  
   (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; 2020-02-21 try http://tuhdo.github.io/helm-intro.html 
   (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
   (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
