@@ -83,7 +83,7 @@
 (define-key jc/right-map (kbd "M-n M-k") 'jc/show-keymaps)
 (define-key jc/left-map (kbd "M-q") 'jc/open-scratch)
 
-(defun misc-macOS-jc ()
+(defun jc/init/misc-macOS-jc ()
   "macOS misc customizations"
   (message (documentation 'misc-macOS-jc))
   (setq flycheck-python-mypy-executable "/Library/Frameworks/Python.framework/Versions/3.7/bin/mypy")
@@ -196,16 +196,16 @@
 ;; === STOP: org-mode ===
 
 ;; === START: origami-mode ===
-(defun jc/origami-mode-init ()
+(defun jc/init/origami-mode ()
   "Init-time customizations for origami-mode"
   (add-hook 'emacs-lisp-mode-hook 'origami-mode)
   (add-hook 'python-mode-hook 'origami-mode)
   (setq origami-show-fold-header t))
-(jc/origami-mode-init)
+(jc/init/origami-mode)
 ;; === STOP: origami-mode ===
 
 ;; === START: go-mode ===
-(defun jc/go-mode-init ()
+(defun jc/init/go-mode ()
   "Init-time customizations for go-mode"
   (setq go-test-args "-v")
   (setq godoc-at-point-function 'godoc-gogetdoc)
@@ -217,7 +217,7 @@
   (add-hook 'go-mode-hook 'jc/go-mode-hook)
   (add-hook 'before-save-hook 'gofmt-before-save)
   )
-(jc/go-mode-init)
+(jc/init/go-mode)
 ;; === STOP: go-mode ===
 
 ;; === START: terraform-mode ===
@@ -278,32 +278,37 @@
  create-lockfiles nil)
 
 ;;; misc
-(setq column-number-mode t)
-(setq imenu-auto-rescan t)
-(setq confirm-kill-emacs 'y-or-n-p)
-(setq register-preview-delay 0)
-(setq scroll-error-top-bottom t)
-(setq show-paren-delay 0)
-(custom-set-variables
- '(fill-column 120)
- '(auto-revert-interval 1)
- '(kill-whole-line t)
- '(visible-bell))
-(show-paren-mode 1)
-(global-auto-revert-mode t)
-(global-eldoc-mode -1)
-(auto-save-visited-mode)
-(define-key jc/right-map (kbd "M-i") 'helm-semantic-or-imenu)
-(define-key jc/left-map (kbd "t") 'origami-toggle-all-nodes)  ;; [t]oggle
-(define-key jc/c-1-map (kbd "C-r") 'point-to-register) ;; [r]emember
-(define-key jc/c-1-map (kbd "C-g") 'jump-to-register)  ;; [g]oto
-(define-key jc/right-map (kbd "M-b") 'ibuffer)  ;; i[b]uffer
-
+(defun jc/init/misc ()
+  (setq column-number-mode t)
+  (setq imenu-auto-rescan t)
+  (setq confirm-kill-emacs 'y-or-n-p)
+  (setq register-preview-delay 0)
+  (setq scroll-error-top-bottom t)
+  (setq show-paren-delay 0)
+  (custom-set-variables
+   '(fill-column 120)
+   '(auto-revert-interval 1)
+   '(kill-whole-line t)
+   '(ibuffer-never-show-predicates '("^\\*dire" "^\\*") nil (ibuf-ext)) 
+   '(visible-bell))
+  (show-paren-mode 1)
+  (global-auto-revert-mode t)
+  (global-eldoc-mode -1)
+  (auto-save-visited-mode)
+  (define-key jc/right-map (kbd "M-i") 'helm-semantic-or-imenu)
+  (define-key jc/left-map (kbd "t") 'origami-toggle-all-nodes)  ;; [t]oggle
+  (define-key jc/c-1-map (kbd "C-r") 'point-to-register) ;; [r]emember
+  (define-key jc/c-1-map (kbd "C-g") 'jump-to-register)  ;; [g]oto
+  (define-key jc/right-map (kbd "M-b") 'ibuffer)  ;; i[b]uffer
+  )
+(jc/init/misc)
 ;; === START: aliases ===
-(defalias 'yes-or-no-p 'y-or-n-p)
-(defalias 'list-buffers 'ibuffer)
-(defalias 'rg 'helm-projectile-rg)
-(defalias 'cst 'org-cut-subtree)
+(defun jc/init/aliases ()
+  (defalias 'yes-or-no-p 'y-or-n-p)
+  (defalias 'list-buffers 'ibuffer)
+  (defalias 'rg 'helm-projectile-rg)
+  (defalias 'cst 'org-cut-subtree))
+(jc/init/aliases)
 ;; === END: aliases ===
 
 
@@ -352,12 +357,17 @@
 (setq inhibit-startup-screen t)
 
 ;;; === START: helm ===
-(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; 2020-02-21 try http://tuhdo.github.io/helm-intro.html 
-(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
-(define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
-;; (helm-autoresize-mode t) ;; comment out, the selected entry moving down as the buffer resizes is too jarring
-(global-set-key (kbd "M-y") 'helm-show-kill-ring)
-(global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
+(defun jc/init/helm ()
+  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; 2020-02-21 try http://tuhdo.github.io/helm-intro.html 
+  (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
+  (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
+  ;; (helm-autoresize-mode t) ;; comment out, the selected entry moving down as the buffer resizes is too jarring
+  (global-set-key (kbd "M-y") 'helm-show-kill-ring)
+  (global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
+  (custom-set-variables
+   '(helm-boring-buffer-regexp-list
+     '("\\` " "\\`\\*helm" "\\`\\*Echo Area" "\\`\\*Minibuf" "\\`\\*"))))
+(jc/init/helm)
 ;;; === END: helm ===
 
 ;;; === START: spellcheck ===
@@ -391,8 +401,7 @@
 ;;; === START: flycheck ===
 (custom-set-variables
  '(flycheck-json-python-json-executable "python3")
- '(flycheck-python-pycompile-executable "python3")
- '(ibuffer-never-show-predicates '("^\\*dire" "^\\*helm") nil (ibuf-ext))
+ '(flycheck-python-pycompile-executable "python3") 
  '(flycheck-disabled-checkers '(python-pylint go-golint)) ;; 2020-02-26 trying flycheck for go
  )
 (add-hook 'python-mode-hook 'flycheck-mode)
