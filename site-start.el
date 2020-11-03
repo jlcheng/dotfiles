@@ -360,7 +360,8 @@
   (global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
   (custom-set-variables
    '(helm-boring-buffer-regexp-list
-     '("\\` " "\\`\\*helm" "\\`\\*Echo Area" "\\`\\*Minibuf" "\\`\\*"))))
+     '("\\` " "\\`\\*helm" "\\`\\*Echo Area" "\\`\\*Minibuf" "\\`\\*"))
+   '(helm-ff-skip-boring-files t)))
 (jc/init/helm)
 ;;; === END: helm ===
 
