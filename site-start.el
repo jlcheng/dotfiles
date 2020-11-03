@@ -29,7 +29,7 @@
    'go-playground		;; 2019-05-27 tried and loved it
    'graphviz-dot-mode
    'markdown-mode
-   'origami
+   ;;'origami                   ;; 2020-11-02 turn off -- do I use it?
    'terraform-mode              ;; 2019-10-10 trying terraform
    'try				;; 2019-07-15 allows one to try packages without installing them
    'which-key			;; 2019-07-15 tried and liked it   
@@ -83,7 +83,7 @@
 (define-key jc/right-map (kbd "M-n M-k") 'jc/show-keymaps)
 (define-key jc/left-map (kbd "M-q") 'jc/open-scratch)
 
-(defun jc/init/misc-macOS-jc ()
+(defun jc/init/misc-macOS ()
   "macOS misc customizations"
   (message (documentation 'misc-macOS-jc))
   (setq flycheck-python-mypy-executable "/Library/Frameworks/Python.framework/Versions/3.7/bin/mypy")
@@ -95,7 +95,7 @@
   (global-unset-key (kbd "s-n")))   ;; macOS: frequenly leads to accidental new frames
 
 
-(defun misc-linux-jc()
+(defun jc/init/misc-linux()
   "linux misc customizations"
   (custom-set-variables
    '(flycheck-python-flake8-executable "/home/jcheng/.venv/privmono/bin/flake8")
@@ -113,11 +113,11 @@
    (set-face-attribute 'default (selected-frame) :height 130))
   ((darwin)
    (message "macOS")
-   (misc-macOS-jc)
+   (jc/init/misc-macOS)
    (setq default-frame-alist '((top . 0) (left . 0) (height . 60) (width . 160))))
   ((gnu/linux)
    (message "gnu/linux")
-   (misc-linux-jc)
+   (jc/init/misc-linux)
    (setq default-frame-alist '((top . 0) (left . 0) (height . 61) (width . 217)))
    (set-face-attribute 'default (selected-frame))))
 
@@ -132,23 +132,19 @@
   (set-fill-column 120))
 (add-hook 'org-mode-hook 'jc/org-mode-hook)
 
-(defun org-last-heading-same-level-jc () ;; 2019-06-26: Do I ever use this function?
-  "move to last heading on the same level"
-  (interactive)
-  (org-forward-heading-same-level 1000)
-  (org-next-visible-heading 1)
-  (backward-char))
-(define-key jc/left-map (kbd "M-f") 'org-last-heading-same-level-jc)
-(global-set-key (kbd "C-c a") 'org-agenda)
-(global-set-key (kbd "C-c C-x C-f") 'helm-projectile-find-file)
-(define-key jc/left-map (kbd "M-b") 'org-switchb)
-
-(setq org-archive-location "~/org/archive/%s_archive.org::datetree/* Finished Tasks"
-      org-startup-folded 'content ;; https://orgmode.org/manual/Initial-visibility.html#Initial-visibility
-      org-startup-indented t      ;; https://orgmode.org/manual/Clean-view.html
-      org-src-fontify-natively t
-      org-src-tab-acts-natively t
-      ) ; unclutter directories with org files
+(defun jc/init/org-mode ()
+  (define-key jc/left-map (kbd "M-f") 'org-last-heading-same-level-jc)
+  (global-set-key (kbd "C-c a") 'org-agenda)
+  (global-set-key (kbd "C-c C-x C-f") 'helm-projectile-find-file)
+  (define-key jc/left-map (kbd "M-b") 'org-switchb)
+  (setq org-archive-location "~/org/archive/%s_archive.org::datetree/* Finished Tasks"
+	org-startup-folded 'content ;; https://orgmode.org/manual/Initial-visibility.html#Initial-visibility
+	org-startup-indented t      ;; https://orgmode.org/manual/Clean-view.html
+	org-src-fontify-natively t
+	org-src-tab-acts-natively t
+	) ; unclutter directories with org files
+  )
+(jc/init/org-mode)
 
 (defun jc/org-append-agenda-file (newfile)
   "Append a file, if non-present, to ~/.org-jc.txt; 2019-11-25 - I am only keeping this function as a reference on elisp code. I hardly ever use it."
@@ -237,16 +233,6 @@
 (jc/python-init)
 ;; === STOP: python-mode ===
 
-(global-set-key (kbd "M-s M-s") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
-(global-set-key (kbd "M-S") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
-(define-key jc/right-map (kbd "M-j") 'jsnice-jc) ;; [j]son indent
-(define-key jc/right-map (kbd "M-p") 'bookmark-jump)
-(define-key jc/right-map (kbd "M-h") 'command-history)
-(define-key jc/right-map (kbd "M-k") 'kill-current-buffer)
-(define-key jc/left-map (kbd "M-r") 'revert-buffer)
-(define-key jc/left-map (kbd "M-s") 'whitespace-mode) ;; toggle [s]paces
-
-
 ;;; enable emacsclient support unless we're running 'emacs-nox'
 (unless
     (string-match "emacs-nox" (cl-first command-line-args))
@@ -295,6 +281,14 @@
   (global-auto-revert-mode t)
   (global-eldoc-mode -1)
   (auto-save-visited-mode)
+  (global-set-key (kbd "M-s M-s") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
+  (global-set-key (kbd "M-S") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
+  (define-key jc/right-map (kbd "M-j") 'jsnice-jc) ;; [j]son indent
+  (define-key jc/right-map (kbd "M-p") 'bookmark-jump)
+  (define-key jc/right-map (kbd "M-h") 'command-history)
+  (define-key jc/right-map (kbd "M-k") 'kill-current-buffer)
+  (define-key jc/left-map (kbd "M-r") 'revert-buffer)
+  (define-key jc/left-map (kbd "M-s") 'whitespace-mode) ;; toggle [s]paces
   (define-key jc/right-map (kbd "M-i") 'helm-semantic-or-imenu)
   (define-key jc/left-map (kbd "t") 'origami-toggle-all-nodes)  ;; [t]oggle
   (define-key jc/c-1-map (kbd "C-r") 'point-to-register) ;; [r]emember
