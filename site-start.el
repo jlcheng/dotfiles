@@ -298,6 +298,7 @@
 (define-key jc/c-1-map (kbd "C-r") 'point-to-register) ;; [r]emember
 (define-key jc/c-1-map (kbd "C-g") 'jump-to-register)  ;; [g]oto
 (define-key jc/right-map (kbd "M-b") 'ibuffer)  ;; i[b]uffer
+
 ;; === START: aliases ===
 (defalias 'yes-or-no-p 'y-or-n-p)
 (defalias 'list-buffers 'ibuffer)
@@ -391,6 +392,7 @@
 (custom-set-variables
  '(flycheck-json-python-json-executable "python3")
  '(flycheck-python-pycompile-executable "python3")
+ '(ibuffer-never-show-predicates '("^\\*dire" "^\\*helm") nil (ibuf-ext))
  '(flycheck-disabled-checkers '(python-pylint go-golint)) ;; 2020-02-26 trying flycheck for go
  )
 (add-hook 'python-mode-hook 'flycheck-mode)
