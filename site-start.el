@@ -85,7 +85,6 @@
 
 (defun jc/init/misc-macOS ()
   "macOS misc customizations"
-  (message "macOS misc customizations")
   (setq flycheck-python-mypy-executable "/Library/Frameworks/Python.framework/Versions/3.7/bin/mypy")
   (setq flycheck-python-flake8-executable "/Library/Frameworks/Python.framework/Versions/3.7/bin/flake8")
   (setq mac-command-modifier 'meta) ;; so the Alt key on WASD Code can be used for 'M-x'
@@ -93,8 +92,8 @@
   (global-unset-key (kbd "C-x m"))  ;; I'll never compose-mail on emacs
   (global-unset-key (kbd "C-x b"))  ;; Replace with helm-mini
   (global-unset-key (kbd "s-w"))    ;; macOS: frequenly leads to accidental killing frames
-  (global-unset-key (kbd "s-n")))   ;; macOS: frequenly leads to accidental new frames
-
+  (global-unset-key (kbd "s-n"))   ;; macOS: frequenly leads to accidental new frames
+  )
 
 (defun jc/init/misc-linux()
   "linux misc customizations"
