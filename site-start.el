@@ -85,7 +85,7 @@
 
 (defun jc/init/misc-macOS ()
   "macOS misc customizations"
-  (message (documentation 'misc-macOS-jc))
+  (message "macOS misc customizations")
   (setq flycheck-python-mypy-executable "/Library/Frameworks/Python.framework/Versions/3.7/bin/mypy")
   (setq flycheck-python-flake8-executable "/Library/Frameworks/Python.framework/Versions/3.7/bin/flake8")
   (setq mac-command-modifier 'meta) ;; so the Alt key on WASD Code can be used for 'M-x'
