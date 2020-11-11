@@ -20,6 +20,7 @@
 (defun jc/init/installs ()
   "Installs favorite packages"
   (jc/ensure-packages
+   'flycheck
    'flyspell-correct-helm 'helm 'helm-rg ;; helm is a super nice completion system
    'magit
    'php-mode                    ;; 2019-09-11 php? I'm doing this because of work :(
@@ -86,8 +87,8 @@
 (defun jc/init/misc-macOS ()
   "macOS misc customizations"
   (custom-set-variables
-   '(flycheck-python-mypy-executable "/Library/Frameworks/Python.framework/Versions/3.7/bin/mypy")
-   '(flycheck-python-flake8-executable "/Library/Frameworks/Python.framework/Versions/3.7/bin/flake8"))
+   '(flycheck-python-mypy-executable "/Users/jcheng/.pyenv/shims/mypy")
+   '(flycheck-python-flake8-executable "/Users/jcheng/.pyenv/shims/flake8"))
   (setq mac-command-modifier 'meta) ;; so the Alt key on WASD Code can be used for 'M-x'
   (setq mac-option-modifier 'super) ;; so the key left of Alt on WAS Code can be used for 'S-p'
   (global-unset-key (kbd "C-x m"))  ;; I'll never compose-mail on emacs
@@ -351,9 +352,10 @@
   (let ((modes '(helm-mode ivy-mode)))
     (funcall (cl-first (seq-filter 'functionp modes))))
   (when (functionp 'helm-mode)
+    (helm-mode)
     (define-key global-map (kbd "C-x C-f") 'helm-find-files)
     (define-key global-map (kbd "C-x b") 'helm-mini)
-    (define-key global-map (kbd "M-x") 'helm-M-x))  
+    (define-key global-map (kbd "M-x") 'helm-M-x))
   (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; 2020-02-21 try http://tuhdo.github.io/helm-intro.html 
   (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
   (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
