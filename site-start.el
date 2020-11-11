@@ -93,7 +93,6 @@
   (setq mac-command-modifier 'meta) ;; so the Alt key on WASD Code can be used for 'M-x'
   (setq mac-option-modifier 'super) ;; so the key left of Alt on WAS Code can be used for 'S-p'
   (global-unset-key (kbd "C-x m"))  ;; I'll never compose-mail on emacs
-  (global-unset-key (kbd "C-x b"))  ;; Replace with helm-mini
   (global-unset-key (kbd "s-w"))    ;; macOS: frequenly leads to accidental killing frames
   (global-unset-key (kbd "s-n"))   ;; macOS: frequenly leads to accidental new frames
   )
