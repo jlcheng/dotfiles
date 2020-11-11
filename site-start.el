@@ -25,7 +25,7 @@
    'php-mode                    ;; 2019-09-11 php? I'm doing this because of work :(
    'projectile 'helm-projectile ;; 2019-05-22 tried and loved it
    'python-mode
-   'python-black                ;; 2020-10-31 trying black
+   'python-black                ;; 2020-10-31 tried and liked it
    'go-playground		;; 2019-05-27 tried and loved it
    'graphviz-dot-mode
    'markdown-mode
@@ -229,7 +229,8 @@
   "Init-time customizations for Python"
   (custom-set-variables
    '(python-shell-interpreter "python3"))
-  (python-black-on-save-mode))
+  (if (functionp 'python-black-on-save-mode) (python-black-on-save-mode))
+  )
 (jc/python-init)
 ;; === STOP: python-mode ===
 
