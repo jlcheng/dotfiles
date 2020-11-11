@@ -85,8 +85,9 @@
 
 (defun jc/init/misc-macOS ()
   "macOS misc customizations"
-  (setq flycheck-python-mypy-executable "/Library/Frameworks/Python.framework/Versions/3.7/bin/mypy")
-  (setq flycheck-python-flake8-executable "/Library/Frameworks/Python.framework/Versions/3.7/bin/flake8")
+  (custom-set-variables
+   '(flycheck-python-mypy-executable "/Library/Frameworks/Python.framework/Versions/3.7/bin/mypy")
+   '(flycheck-python-flake8-executable "/Library/Frameworks/Python.framework/Versions/3.7/bin/flake8"))
   (setq mac-command-modifier 'meta) ;; so the Alt key on WASD Code can be used for 'M-x'
   (setq mac-option-modifier 'super) ;; so the key left of Alt on WAS Code can be used for 'S-p'
   (global-unset-key (kbd "C-x m"))  ;; I'll never compose-mail on emacs
@@ -229,9 +230,10 @@
   "Init-time customizations for Python"
   (custom-set-variables
    '(python-shell-interpreter "python3"))
-  (if (functionp 'python-black-on-save-mode) (python-black-on-save-mode))
+  (if (functionp 'python-black-on-save-mode) (add-hook 'python-mode-hook 'python-black-on-save-mode))
   )
 (jc/python-init)
+
 ;; === STOP: python-mode ===
 
 ;;; enable emacsclient support unless we're running 'emacs-nox'
