@@ -87,7 +87,6 @@
 (defun jc/init/misc-macOS ()
   "macOS misc customizations"
   (custom-set-variables
-   '(flycheck-python-mypy-executable (expand-file-name "~/.pyenv/shims/mypy"))
    '(flycheck-python-pycompile-executable (expand-file-name "~/.pyenv/shims/python"))
    '(flycheck-python-pylint-executable (expand-file-name "~/.pyenv/shims/pylint"))
    '(flycheck-python-flake8-executable (expand-file-name "~/.pyenv/shims/flake8")))
