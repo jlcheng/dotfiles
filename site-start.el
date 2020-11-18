@@ -387,9 +387,14 @@
 
 ;;; === START: recentf ===
 ;; https://www.emacswiki.org/emacs/RecentFiles#toc9 - prevents blocking of emacs startup
-(require 'recentf)
-(setq recentf-auto-cleanup 'never)
-(recentf-mode)
+(defun jc/init/recentf ()
+  "recentf init"
+  (require 'recentf)
+  (custom-set-variables
+   '(recentf-auto-cleanup 'never)
+   '(recentf-max-saved-items 1000))
+  (recentf-mode))
+(jc/init/recentf)
 ;;; === END: recentf ===
 
 ;;; === START: projectile ===
