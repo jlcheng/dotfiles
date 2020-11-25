@@ -364,6 +364,11 @@
   (global-set-key (kbd "M-y") 'helm-show-kill-ring)
   (global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
   (custom-set-variables
+   ;; 2020-11-26 Use helm in separate frame
+   '(helm-display-function 'helm-display-buffer-in-own-frame)
+   '(helm-display-buffer-reuse-frame t)
+   '(helm-use-undecorated-frame-option t)
+   '(helm-display-buffer-width 200)
    '(helm-boring-buffer-regexp-list
      '("\\` " "\\`\\*helm" "\\`\\*Echo Area" "\\`\\*Minibuf" "\\`\\*"))
    '(helm-ff-skip-boring-files t)))
