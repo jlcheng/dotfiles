@@ -370,6 +370,8 @@
    '(helm-display-buffer-height 40)
    '(helm-display-buffer-width 200)
    ;; END:
+
+   '(helm-buffer-max-length 40)
    
    '(helm-boring-buffer-regexp-list
      '("\\` " "\\`\\*helm" "\\`\\*Echo Area" "\\`\\*Minibuf" "\\`\\*"))
