@@ -367,7 +367,7 @@
   (custom-set-variables
    ;; 2020-11-26 Use helm in separate frame
    '(helm-display-function 'helm-display-buffer-in-own-frame)
-   '(helm-use-undecorated-frame-option t)
+   '(helm-use-undecorated-frame-option nil)
    '(helm-display-buffer-height 40)
    '(helm-display-buffer-width 200)
    ;; END:
