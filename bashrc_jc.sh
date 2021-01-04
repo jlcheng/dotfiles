@@ -36,9 +36,14 @@ gitdiffjc ()
     eval $CMD
 }
 
-jc.co()
+jc.gco()
 {
     git checkout $(git branch --format="%(refname:lstrip=2)" | fzf)
+}
+
+jc.gm()
+{
+    git merge $(git branch --format="%(refname:lstrip=2)" | fzf)
 }
 # git config --global pretty.j "format:%C(auto)%h %<(14)%cr %<(20,trunc)%ae %s%d"
 # git config --global format.pretty "format:%C(auto)%h %<(14)%cr %<(20,trunc)%ae %s%d"
