@@ -2,6 +2,17 @@
 ;;; Installation --- 
 ;;;   echo '(load-file (expand-file-name "~/privprjs/dotfiles/site-start.el"))' >> ~/.emacs.d/init.el
 
+;; Make emacs... start faster?  https://tychoish.com/post/towards-faster-emacs-start-times/
+(defun jc/fast-startup ()
+  (setq inhibit-startup-echo-area-message "tychoish")
+  (setq inhibit-startup-message 't)
+  (setq initial-major-mode 'fundamental-mode)
+  (setq initial-scratch-message 'nil)
+  (setq jit-lock-stealth-time nil)
+  (setq jit-lock-defer-time nil)
+  (setq jit-lock-defer-time 0.05)
+  (setq jit-lock-stealth-load 200))
+
 ;; Required packages
 (defvar jc/package-refreshed-p nil "Sets to t once we ran package-refresh-contents once")
 (defun jc/package-refresh-contents-once ()
