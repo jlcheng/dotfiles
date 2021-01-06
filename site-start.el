@@ -12,6 +12,7 @@
   (setq jit-lock-defer-time nil)
   (setq jit-lock-defer-time 0.05)
   (setq jit-lock-stealth-load 200))
+(jc/fast-startup)
 
 ;; Required packages
 (defvar jc/package-refreshed-p nil "Sets to t once we ran package-refresh-contents once")
@@ -402,6 +403,7 @@
   (if flyspell-mode
       (flyspell-correct-at-point)
     (ispell-word)))
+(define-key jc/c-1-map (kbd "C-1") 'flyspell-buffer)
 (define-key jc/c-1-map (kbd "C-2") 'flyspell-mode)
 (define-key jc/c-1-map (kbd "C-4") 'jc/correct-at-word)
 ;;; === END: spellcheck ===
