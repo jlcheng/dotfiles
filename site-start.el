@@ -143,6 +143,7 @@
   (define-key org-mode-map (kbd "C-c C-n") nil) ;; next heading, but cut across different levels
   (define-key org-mode-map (kbd "C-c C-p") nil) ;; prev heading
   (define-key org-mode-map (kbd "C-c s") 'org-show-subtree)
+  (define-key org-agenda-mode-map (kbd "M-s M-s") 'org-save-all-org-buffers)
   (define-key org-mode-map (kbd "C-c C-x C-f") nil) ;; Unset org-emphasize, conflicts with search
   (set-fill-column 120))
 (add-hook 'org-mode-hook 'jc/org-mode-hook)
