@@ -378,8 +378,8 @@
   (global-set-key (kbd "M-y") 'helm-show-kill-ring)
   (global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
   (custom-set-variables
-   ;; 2020-11-26 Use helm in separate frame
-   '(helm-display-function 'helm-display-buffer-in-own-frame)
+   ;; 2020-11-26 Use helm in separate frame 2021-01-11 somewhat didn't enjoy it
+   ;;   '(helm-display-function 'helm-display-buffer-in-own-frame)
    '(helm-use-undecorated-frame-option nil)
    '(helm-display-buffer-height 40)
    '(helm-display-buffer-width 200)
