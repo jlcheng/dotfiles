@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 from pathlib import Path
-import os.path
 import os
 
 
@@ -30,13 +29,13 @@ def install_link(src, dst):
 
     if not dst.exists():
         print(f"installing {src} to {dst}")
-        os.symlink(os.path.abspath(src), dst)
+        os.symlink(Path(src).resolve(), dst)
     else:
         print(f"{src} already installed")
 
 
 def main():
-    os.chdir(os.path.dirname(os.path.abspath(__file__)))
+    os.chdir(Path(__file__).resolve().parent)
 
     install_line("bashrc_jc.sh", "~/.bashrc", ". ~/privprjs/dotfiles/bashrc_jc.sh")
     install_line(
