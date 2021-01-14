@@ -148,11 +148,16 @@
   (set-fill-column 120))
 (add-hook 'org-mode-hook 'jc/org-mode-hook)
 
+(defun jc/org-agenda-list-post (x)
+  "post advice for org-agenda-list"
+  (delete-other-windows))
+
 (defun jc/init/org-mode ()
   (define-key jc/left-map (kbd "M-f") 'org-last-heading-same-level-jc)
   (global-set-key (kbd "C-c a") 'org-agenda)
   (global-set-key (kbd "C-c C-x C-f") 'helm-projectile-find-file)
   (define-key jc/left-map (kbd "M-b") 'org-switchb)
+  (advice-add 'org-agenda-list :filter-return #'jc/org-agenda-list-post)
   (setq org-archive-location "~/org/archive/%s_archive.org::datetree/* Finished Tasks"
 	org-startup-folded 'content ;; https://orgmode.org/manual/Initial-visibility.html#Initial-visibility
 	org-startup-indented t      ;; https://orgmode.org/manual/Clean-view.html
