@@ -298,7 +298,7 @@
   (show-paren-mode 1)
   (global-auto-revert-mode t)
   (global-eldoc-mode -1)
-  (auto-save-visited-mode)
+  ; (auto-save-visited-mode)  ;; disabled on 2021-01-31 to favor save-some-buffers instead
   (global-set-key (kbd "M-s M-s") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
   (global-set-key (kbd "M-S") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
   (define-key jc/right-map (kbd "M-j") 'jsnice-jc) ;; [j]son indent
