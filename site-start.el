@@ -205,6 +205,7 @@
 
    ;; 2020-08-14 Graphviz
    '(graphviz-dot-auto-preview-on-save t)
+   '(graphviz-dot-preview-extension "svg")
    '(org-fontify-quote-and-verse-blocks t)
    )
   (require 'org-tempo)  ;; 2020-08-20 < s TAB to create #+begin_src blocks
