@@ -295,6 +295,7 @@
    '(ibuffer-never-show-predicates '("^\\*dire" "^\\*") nil (ibuf-ext))
    '(mode-require-final-newline nil)
    '(sgml-basic-offset 4)
+   '(display-time-day-and-date t)
    '(visible-bell))
   (show-paren-mode 1)
   (global-auto-revert-mode t)
