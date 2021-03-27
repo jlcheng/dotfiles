@@ -297,7 +297,8 @@
    '(sgml-basic-offset 4)
    '(display-time-day-and-date t)
    '(visible-bell))
-  (show-paren-mode 1)
+  (display-time)
+  (show-paren-mode 1)  
   (global-auto-revert-mode t)
   (global-eldoc-mode -1)
   ; (auto-save-visited-mode)  ;; disabled on 2021-01-31 to favor save-some-buffers instead
