@@ -196,9 +196,8 @@
   (custom-set-variables
    ;; (org-todo-keywords '((sequence "REPORT" "BUG" "KNOWNCAUSE" "|" "FIXED"))) ;; 2020-01-02 - example
    '(org-todo-keywords '((sequence "TODO" "|" "DONE")
-			 (sequence "WK_CODING" "WK_PENDING_PR" "|" "WK_MERGED")
 			 (sequence "|" "CANCELED")))
-					; themes
+   ;; themes
    '(ansi-color-names-vector
      ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#e090d7" "#8cc4ff" "#eeeeec"])
    '(custom-enabled-themes (quote (manoj-dark)))
