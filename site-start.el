@@ -39,6 +39,7 @@
    'projectile 'helm-projectile ;; 2019-05-22 tried and loved it
    'python-mode
    'python-black                ;; 2020-10-31 tried and liked it
+   'go-mode
    'go-playground		;; 2019-05-27 tried and loved it
    'graphviz-dot-mode
    'markdown-mode
