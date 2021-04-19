@@ -22,6 +22,4 @@ fi
 # === END: terraform ===
 
 
-export GOPROXY=http://localhost:19093
-
 echo "bashrc_jc_linux.sh"
