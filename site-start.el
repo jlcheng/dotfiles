@@ -74,12 +74,15 @@
 (add-to-list 'exec-path "/Library/Frameworks/Python.framework/Versions/3.6/bin/mypy") ;; hack for mac os
 
 ;; Keymaps
-(defvar jc/right-map (make-keymap) "Keys whose suffix are intended for the right hand.")
-(define-key global-map (kbd "M-n") jc/right-map)
-(defvar jc/left-map (make-keymap) "Keys whose suffix are intended for the left hand.")
-(define-key global-map (kbd "M-c") jc/left-map)
-(defvar jc/c-1-map (make-keymap) "Keys bound to C-1. Shortcuts for misc.")
-(define-key global-map (kbd "C-1") jc/c-1-map)
+(defun jc/keymaps/create ()
+  "My keymaps"
+  (defvar jc/right-map (make-keymap) "Keys whose suffix are intended for the right hand.")
+  (define-key global-map (kbd "M-n") jc/right-map)
+  (defvar jc/left-map (make-keymap) "Keys whose suffix are intended for the left hand.")
+  (define-key global-map (kbd "M-c") jc/left-map)
+  (defvar jc/c-1-map (make-keymap) "Keys bound to C-1. Shortcuts for misc.")
+  (define-key global-map (kbd "C-1") jc/c-1-map))
+(jc/keymaps/create)
 (defun jc/show-keymaps ()
   "Shows my personalized keymaps"
   (interactive)
@@ -331,6 +334,8 @@
 ;; 2020-10-04 Trying out from from https://gist.github.com/mookid/64941602b840ca5ce81e2b3017d1e0a5
 ;; 2020-10-05 Stopped using repeatable zap-to-char since it breaks zapping backward
 (define-key global-map [remap zap-to-char] 'zap-up-to-char)
+;; 2021-05-01 Trying out mapping C-h to delete
+(define-key global-map (kbd "C-h") 'delete-backward-char)
 
 ;; === START: markdown-mode ===
 (defun jc/markdown-mode-hook()
@@ -387,7 +392,6 @@
   (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
   ;; (helm-autoresize-mode t) ;; comment out, the selected entry moving down as the buffer resizes is too jarring
   (global-set-key (kbd "M-y") 'helm-show-kill-ring)
-  (global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
   (custom-set-variables
    ;; 2020-11-26 Use helm in separate frame 2021-01-11 somewhat didn't enjoy it
    ;;   '(helm-display-function 'helm-display-buffer-in-own-frame)
