@@ -408,6 +408,11 @@
 (jc/init/helm)
 ;;; === END: helm ===
 
+;;; === START: minibuffer ===
+(define-key minibuffer-local-map (kbd "C-p") 'previous-history-element)
+(define-key minibuffer-local-map (kbd "C-n") 'next-history-element)
+;;; === END: minibuffer ===
+
 ;;; === START: spellcheck ===
 (require 'flyspell-correct-helm)
 (when (executable-find "aspell")
