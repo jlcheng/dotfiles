@@ -99,11 +99,17 @@ jc.help() {
 }
 
 jc.e() {
+    pc=cat
+    which bat > dev/null
+    if [[ $? == 0 ]]; then
+        pc="bat --color=always"
+    fi
+    
     which fzf > /dev/null
     if [[ $? == 0 ]]; then
-	emacs $(fzf)
+        emacs $(fzf --preview "$pc {}")
     else
-	echo "fzf is not installed."
+        echo "fzf is not installed."
     fi 
 }
 
