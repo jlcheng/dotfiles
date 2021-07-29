@@ -319,6 +319,7 @@
   (define-key jc/c-1-map (kbd "C-r") 'point-to-register) ;; [r]emember
   (define-key jc/c-1-map (kbd "C-g") 'jump-to-register)  ;; [g]oto
   (define-key jc/right-map (kbd "M-b") 'ibuffer)  ;; i[b]uffer
+  (define-key jc/left-map (kbd "M-c") 'calendar)  ;; [c]alendar
   )
 (jc/init/misc)
 ;; === START: aliases ===
