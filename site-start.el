@@ -149,7 +149,7 @@
   (define-key org-mode-map (kbd "C-c s") 'org-show-subtree)
   (define-key org-agenda-mode-map (kbd "M-s M-s") 'org-save-all-org-buffers)
   (define-key org-mode-map (kbd "C-c C-x C-f") nil) ;; Unset org-emphasize, conflicts with search
-  (define-key org-mode-map (kbd "M-h") 'backward-kill-word)
+  (define-key org-mode-map (kbd "M-h") 'backward-kill-word) 
   (set-fill-column 120))
 (add-hook 'org-mode-hook 'jc/org-mode-hook)
 
@@ -170,6 +170,7 @@
 	org-src-fontify-natively t
 	org-src-tab-acts-natively t
 	) ; unclutter directories with org files
+  (setq org-startup-with-inline-images t)
   )
 (jc/init/org-mode)
 
