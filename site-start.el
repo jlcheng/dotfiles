@@ -173,27 +173,29 @@
   )
 (jc/init/org-mode)
 
-(defun jc/org-append-agenda-file (newfile)
-  "Append a file, if non-present, to ~/.org-jc.txt; 2019-11-25 - I am only keeping this function as a reference on elisp code. I hardly ever use it."
-  (interactive)
-  (let ((org-agendas-file "~/.org-jc.txt"))
-    (if (file-exists-p org-agendas-file)
-	(let ((flist (jc/file-readlines org-agendas-file)))          ; read org-jc.txt
-	  (unless (seq-contains flist newfile)
-	    (write-region newfile nil org-agendas-file 'append))
-	  ))))
-(defun jc/org-append-agenda-file-this ()
-  "Append this buffer to ~/.org-jc.txt; 2019-11-25 - I am only keeping this function as a reference on elisp code. I hardly ever use it."
-  (interactive)
-  (let ((bfn (buffer-file-name)))
-    (if (file-exists-p buffer-file-name)
-	(progn 
-	  (jc/org-append-agenda-file bfn)
-	  (jc/org-refresh-agenda-files)
-	  (find-file "~/.org-jc.txt"))
-      )
-    )
-  )
+
+;; These are my attemtps at implementing org-agenda-file-to-front and org-remove-file
+;; (defun jc/org-append-agenda-file (newfile)
+;;   "Append a file, if non-present, to ~/.org-jc.txt; 2019-11-25 - I am only keeping this function as a reference on elisp code. I hardly ever use it."
+;;   (interactive)
+;;   (let ((org-agendas-file "~/.org-jc.txt"))
+;;     (if (file-exists-p org-agendas-file)
+;; 	(let ((flist (jc/file-readlines org-agendas-file)))          ; read org-jc.txt
+;; 	  (unless (seq-contains flist newfile)
+;; 	    (write-region newfile nil org-agendas-file 'append))
+;; 	  ))))
+;; (defun jc/org-append-agenda-file-this ()
+;;   "Append this buffer to ~/.org-jc.txt; 2019-11-25 - I am only keeping this function as a reference on elisp code. I hardly ever use it."
+;;   (interactive)
+;;   (let ((bfn (buffer-file-name)))
+;;     (if (file-exists-p buffer-file-name)
+;; 	(progn 
+;; 	  (jc/org-append-agenda-file bfn)
+;; 	  (jc/org-refresh-agenda-files)
+;; 	  (find-file "~/.org-jc.txt"))
+;;       )
+;;     )
+;;   )
 
 (defun jc/org-setup()
   "org-mode customizations"
