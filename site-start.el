@@ -163,6 +163,8 @@
   (global-set-key (kbd "C-c a") 'org-agenda)
   (global-set-key (kbd "C-c C-x C-f") 'helm-projectile-find-file)
   (advice-add 'org-agenda-list :filter-return #'jc/org-agenda-list-post)
+  (custom-set-variables
+   '(org-catch-invisible-edits t))
   (setq org-archive-location "~/org/archive/%s_archive.org::datetree/* Finished Tasks"
 	org-startup-folded 'content ;; https://orgmode.org/manual/Initial-visibility.html#Initial-visibility
 	org-startup-indented t      ;; https://orgmode.org/manual/Clean-view.html
