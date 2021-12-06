@@ -1,4 +1,4 @@
-; site-start.el --- personalization -*- lexical-binding: t -*-
+; SITE-start.el --- personalization -*- lexical-binding: t -*-
 ;;; Installation --- 
 ;;;   echo '(load-file (expand-file-name "~/privprjs/dotfiles/site-start.el"))' >> ~/.emacs.d/init.el
 
@@ -32,6 +32,7 @@
 (defun jc/init/installs ()
   "Installs favorite packages"
   (jc/ensure-packages
+   'avy                         ;; 2021-12-03 try avy based on https://karthinks.com/software/avy-can-do-anything/
    'flycheck
    'flyspell-correct-helm 'helm 'helm-rg ;; helm is a super nice completion system
    'magit
@@ -43,7 +44,6 @@
    'go-playground		;; 2019-05-27 tried and loved it
    'graphviz-dot-mode
    'markdown-mode
-   ;;'origami                   ;; 2020-11-02 turn off -- do I use it?
    'terraform-mode              ;; 2019-10-10 trying terraform
    'try				;; 2019-07-15 allows one to try packages without installing them
    'which-key			;; 2019-07-15 tried and liked it   
@@ -76,9 +76,9 @@
 ;; Keymaps
 (defun jc/keymaps/create ()
   "My keymaps"
-  (defvar jc/right-map (make-keymap) "Keys whose suffix are intended for the right hand.")
+  (defvar jc/right-map (make-keymap) "Keys bound to M-n")
   (define-key global-map (kbd "M-n") jc/right-map)
-  (defvar jc/left-map (make-keymap) "Keys whose suffix are intended for the left hand.")
+  (defvar jc/left-map (make-keymap) "Keys bound to M-c")
   (define-key global-map (kbd "M-c") jc/left-map)
   (defvar jc/c-1-map (make-keymap) "Keys bound to C-1. Shortcuts for misc.")
   (define-key global-map (kbd "C-1") jc/c-1-map))
@@ -96,9 +96,14 @@
 		 (setq p (replace-regexp-in-string "\n*\n" "\n" p))
 		 (princ p)
 		 ))
-             jc/keymaps))))
-(define-key jc/right-map (kbd "M-n M-k") 'jc/show-keymaps)
-(define-key jc/left-map (kbd "M-q") 'jc/open-scratch)
+               jc/keymaps))))
+(defun jc/keymaps/customize ()
+  "Customize the created keymaps"
+  (define-key jc/right-map (kbd "M-n M-k") 'jc/show-keymaps)
+  (define-key jc/left-map (kbd "M-q") 'jc/open-scratch)
+  (define-key jc/right-map (kbd "M-t") 'imenu)
+  )
+(jc/keymaps/customize)
 
 (defun jc/init/misc-macOS ()
   "macOS misc customizations"
@@ -222,15 +227,6 @@
 (jc/org-setup)
 ;; === STOP: org-mode ===
 
-;; === START: origami-mode ===
-(defun jc/init/origami-mode ()
-  "Init-time customizations for origami-mode"
-  (add-hook 'emacs-lisp-mode-hook 'origami-mode)
-  (add-hook 'python-mode-hook 'origami-mode)
-  (setq origami-show-fold-header t))
-(jc/init/origami-mode)
-;; === STOP: origami-mode ===
-
 ;; === START: go-mode ===
 (defun jc/init/go-mode ()
   "Init-time customizations for go-mode"
@@ -319,7 +315,6 @@
   (define-key jc/left-map (kbd "M-r") 'revert-buffer)
   (define-key jc/left-map (kbd "M-s") 'whitespace-mode) ;; toggle [s]paces
   (define-key jc/right-map (kbd "M-i") 'helm-semantic-or-imenu)
-  (define-key jc/left-map (kbd "t") 'origami-toggle-all-nodes)  ;; [t]oggle
   (define-key jc/c-1-map (kbd "C-r") 'point-to-register) ;; [r]emember
   (define-key jc/c-1-map (kbd "C-g") 'jump-to-register)  ;; [g]oto
   (define-key jc/right-map (kbd "M-b") 'ibuffer)  ;; i[b]uffer
@@ -348,20 +343,7 @@
   (set-fill-column 120))
 (add-hook 'markdown-mode-hook 'jc/markdown-mode-hook)
 ;; === END: markdown-mode ===
-(defun jsnice-jc (p1 p2)
-  "Runs jsnice against the region"
-  (interactive "r")
-  (if (functionp 'json-pretty-print)
-      (json-pretty-print p1 p2)
-    (let ((jsnice-path (expand-file-name "~/bin/jsnice")))
-      (cond ((eq system-type 'cygwin)
-             (setq jsnice-path "C:\\cygwin64\\home\\johnl\\bin\\jsnice.exe")))
-      (if (executable-find jsnice-path)
-          (shell-command-on-region
-           p1 p2 jsnice-path nil t "*Minibuf-0*" t)
-	(message (format "%s not installed" jsnice-path))))))
 
-;; (if (functionp 'global-company-mode) (global-company-mode)) 2019-11-20 Disabled for testing
 (if (functionp 'which-key-mode) (which-key-mode))
 
 ;; 2018-10-29: Sets full file path in title
