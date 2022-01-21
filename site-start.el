@@ -32,7 +32,6 @@
 (defun jc/init/installs ()
   "Installs favorite packages"
   (jc/ensure-packages
-   'avy                         ;; 2021-12-03 try avy based on https://karthinks.com/software/avy-can-do-anything/
    'flycheck
    'flyspell-correct-helm 'helm 'helm-rg ;; helm is a super nice completion system
    'magit

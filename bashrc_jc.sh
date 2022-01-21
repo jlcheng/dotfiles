@@ -46,6 +46,7 @@ jc.cd()
     cd $(ls | fzf)
 }
 
+
 jc.gm()
 {
     git merge $(git branch --format="%(refname:lstrip=2)" | fzf)
