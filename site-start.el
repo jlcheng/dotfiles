@@ -36,6 +36,7 @@
    'flyspell-correct-helm 'helm 'helm-rg ;; helm is a super nice completion system
    'magit
    'php-mode                    ;; 2019-09-11 php? I'm doing this because of work :(
+   'helm 'helm-core             ;; 2022-04-09 This dependency needs to be explicitly specified
    'projectile 'helm-projectile ;; 2019-05-22 tried and loved it
    'python-mode
    'python-black                ;; 2020-10-31 tried and liked it
@@ -369,7 +370,7 @@
   (let ((modes '(helm-mode ivy-mode)))
     (funcall (cl-first (seq-filter 'functionp modes))))
   (when (functionp 'helm-mode)
-    (helm-mode)
+    (require 'helm)
     (define-key global-map (kbd "C-x C-f") 'helm-find-files)
     (define-key global-map (kbd "C-x b") 'helm-mini)
     (define-key global-map (kbd "M-x") 'helm-M-x))
