@@ -14,3 +14,5 @@ ppactivate ()
         echo "venv directory not found"
     fi
 }
+
+alias grep="grep --color"
