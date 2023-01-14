@@ -169,7 +169,7 @@
 
 (defun jc/init/org-mode ()
   (define-key jc/left-map (kbd "M-f") 'org-last-heading-same-level-jc)
-  (define-key jc/left-map (kbd "M-b") 'org-switchb)
+  (define-key jc/left-map (kbd "M-b") 'org-switchb)  
   (define-key jc/left-map (kbd "M-a") 'org-agenda-list)
   (global-set-key (kbd "C-c a") 'org-agenda)
   (global-set-key (kbd "C-c C-x C-f") 'helm-projectile-find-file)
@@ -314,7 +314,7 @@
   ; (auto-save-visited-mode)  ;; disabled on 2021-01-31 to favor save-some-buffers instead
   (global-set-key (kbd "M-s M-s") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
   (global-set-key (kbd "M-S") 'save-buffer) ;; left hand saver; my left pinky is killing me from hitting ctrl all the time.
-  (define-key jc/right-map (kbd "M-j") 'jsnice-jc) ;; [j]son indent
+  (define-key jc/right-map (kbd "M-d") 'jc/indent-buffer)
   (define-key jc/right-map (kbd "M-p") 'bookmark-jump)
   (define-key jc/right-map (kbd "M-h") 'command-history)
   (define-key jc/right-map (kbd "M-k") 'kill-current-buffer)
