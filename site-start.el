@@ -146,11 +146,10 @@
    (set-face-attribute 'default (selected-frame))))
 
 (defun jc/indent-buffer()
+  "re-indents the entire buffers"
   (interactive)
   (save-excursion
-    (indent-region (point-min) (point-max) 4)))
-
-  
+    (indent-region (point-min) (point-max))))
 
 ;; === START: org-mode ===
 (defun jc/org-mode-hook ()
