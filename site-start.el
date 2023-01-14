@@ -145,6 +145,13 @@
    (setq default-frame-alist '((top . 0) (left . 0) (height . 61) (width . 217)))
    (set-face-attribute 'default (selected-frame))))
 
+(defun jc/indent-buffer()
+  (interactive)
+  (save-excursion
+    (indent-region (point-min) (point-max) 4)))
+
+  
+
 ;; === START: org-mode ===
 (defun jc/org-mode-hook ()
   "org-mode hooks. auto-fill has been useful."
