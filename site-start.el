@@ -122,7 +122,7 @@
   "linux misc customizations"
   (custom-set-variables
    '(flycheck-python-flake8-executable "/usr/bin/flake8")
-   '(flycheck-python-mypy-executable "/usr/bin/mypy")
+   '(flycheck-python-mypy-executable "/home/jcheng/.pyenv/shims/mypy")
    '(flycheck-python-mypy-ini "/home/jcheng/privprjs/privmono/mypy.ini")
    '(flycheck-proselint-executable "/home/jcheng/.venv/privmono/bin/proselint")
    ))
