@@ -21,5 +21,4 @@ fi
 # export TF_DATA_DIR=$HOME/.terraform/v12
 # === END: terraform ===
 
-
 echo "bashrc_jc_linux.sh"
