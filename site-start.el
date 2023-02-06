@@ -38,8 +38,9 @@
    'php-mode                    ;; 2019-09-11 php? I'm doing this because of work :(
    'helm 'helm-core             ;; 2022-04-09 This dependency needs to be explicitly specified
    'projectile 'helm-projectile ;; 2019-05-22 tried and loved it
-   'python-mode
+   'pyenv-mode                  ;; 2023-02-05 tried and liked it
    'python-black                ;; 2020-10-31 tried and liked it
+   'python-mode
    'go-mode
    'go-playground		;; 2019-05-27 tried and loved it
    'graphviz-dot-mode
@@ -105,12 +106,18 @@
   )
 (jc/keymaps/customize)
 
+
+(defun jc/first-file (&rest files)
+  (let ((files (mapcar #'expand-file-name files)))
+    (or (cl-find-if #'file-exists-p files) (car (last files)))))
+
 (defun jc/init/misc-macOS ()
   "macOS misc customizations"
   (custom-set-variables
-   '(flycheck-python-pycompile-executable (expand-file-name "~/.pyenv/shims/python"))
-   '(flycheck-python-pylint-executable (expand-file-name "~/.pyenv/shims/pylint"))
-   '(flycheck-python-flake8-executable (expand-file-name "~/.pyenv/shims/flake8")))
+   '(flycheck-python-flake8-executable (jc/first-file "~/.pyenv/shims/flake8" "/usr/bin/flake8"))
+   '(flycheck-python-pycompile-executable (jc/first-file "~/.pyenv/shims/python" "/usr/bin/python3"))
+   '(flycheck-python-pylint-executable (jc/first-file "~/.pyenv/shims/pylint" "~/.local/bin/pylint"))
+   )
   (setq mac-command-modifier 'meta) ;; so the Alt key on WASD Code can be used for 'M-x'
   (setq mac-option-modifier 'super) ;; so the key left of Alt on WAS Code can be used for 'S-p'
   (global-unset-key (kbd "C-x m"))  ;; I'll never compose-mail on emacs
@@ -121,12 +128,13 @@
 (defun jc/init/misc-linux()
   "linux misc customizations"
   (custom-set-variables
-   '(flycheck-python-flake8-executable "/usr/bin/flake8")
-   '(flycheck-python-mypy-executable "/home/jcheng/.pyenv/shims/mypy")
+   '(flycheck-python-flake8-executable (jc/first-file "~/.pyenv/shims/flake8" "/usr/bin/flake8"))
+   '(flycheck-python-mypy-executable (jc/first-file "~/.pyenv/shims/mypy" "/usr/bin/mypy"))
    '(flycheck-python-mypy-ini "/home/jcheng/privprjs/privmono/mypy.ini")
-   '(flycheck-proselint-executable "/home/jcheng/.venv/privmono/bin/proselint")
-   ))
-
+   '(flycheck-python-pycompile-executable (jc/first-file "~/.pyenv/shims/python3" "/usr/bin/python3"))
+   '(flycheck-python-pylint-executable (jc/first-file "~/.pyenv/shims/pylint" "~/.local/bin/pylint"))
+   )
+  )
 ;; OS-specific settings:
 ;;  - misc
 ;;  - GUI customizations
@@ -264,6 +272,7 @@
   (custom-set-variables
    '(python-shell-interpreter "python3"))
   (if (functionp 'python-black-on-save-mode) (add-hook 'python-mode-hook 'python-black-on-save-mode))
+  (if (functionp 'pyenv-mode) (pyenv-mode))
   )
 (jc/python-init)
 
