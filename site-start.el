@@ -72,7 +72,6 @@
 (setenv "PATH" (concat (getenv "PATH") ":/Library/Frameworks/Python.framework/Versions/3.6/bin/mypy")) ;; hack for mac os
 (add-to-list 'exec-path "/usr/local/bin")                  ;; Needed for (executable-find ...)
 (add-to-list 'exec-path (expand-file-name "~/go/bin"))
-(add-to-list 'exec-path "/Library/Frameworks/Python.framework/Versions/3.6/bin/mypy") ;; hack for mac os
 
 ;; Keymaps
 (defun jc/keymaps/create ()
@@ -115,6 +114,7 @@
   "macOS misc customizations"
   (custom-set-variables
    '(flycheck-python-flake8-executable (jc/first-file "~/.pyenv/shims/flake8" "/usr/bin/flake8"))
+   '(flycheck-python-mypy-executable (jc/first-file "~/.pyenv/shims/mypy" "/usr/bin/mypy"))
    '(flycheck-python-pycompile-executable (jc/first-file "~/.pyenv/shims/python" "/usr/bin/python3"))
    '(flycheck-python-pylint-executable (jc/first-file "~/.pyenv/shims/pylint" "~/.local/bin/pylint"))
    )
