@@ -67,9 +67,6 @@
   (switch-to-buffer jc/scratch-buffer-name))
 
 ;; fix paths
-(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin")) ;; Needed for M-x shell-command
-(setenv "PATH" (concat (getenv "PATH") (concat ":" (expand-file-name "~/go/bin"))))
-(setenv "PATH" (concat (getenv "PATH") ":/Library/Frameworks/Python.framework/Versions/3.6/bin/mypy")) ;; hack for mac os
 (add-to-list 'exec-path "/usr/local/bin")                  ;; Needed for (executable-find ...)
 (add-to-list 'exec-path (expand-file-name "~/go/bin"))
 
