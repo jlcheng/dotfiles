@@ -28,7 +28,8 @@
       (jc/package-refresh-contents-once)
       (package-install package))))
 (package-initialize)
-(setq package-archives '(("melpa" . "http://melpa.org/packages/")))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+
 (defun jc/init/installs ()
   "Installs favorite packages"
   (jc/ensure-packages
