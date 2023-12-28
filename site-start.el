@@ -262,11 +262,9 @@
   (when (memq major-mode '(toml-mode conf-toml-mode))
     (let ((original-content (buffer-string))  ; Save the current buffer content
           (command (expand-file-name "~/bin/taplo fmt --option indent_tables=true --option indent_entries=true --option align_entries=true -")))
-      (if (zerop (shell-command-on-region (point-min) (point-max) command nil t "error" t))
+      (if (zerop (shell-command-on-region (point-min) (point-max) command t t "error"))
           (message "Formatting successful.")
-        (delete-region (point-min) (point-max))  ; Clear the buffer
-        (insert original-content)  ; Restore the original content
-        (message "Formatting failed. Original content restored.")))))
+        ))))
 ;; === STOP: conf-toml-mode ===
 
 ;; === START: terraform-mode ===
