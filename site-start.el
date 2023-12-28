@@ -36,7 +36,6 @@
    'flycheck
    'flyspell-correct-helm 'helm 'helm-rg ;; helm is a super nice completion system
    'magit
-   'php-mode                    ;; 2019-09-11 php? I'm doing this because of work :(
    'helm 'helm-core             ;; 2022-04-09 This dependency needs to be explicitly specified
    'projectile 'helm-projectile ;; 2019-05-22 tried and loved it
    'pyenv-mode                  ;; 2023-02-05 tried and liked it
@@ -44,7 +43,6 @@
    'python-mode
    'go-mode
    'go-playground		;; 2019-05-27 tried and loved it
-   'graphviz-dot-mode
    'markdown-mode
    'terraform-mode              ;; 2019-10-10 trying terraform
    'try				;; 2019-07-15 allows one to try packages without installing them
