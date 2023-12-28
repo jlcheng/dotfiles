@@ -231,6 +231,7 @@
    '(graphviz-dot-auto-preview-on-save t)
    '(graphviz-dot-preview-extension "svg")
    '(org-fontify-quote-and-verse-blocks t)
+   '(org-edit-src-content-indentation 0)
    )
   (require 'org-tempo)  ;; 2020-08-20 < s TAB to create #+begin_src blocks
   (setq org-use-speed-commands t) ;; 2019-02-26 Trying this (use 'n' and 'p' to navigate up and down)
