@@ -255,6 +255,20 @@
 (jc/init/go-mode)
 ;; === STOP: go-mode ===
 
+;; === START: conf-toml-mode ===
+(defun jc-format-toml ()
+  "Format the current TOML buffer using taplo formatter."
+  (interactive)
+  (when (memq major-mode '(toml-mode conf-toml-mode))
+    (let ((original-content (buffer-string))  ; Save the current buffer content
+          (command (expand-file-name "~/bin/taplo fmt --option indent_tables=true --option indent_entries=true --option align_entries=true -")))
+      (if (zerop (shell-command-on-region (point-min) (point-max) command nil t "error" t))
+          (message "Formatting successful.")
+        (delete-region (point-min) (point-max))  ; Clear the buffer
+        (insert original-content)  ; Restore the original content
+        (message "Formatting failed. Original content restored.")))))
+;; === STOP: conf-toml-mode ===
+
 ;; === START: terraform-mode ===
 (defun jc/terraform-mode-init()
   "Init-time customizations for terraform-mode"
@@ -332,6 +346,7 @@
   (define-key jc/c-1-map (kbd "C-g") 'jump-to-register)  ;; [g]oto
   (define-key jc/right-map (kbd "M-b") 'ibuffer)  ;; i[b]uffer
   (define-key jc/left-map (kbd "M-c") 'calendar)  ;; [c]alendar
+  (define-key jc/left-map (kbd "C-f t") 'jc-format-toml)
   )
 (jc/init/misc)
 ;; === START: aliases ===
