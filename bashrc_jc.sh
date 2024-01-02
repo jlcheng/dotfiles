@@ -1,7 +1,7 @@
 # Installation ---
 #  echo ". ~/privprjs/dotfiles/bashrc_jc.sh" >> ~/.bashrc
 
-export HISTCONTROL=ignoredups
+export HISTCONTROL=ignoreboth
 export HISTFILE=$HOME/.bash_history
 export HISTIGNORE='&:ls:[bf]g:exit'
 export HISTSIZE=100000
