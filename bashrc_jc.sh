@@ -3,7 +3,7 @@
 
 export HISTCONTROL=ignoreboth
 export HISTFILE=$HOME/.bash_history
-export HISTIGNORE='&:ls:[bf]g:exit:*KEY[!a-zA-Z0-9]*'
+export HISTIGNORE='&:ls:[bf]g:exit:export:'
 export HISTSIZE=100000
 export HISTFILESIZE=100000
 export PATH="/usr/bin:$PATH:$HOME/go/bin"
