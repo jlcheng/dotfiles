@@ -349,7 +349,6 @@
 (jc/init/misc)
 ;; === START: aliases ===
 (defun jc/init/aliases ()
-  (defalias 'yes-or-no-p 'y-or-n-p)
   (defalias 'list-buffers 'ibuffer)
   (defalias 'rg 'helm-projectile-rg)
   (defalias 'cst 'org-cut-subtree))
