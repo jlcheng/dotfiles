@@ -11,13 +11,13 @@ if [ -d "/Applications/Emacs.app" ]; then
   GIT_EDITOR="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -q -a vim"
 fi
 
+if [ -d "/opt/homebrew/bin" ]; then
+    PATH=$PATH:/opt/homebrew/bin
+fi    
+
 # 1) force ls to have color; 2) optimize lscolors for black background
 export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
-
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-    . $(brew --prefix)/etc/bash_completion
-fi
 
 echo "bashrc_jc_osx.sh"
 

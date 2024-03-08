@@ -38,7 +38,6 @@
    'magit
    'helm 'helm-core             ;; 2022-04-09 This dependency needs to be explicitly specified
    'projectile 'helm-projectile ;; 2019-05-22 tried and loved it
-   'pyenv-mode                  ;; 2023-02-05 tried and liked it
    'python-black                ;; 2020-10-31 tried and liked it
    'python-mode
    'go-mode
