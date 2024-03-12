@@ -132,9 +132,8 @@ export APP_CONFIG_TOML=$HOME/.privmono.d/local.toml
 # === START: pyenv ===
 if [[ -d $HOME/.pyenv ]]; then
     export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
+    eval "$(pyenv init -- path)"  # Enable 'shim-only', use '... init -' to also enable shell completion
+    eval "$(pyenv virtualenv-init -)"  # Enable auto-activation of virtualenvs
 fi
 # === END: pyenv ===
 
