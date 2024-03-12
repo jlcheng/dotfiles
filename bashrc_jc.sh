@@ -130,10 +130,12 @@ export APP_CONFIG_TOML=$HOME/.privmono.d/local.toml
 
 
 # === START: pyenv ===
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+if [[ -d $HOME/.pyenv ]]; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
 # === END: pyenv ===
 
 echo "bashrc_jc.sh"
