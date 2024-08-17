@@ -14,6 +14,8 @@
   (setq jit-lock-stealth-load 200))
 (jc/fast-startup)
 
+(setq package-check-signature nil)
+
 ;; Required packages
 (defvar jc/package-refreshed-p nil "Sets to t once we ran package-refresh-contents once")
 (defun jc/package-refresh-contents-once ()
