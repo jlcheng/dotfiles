@@ -403,23 +403,24 @@
   (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; 2020-02-21 try http://tuhdo.github.io/helm-intro.html 
   (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
   (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
-  ;; (helm-autoresize-mode t) ;; comment out, the selected entry moving down as the buffer resizes is too jarring
   (global-set-key (kbd "M-y") 'helm-show-kill-ring)
   (custom-set-variables
-   ;; 2020-11-26 Use helm in separate frame 2021-01-11 somewhat didn't enjoy it
-   ;;   '(helm-display-function 'helm-display-buffer-in-own-frame)
    '(helm-use-undecorated-frame-option nil)
    '(helm-display-buffer-height 40)
    '(helm-display-buffer-width 200)
    ;; END:
 
    '(helm-buffer-max-length 40)
-   
+   '(helm-move-to-line-cycle-in-source nil)   
    '(helm-boring-buffer-regexp-list
      '("\\` " "\\`\\*helm" "\\`\\*Echo Area" "\\`\\*Minibuf" "\\`\\*"))
    '(helm-ff-skip-boring-files t)))
 (jc/init/helm)
 ;;; === END: helm ===
+
+;;; === START: magit ===
+(require 'magit)
+;;; === END: magic ===
 
 ;;; === START: minibuffer ===
 (define-key minibuffer-local-map (kbd "C-p") 'previous-history-element)
