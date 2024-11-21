@@ -127,7 +127,7 @@
   (custom-set-variables
    '(flycheck-python-flake8-executable (jc/first-file "~/.pyenv/shims/flake8" "/usr/bin/flake8"))
    '(flycheck-python-mypy-executable (jc/first-file "~/.pyenv/shims/mypy" "/usr/bin/mypy"))
-   '(flycheck-python-mypy-ini "/home/jcheng/privprjs/privmono/mypy.ini")
+   '(flycheck-python-mypy-config '("mypy.ini" "pyproject.toml" "setup.cfg" "/home/jcheng/privprjs/privmono/mypy.ini"))
    '(flycheck-python-pycompile-executable (jc/first-file "~/.pyenv/shims/python3" "/usr/bin/python3"))
    '(flycheck-python-pylint-executable (jc/first-file "~/.pyenv/shims/pylint" "~/.local/bin/pylint"))
    )
@@ -326,6 +326,7 @@
    '(mode-require-final-newline nil)
    '(sgml-basic-offset 4)
    '(display-time-day-and-date t)
+   '(json-encoding-default-indentation "    ")
    '(visible-bell))
   (display-time)
   (show-paren-mode 1)  
