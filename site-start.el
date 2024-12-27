@@ -62,9 +62,11 @@
 
 (defvar jc/scratch-buffer-name "qweqwe" "Name of a scratch buffer that is transient")
 (defun jc/open-scratch ()
-  "Opens the buffer named by jc/scratch-buffer-name"
+  "Opens the buffer named by jc/scratch-buffer-name and clears its contents if non-empty."
   (interactive)
-  (switch-to-buffer jc/scratch-buffer-name))
+  (switch-to-buffer jc/scratch-buffer-name)
+  (when (buffer-modified-p)
+    (erase-buffer)))
 
 ;; fix paths
 (add-to-list 'exec-path "/usr/local/bin")                  ;; Needed for (executable-find ...)
