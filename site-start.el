@@ -101,6 +101,8 @@
   (define-key jc/right-map (kbd "M-n M-k") 'jc/show-keymaps)
   (define-key jc/left-map (kbd "M-q") 'jc/open-scratch)
   (define-key jc/right-map (kbd "M-t") 'imenu)
+  (define-key jc/right-map (kbd "M-g") 'gptel-menu)
+  (define-key jc/left-map (kbd "M-g") 'gptel)
   )
 (jc/keymaps/customize)
 
@@ -533,3 +535,28 @@
   (bookmark-jump "emacs_notes.org" 'switch-to-buffer-other-window)
   (outline-show-all))
 (define-key jc/right-map (kbd "M-e") `jc/emacs-notes)
+
+;; === START: gptel ===
+(defun jc/gptel-01 ()
+  "gptel customization version 1"
+  (require 'gptel-gemini)
+  (setq my-gemini-models
+      (append gptel--gemini-models
+              '(
+                (gemini-2.0-flash-thinking-exp
+                 :description "Thinking Mode is capable of stronger reasoning capabilities in its responses than the Gemini 2.0 Flash Experimental model."
+                 :context-window 32
+                 :mime-types ("image/png" "image/jpeg" "image/webp" "image/heic" "image/heif"
+                              "text/plain" "text/csv" "text/html")
+                 ;; input & output price is halved for prompts of 128k tokens or less
+                 :input-cost 0.075
+                 :output-cost 0.30
+                 :cutoff-date "2024-08")
+                )))
+  (gptel-make-gemini "Gemini" :key "AIzaSyAZl-qYJ7rHB8YsmLm3YxiEwbtmq3YtjYA" :stream t :models my-gemini-models))
+(jc/gptel-01)
+;(setq
+; gptel-model 'gemini-2.0-flash-exp
+; gptel-backend
+		
+;;; === END: gptel ===
