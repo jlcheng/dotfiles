@@ -551,6 +551,15 @@
                  :cutoff-date "2024-08")
                 )))
   (gptel-make-gemini "Gemini" :key "AIzaSyAZl-qYJ7rHB8YsmLm3YxiEwbtmq3YtjYA" :stream t :models my-gemini-models))
+(defun jc/gptel-02 ()
+  "gptel customization version 1"
+  (require 'gptel)
+  (push 'gemini-2.0-flash-thinking-exp (gptel-backend-models gptel-backend)))
+(require 'gptel)
+(push 'gemini-2.0-flash-thinking-exp (gptel-backend-models gptel-backend))
+(put 'gemini-2.0-flash-thinking-exp :capabilities '(media tool-use))
+(put 'gemini-2.0-flash-thinking-exp :description "Thinking Mode is capable of stronger reasoning capabilities.")
+(put 'gemini-2.0-flash-thinking-exp :context-window 32)
 ;(jc/gptel-01)
 ;(setq
 ; gptel-model 'gemini-2.0-flash-exp
