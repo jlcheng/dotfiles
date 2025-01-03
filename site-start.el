@@ -556,10 +556,8 @@
 (defvar my-gemini-backend (gptel-make-gemini "Gemini"
                             :key my-gemini-api-key :stream t)
   "Reference to the Gemini gptel Backend")
-
-(setq
- gptel-model 'gemini-2.0-flash-exp
- gptel-backend my-gemini-backend)
+;(push 'gemini-2.0-flash-thinking-exp (gptel-backend-models my-gemini-backend))
+; (setq  gptel-model 'gemini-2.0-flash-exp  gptel-backend my-gemini-backend)
 ;(push 'gemini-2.0-flash-thinking-exp (gptel-backend-models my-gemini-backend))
 
 ; (push 'gemini-2.0-flash-thinking-exp (gptel-backend-models gptel-backend))
