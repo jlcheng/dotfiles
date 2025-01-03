@@ -551,7 +551,7 @@
                  :cutoff-date "2024-08")
                 )))
   (gptel-make-gemini "Gemini" :key "AIzaSyAZl-qYJ7rHB8YsmLm3YxiEwbtmq3YtjYA" :stream t :models my-gemini-models))
-(jc/gptel-01)
+;(jc/gptel-01)
 ;(setq
 ; gptel-model 'gemini-2.0-flash-exp
 ; gptel-backend
